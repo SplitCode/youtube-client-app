@@ -5,7 +5,7 @@
     ],
     "plugins": ["simple-import-sort"],
     "parserOptions": {
-        "project": ["./tsconfig.(app|spec).json"]
+        "project": ["./tsconfig.(app|spec).json", "./tsconfig.json"]
     },
     "overrides": [
         {
