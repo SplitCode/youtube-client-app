@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HeaderComponent } from './header/header.component';
-import { SearchItemComponent } from './search/search-item/search-item.component';
-import { SearchResultsComponent } from './search/search-results/search-results.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SearchItemComponent } from './components/search/search-item/search-item.component';
+import { SearchResultsComponent } from './components/search/search-results/search-results.component';
 
 @Component({
   selector: 'app-root',
