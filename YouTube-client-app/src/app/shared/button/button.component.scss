@@ -1,56 +1,23 @@
 .btn {
-  background-color: var(--button-color);
   border: none;
-  // background-color: inherit;
-  color: #ffffff;
-  font-family: Roboto, sans-serif;
-  box-shadow: 2px 0px 4px 0px #2f80ed;
   border-radius: 0.4rem;
   cursor: pointer;
-  background-repeat: no-repeat;
-  background-position: center center;
-}
-
-:host {
-  // background-color: var(--button-color);
-  // border: none;
-  // // background-color: inherit;
-  // color: #ffffff;
-  // font-family: Roboto, sans-serif;
-  // box-shadow: 2px 0px 4px 0px #2f80ed;
-  // border-radius: 0.4rem;
-  // cursor: pointer;
+  font-family: Roboto, sans-serif;
+  background-color: var(--button-color);
+  color: #ffffff;
+  box-shadow: 2px 0px 4px 0px #2f80ed;
 }
 
 .small {
-  background-color: green;
-  width: 5px;
+  display: flex;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 4.5px;
 }
 
 .search {
   border-radius: 0px 4px 4px 0px;
   width: 8rem;
   height: 2.4rem;
-}
-
-.filter {
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 4.5px;
-  // background-image: url("./../../../../assets/settings_button.svg");
-  // background-repeat: no-repeat;
-  // background-position: center center;
-}
-
-.login {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 2.4rem;
-  height: 2.4rem;
-  padding: 2.4px;
-  // background-image: url("./../../../../assets/login.png");
-  // background-repeat: no-repeat;
-  // background-position: center;
-  background-size: 75%;
 }
