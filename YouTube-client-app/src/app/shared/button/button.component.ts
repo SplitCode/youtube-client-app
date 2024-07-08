@@ -6,7 +6,11 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrls: ['./button.component.scss', './../../components/header/search-input/search-input.component.scss']
+  styleUrls: [
+    './button.component.scss',
+    './../../components/header/search-input/search-input.component.scss',
+    './../../components/header/settings-button/settings-button.component.scss',
+  ],
 })
 export class ButtonComponent {
   @Input() btnClass: string = '';
