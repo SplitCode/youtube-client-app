@@ -1,0 +1,19 @@
+.login-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.login-info-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  padding: 2.4px;
+  background-image: url("./../../../../assets/login.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 75%;
+}

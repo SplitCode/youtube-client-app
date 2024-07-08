@@ -10,6 +10,7 @@ import { Component, Input } from '@angular/core';
     './button.component.scss',
     './../../components/header/search-input/search-input.component.scss',
     './../../components/header/settings-button/settings-button.component.scss',
+    './../../components/header/login-info/login-info.component.scss',
   ],
 })
 export class ButtonComponent {

@@ -1,9 +1,11 @@
 <header class="header">
-  <div class="search-area">
-    <img class="header__logo" src="logo.svg" alt="youtube logo" />
-    <!-- <app-search-input (search)="onSearch($event)"></app-search-input> -->
-    <app-search-input></app-search-input>
-    <app-settings-button></app-settings-button>
+  <div class="header__content">
+    <div class="search-content">
+      <img class="header__logo" src="logo.svg" alt="youtube logo" />
+      <!-- <app-search-input (search)="onSearch($event)"></app-search-input> -->
+      <app-search-input></app-search-input>
+      <app-settings-button></app-settings-button>
+    </div>
+    <app-login-info></app-login-info>
   </div>
-  <app-login-info></app-login-info>
 </header>
