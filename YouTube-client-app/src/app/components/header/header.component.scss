@@ -1,0 +1,21 @@
+.header {
+  display: flex;
+  background-color: var(--bg-color);
+  justify-content: center;
+  align-items: center;
+}
+
+.header__logo {
+  height: 50px;
+  width: 50px;
+  // align-self: center;
+  // margin-right: 1rem;
+}
+
+.search-area {
+  display: flex;
+  height: 8rem;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
