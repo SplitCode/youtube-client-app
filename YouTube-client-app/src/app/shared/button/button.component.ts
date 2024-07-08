@@ -1,18 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import {
+  Component, EventEmitter, Input, Output
+} from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-button',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatButtonModule],
   templateUrl: './button.component.html',
   styleUrls: [
     './button.component.scss',
-    './../../components/header/search-input/search-input.component.scss',
-    './../../components/header/settings-button/settings-button.component.scss',
-    './../../components/header/login-info/login-info.component.scss',
   ],
 })
 export class ButtonComponent {
   @Input() btnClass: string = '';
+  @Input() btnAppearence!: 'search' | 'filter' | 'login';
+  @Input() isIcon: boolean = false;
+
+  @Output() clicked = new EventEmitter<string>();
 }

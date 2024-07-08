@@ -1,3 +1,27 @@
-<button class="btn" [ngClass]="btnClass">
+<button
+  class="btn"
+  [ngClass]="{
+    search: btnAppearence === 'search',
+    filter: btnAppearence === 'filter',
+    login: btnAppearence === 'login',
+  }"
+  (click)="clicked.emit('clicked')"
+>
   <ng-content></ng-content>
 </button>
+
+<!-- <button *ngIf="isIcon" mat-mini-fab aria-label="Example icon button with a menu icon">
+  <ng-content></ng-content>
+</button> -->
+<!-- 
+<button
+  *ngIf="!isIcon"
+  class="btn"
+  [ngClass]="{
+    search: btnAppearence === 'search',
+    filter: btnAppearence === 'filter',
+    login: btnAppearence === 'login',
+  }"
+>
+  <ng-content></ng-content>
+</button> -->

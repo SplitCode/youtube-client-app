@@ -4,8 +4,15 @@
       <img class="header__logo" src="logo.svg" alt="youtube logo" />
       <!-- <app-search-input (search)="onSearch($event)"></app-search-input> -->
       <app-search-input></app-search-input>
-      <app-settings-button></app-settings-button>
+      <!-- <app-button (click)="onClicked($event)" btnAppearence="filter"> -->
+      <app-button (click)="isFilterShown = !isFilterShown; onClicked('pri')" btnAppearence="filter">
+        <app-setting-img></app-setting-img>
+      </app-button>
+      <div *ngIf="isFilterShown">Text</div>
+      <!-- <app-settings-button></app-settings-button> -->
     </div>
-    <app-login-info></app-login-info>
+    @if (isFilterShown) {
+      <app-login-info ></app-login-info>
+    }
   </div>
 </header>
