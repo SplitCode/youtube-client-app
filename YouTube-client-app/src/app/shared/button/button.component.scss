@@ -2,9 +2,9 @@
   border: none;
   cursor: pointer;
   font-family: Roboto, sans-serif;
+  color: var(--text-color);
   background-color: var(--button-color);
-  color: #ffffff;
-  box-shadow: 2px 0px 4px 0px #2f80ed;
+  box-shadow: var(--box-shadow);
 }
 
 .small {
@@ -16,7 +16,6 @@
 }
 
 .middle {
-  // border-radius: 0px 4px 4px 0px;
   width: 8rem;
   height: 2.4rem;
 }

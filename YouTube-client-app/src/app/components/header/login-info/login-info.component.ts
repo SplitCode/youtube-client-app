@@ -9,4 +9,6 @@ import { ButtonComponent } from '../../../shared/button/button.component';
   templateUrl: './login-info.component.html',
   styleUrl: './login-info.component.scss',
 })
-export class LoginInfoComponent {}
+export class LoginInfoComponent {
+  title = 'Your Name';
+}
