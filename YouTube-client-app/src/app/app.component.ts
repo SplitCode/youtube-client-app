@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { CardItemComponent } from './components/cards-list/card-item/card-item.component';
+import { CardsListComponent } from './components/cards-list/cards-list.component';
 import { FilterComponent } from './components/header/filters/filter.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SearchItemComponent } from './components/search-results/search-item/search-item.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
 
 @Component({
   selector: 'app-root',
@@ -15,8 +15,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
     RouterOutlet,
     HeaderComponent,
     FilterComponent,
-    SearchResultsComponent,
-    SearchItemComponent,
+    CardItemComponent,
+    CardsListComponent,
   ],
 })
 export class AppComponent {
