@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() btnAppearance!: 'small' | 'middle';
+  @Input() btnAppearance!: 'small' | 'middle' | 'large';
   @Input() btnBorder: 'left-border' | 'right-border' | 'full-border' = 'full-border';
   @Input() btnType: 'button' | 'submit' = 'button';
 }

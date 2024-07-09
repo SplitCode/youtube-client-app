@@ -2,9 +2,10 @@
   border: none;
   cursor: pointer;
   font-family: Roboto, sans-serif;
+  font-weight: 400;
   color: var(--text-color);
   background-color: var(--accent-color);
-  box-shadow: var(--box-shadow);
+  box-shadow: var(--button-shadow);
 }
 
 .small {
@@ -12,12 +13,17 @@
   justify-content: center;
   width: 2.4rem;
   height: 2.4rem;
-  padding: 4.5px;
+  padding: 0.45rem;
 }
 
 .middle {
   width: 8rem;
   height: 2.4rem;
+}
+
+.large {
+  width: 12rem;
+  padding: 0.64rem;
 }
 
 .right {

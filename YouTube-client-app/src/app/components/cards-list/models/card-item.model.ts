@@ -1,9 +1,25 @@
-export interface SearchItemModel {
+// export interface CardItemModel {
+//   kind: string;
+//   etag: string;
+//   id: string;
+//   snippet: Snippet;
+//   statistics: Statistics;
+// }
+
+export interface CardItemModel {
   kind: string;
   etag: string;
   id: string;
-  snippet: Snippet;
-  statistics: Statistics;
+  snippet?: Snippet;
+  statistics?: Statistics;
+  url: string;
+  viewCount: string;
+  likeCount: string;
+  dislikeCount: string;
+  favoriteCount: string;
+  commentCount: string;
+  channelTitle: string;
+  videoTitle: string;
 }
 
 export interface Snippet {

@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, Input } from '@angular/core';
+
+import { ButtonComponent } from '../../../shared/button/button.component';
+import { CardItemModel } from '../models/card-item.model';
 
 @Component({
   selector: 'app-card-item',
   standalone: true,
-  imports: [],
+  imports: [CommonModule, ButtonComponent],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
-export class CardItemComponent {}
+export class CardItemComponent {
+  @Input() cardItem!: CardItemModel;
+}
