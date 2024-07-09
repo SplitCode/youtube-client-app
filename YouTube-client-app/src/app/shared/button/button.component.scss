@@ -1,6 +1,5 @@
 .btn {
   border: none;
-  border-radius: 0.4rem;
   cursor: pointer;
   font-family: Roboto, sans-serif;
   background-color: var(--button-color);
@@ -16,8 +15,20 @@
   padding: 4.5px;
 }
 
-.search {
-  border-radius: 0px 4px 4px 0px;
+.middle {
+  // border-radius: 0px 4px 4px 0px;
   width: 8rem;
   height: 2.4rem;
+}
+
+.right {
+  border-radius: 0px 4px 4px 0px;
+}
+
+.left {
+  border-radius: 5px, 5px, 0px, 0px;
+}
+
+.full {
+  border-radius: 0.4rem;
 }

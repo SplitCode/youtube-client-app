@@ -1,8 +1,11 @@
 <button
   class="btn"
   [ngClass]="{
-    search: btnAppearence === 'search',
-    small: btnAppearence === 'small'
+    middle: btnAppearance === 'middle',
+    small: btnAppearance === 'small',
+    right: btnBorder === 'right-border',
+    left: btnBorder === 'left-border',
+    full: btnBorder === 'full-border'
   }"
 >
   <ng-content></ng-content>

@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component, Input
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-button',
@@ -11,5 +9,6 @@ import {
   styleUrls: ['./button.component.scss'],
 })
 export class ButtonComponent {
-  @Input() btnAppearence!: 'search' | 'small';
+  @Input() btnAppearance!: 'small' | 'middle';
+  @Input() btnBorder!: 'left-border' | 'right-border' | 'full-border';
 }
