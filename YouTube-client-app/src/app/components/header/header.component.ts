@@ -6,6 +6,7 @@ import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingImgComponent } from './settings-button/setting-img.component';
+import { SettingsButtonComponent } from './settings-button/settings-button.component';
 
 @Component({
   selector: 'app-header',
@@ -19,8 +20,13 @@ import { SettingImgComponent } from './settings-button/setting-img.component';
     ButtonComponent,
     CommonModule,
     FilterComponent,
+    SettingsButtonComponent,
   ],
 })
 export class HeaderComponent {
-  public isFilterShown = false;
+  public isFilterShown: boolean = false;
+
+  public onShowFilter(): void {
+    this.isFilterShown = !this.isFilterShown;
+  }
 }

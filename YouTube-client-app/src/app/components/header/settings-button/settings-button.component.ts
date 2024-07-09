@@ -8,8 +8,6 @@ import { SettingImgComponent } from './setting-img.component';
   standalone: true,
   imports: [ButtonComponent, SettingImgComponent],
   templateUrl: './settings-button.component.html',
-  styleUrl: './settings-button.component.scss'
+  styleUrl: './settings-button.component.scss',
 })
-export class SettingsButtonComponent {
-
-}
+export class SettingsButtonComponent {}

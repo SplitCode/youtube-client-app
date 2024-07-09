@@ -4,13 +4,7 @@
       <img class="header__logo" src="logo.svg" alt="youtube logo" />
       <!-- <app-search-input (search)="onSearch($event)"></app-search-input> -->
       <app-search-input></app-search-input>
-      <app-button
-        (click)="isFilterShown = !isFilterShown"
-        btnAppearance="small"
-      >
-        <app-setting-img></app-setting-img>
-      </app-button>
-      <!-- <app-settings-button></app-settings-button> -->
+      <app-settings-button (click)="onShowFilter()"></app-settings-button>
     </div>
     <app-login-info></app-login-info>
   </div>
