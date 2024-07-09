@@ -10,5 +10,6 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonComponent {
   @Input() btnAppearance!: 'small' | 'middle';
-  @Input() btnBorder!: 'left-border' | 'right-border' | 'full-border';
+  @Input() btnBorder: 'left-border' | 'right-border' | 'full-border' = 'full-border';
+  @Input() btnType: 'button' | 'submit' = 'button';
 }
