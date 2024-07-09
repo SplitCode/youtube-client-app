@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { CardItemModel } from './components/cards-list/models/card-item.model';
-import response from './mock-response.json';
+import response from '../../../mock-response.json';
+import { CardItemModel } from '../models/card-item.model';
 
 @Injectable({
   providedIn: 'root',
