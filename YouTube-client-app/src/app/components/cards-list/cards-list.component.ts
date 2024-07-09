@@ -17,6 +17,6 @@ export class CardsListComponent {
   cardService: CardService = inject(CardService);
 
   constructor() {
-    this.cardsList = this.cardService.getAllCards();
+    this.cardsList = this.cardService.getCards();
   }
 }

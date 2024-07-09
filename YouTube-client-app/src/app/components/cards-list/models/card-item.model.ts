@@ -1,25 +1,9 @@
-// export interface CardItemModel {
-//   kind: string;
-//   etag: string;
-//   id: string;
-//   snippet: Snippet;
-//   statistics: Statistics;
-// }
-
 export interface CardItemModel {
   kind: string;
   etag: string;
   id: string;
-  snippet?: Snippet;
-  statistics?: Statistics;
-  url: string;
-  viewCount: string;
-  likeCount: string;
-  dislikeCount: string;
-  favoriteCount: string;
-  commentCount: string;
-  channelTitle: string;
-  videoTitle: string;
+  snippet: Snippet;
+  statistics: Statistics;
 }
 
 export interface Snippet {
@@ -59,6 +43,6 @@ export interface Localized {
 
 export interface Thumbnail {
   url: string;
-  width: string;
-  height: string;
+  width: number;
+  height: number;
 }
