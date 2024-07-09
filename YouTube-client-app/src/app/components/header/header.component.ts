@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
 import { ButtonComponent } from '../../shared/button/button.component';
-import { FilterComponent } from '../filters/filter.component';
+import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingImgComponent } from './settings-button/setting-img.component';

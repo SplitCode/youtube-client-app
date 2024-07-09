@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { FilterComponent } from './components/filters/filter.component';
+import { FilterComponent } from './components/header/filters/filter.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SearchItemComponent } from './components/search-results/search-item/search-item.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
