@@ -1,5 +1,6 @@
-<!-- <p>cards-list works!</p> -->
-
-<section class="results">
-  <app-card-item [cardItem]="cardItem"></app-card-item>
+<section class="cards-list">
+  <app-card-item
+    *ngFor="let cardItem of cardsList"
+    [cardItem]="cardItem"
+  ></app-card-item>
 </section>
