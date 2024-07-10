@@ -12,4 +12,5 @@ export class ButtonComponent {
   @Input() btnAppearance!: 'small' | 'middle' | 'large';
   @Input() btnBorder: 'left-border' | 'right-border' | 'full-border' = 'full-border';
   @Input() btnType: 'button' | 'submit' = 'button';
+  @Input() disabled: boolean = false;
 }

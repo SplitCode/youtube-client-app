@@ -31,4 +31,8 @@ export class SearchInputComponent {
     event.preventDefault();
     this.cardShowService.showCards(true);
   }
+
+  isSearchDisabled(): boolean {
+    return this.searchQuery.trim().length === 0;
+  }
 }
