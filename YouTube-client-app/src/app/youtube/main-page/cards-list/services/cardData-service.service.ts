@@ -6,7 +6,7 @@ import { CardItemModel } from '../models/card-item.model';
 @Injectable({
   providedIn: 'root',
 })
-export class CardService {
+export class CardDataService {
   private data = response;
 
   protected cardsList: CardItemModel[] = [...this.data.items];

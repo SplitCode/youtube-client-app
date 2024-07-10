@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
@@ -9,7 +10,7 @@ import { MainPageComponent } from './youtube/main-page/main-page.component';
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
-  imports: [RouterOutlet, HeaderComponent, MainPageComponent],
+  imports: [RouterOutlet, HeaderComponent, MainPageComponent, CommonModule],
 })
 export class AppComponent {
   title = 'YouTube-client-app';

@@ -26,7 +26,7 @@ export class CardColorDirective implements AfterViewInit {
   ) {}
 
   ngAfterViewInit() {
-    const dateStatus = CardColorDirective.countDateStatusAfterPublish(this.date);
+    const dateStatus = this.countDateStatusAfterPublish(this.date);
     const setColor = (color: string) => this.render2.setStyle(
       this.elementRef.nativeElement,
       'background-color',
@@ -39,7 +39,7 @@ export class CardColorDirective implements AfterViewInit {
     else setColor(CardColors.red);
   }
 
-  private static countDateStatusAfterPublish(date: string): number {
+  private countDateStatusAfterPublish(date: string): number {
     const oneDay = 24 * 60 * 60 * 1000;
     const publishDate = new Date(date).getTime();
     const today = Date.now();

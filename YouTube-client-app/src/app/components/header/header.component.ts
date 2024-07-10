@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 
 import { ButtonComponent } from '../../shared/button/button.component';
 import { FilterComponent } from './filters/filter.component';
@@ -24,9 +24,14 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
   ],
 })
 export class HeaderComponent {
+  @Output() searchSubmitted = new EventEmitter<boolean>();
   public isFilterShown: boolean = false;
 
   public onShowFilter(): void {
     this.isFilterShown = !this.isFilterShown;
+  }
+
+  onSubmitForm() {
+    this.searchSubmitted.emit(true);
   }
 }
