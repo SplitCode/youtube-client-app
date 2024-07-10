@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import response from '../../../mock-response.json';
+import response from '../mock-response.json';
 import { CardItemModel } from '../models/card-item.model';
 
 @Injectable({
