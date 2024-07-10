@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 
-import { ButtonComponent } from '../../../shared/button/button.component';
+import { ButtonComponent } from '../../../../shared/button/button.component';
 import { CardItemModel } from '../models/card-item.model';
 
 @Component({
