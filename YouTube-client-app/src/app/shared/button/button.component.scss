@@ -6,6 +6,10 @@
   color: var(--text-color);
   background-color: var(--accent-color);
   box-shadow: var(--button-shadow);
+
+  &:hover {
+    background-color: var(--hover-color);
+  }
 }
 
 .small {
