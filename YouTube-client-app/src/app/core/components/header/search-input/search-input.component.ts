@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ButtonComponent } from '../../../../shared/button/button.component';
-import { CardShowService } from '../../../../youtube/main-page/cards-list/services/card-show-service.service';
+import { CardShowService } from '../../../../youtube/services/card-show-service.service';
 import { SearchStateService } from '../../../services/search-state.service';
 
 @Component({
