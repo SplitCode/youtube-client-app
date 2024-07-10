@@ -1,6 +1,6 @@
 <main class="main-page">
-  <!-- <app-filter *ngIf="isFiltersShown"></app-filter> -->
   <app-filter
+    *ngIf="isFiltersShown"
     (dateSortClick)="onDateClick($event)"
     (viewSortClick)="onViewsClick($event)"
   ></app-filter>

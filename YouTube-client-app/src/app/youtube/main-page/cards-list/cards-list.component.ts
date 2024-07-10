@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { FilterDatePipe } from '../../../core/components/header/pipes/filter-date-pipe.pipe';
-import { FilterViewsPipe } from '../../../core/components/header/pipes/filter-views-pipe.pipe';
-import { SearchPipePipe } from '../../../core/components/header/pipes/search-pipe.pipe';
-import { SearchStateService } from '../../../core/components/header/services/search-state.service';
+import { FilterDatePipe } from '../../../core/pipes/filter-date-pipe.pipe';
+import { FilterViewsPipe } from '../../../core/pipes/filter-views-pipe.pipe';
+import { SearchPipePipe } from '../../../core/pipes/search-pipe.pipe';
+import { SearchStateService } from '../../../core/services/search-state.service';
 import { CardItemComponent } from './card-item/card-item.component';
 import { CardItemModel } from './models/card-item.model';
 import { CardDataService } from './services/cardData-service.service';

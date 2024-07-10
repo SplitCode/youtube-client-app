@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { FilterComponent } from '../../core/components/header/filters/filter.component';
 import { CardsListComponent } from './cards-list/cards-list.component';
 import { CardShowService } from './cards-list/services/card-show-service.service';
+import { FilterShowService } from './cards-list/services/filter-show-service.service';
+import { FilterComponent } from './filters/filter.component';
 
 @Component({
   selector: 'app-main-page',
@@ -26,11 +27,18 @@ export class MainPageComponent implements OnInit {
     this.isViewSortClick = isViews;
   }
 
-  constructor(private cardShowService: CardShowService) {}
+  constructor(
+    private cardShowService: CardShowService,
+    private filterShowService: FilterShowService,
+  ) {}
 
   ngOnInit(): void {
     this.cardShowService.submitForm$.subscribe((value: boolean) => {
       this.isCardsShown = value;
+    });
+
+    this.filterShowService.currentFilterShow.subscribe((isShow: boolean) => {
+      this.isFiltersShown = isShow;
     });
   }
 }

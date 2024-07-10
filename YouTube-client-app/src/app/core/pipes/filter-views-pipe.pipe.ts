@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { CardItemModel } from '../../../../youtube/main-page/cards-list/models/card-item.model';
+import { CardItemModel } from '../../youtube/main-page/cards-list/models/card-item.model';
 
 @Pipe({
   name: 'filterViewsPipe',

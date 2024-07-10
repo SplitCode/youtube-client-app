@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { FilterComponent } from './filters/filter.component';
+import { FilterShowService } from '../../../youtube/main-page/cards-list/services/filter-show-service.service';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingImgComponent } from './settings-button/setting-img.component';
@@ -19,7 +19,6 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     SettingImgComponent,
     ButtonComponent,
     CommonModule,
-    FilterComponent,
     SettingsButtonComponent,
   ],
 })
@@ -27,8 +26,10 @@ export class HeaderComponent {
   @Output() searchSubmitted = new EventEmitter<boolean>();
   public isFilterShown: boolean = false;
 
-  public onShowFilter(): void {
-    this.isFilterShown = !this.isFilterShown;
+  constructor(private filterShowService: FilterShowService) {}
+
+  showFilter(): void {
+    this.filterShowService.toggleFilterShow();
   }
 
   onSubmitForm() {
