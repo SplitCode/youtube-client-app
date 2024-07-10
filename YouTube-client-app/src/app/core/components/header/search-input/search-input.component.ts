@@ -27,8 +27,8 @@ export class SearchInputComponent {
     this.searchStateService.updateSearchQuery(this.searchQuery);
   }
 
-  showCards(event: unknown): void {
-    this.isSubmitForm = event as boolean;
-    this.cardShowService.showCards(this.isSubmitForm);
+  showCards(event: Event): void {
+    event.preventDefault();
+    this.cardShowService.showCards(true);
   }
 }
