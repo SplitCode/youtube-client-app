@@ -10,6 +10,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class FilterComponent {
   @Output() dateSortClick: EventEmitter<boolean> = new EventEmitter();
   @Output() viewSortClick: EventEmitter<boolean> = new EventEmitter();
+  @Output() wordFilterChange: EventEmitter<string> = new EventEmitter();
 
   public isDateSortClick: boolean = false;
   public isViewSortClick: boolean = false;
@@ -22,5 +23,10 @@ export class FilterComponent {
   onSortByViews() {
     this.isViewSortClick = !this.isViewSortClick;
     this.viewSortClick.emit(this.isViewSortClick);
+  }
+
+  onFilterWordChange(event: Event) {
+    const filterWord = (event.target as HTMLInputElement).value;
+    this.wordFilterChange.emit(filterWord);
   }
 }

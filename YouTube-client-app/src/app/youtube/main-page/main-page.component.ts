@@ -18,6 +18,7 @@ export class MainPageComponent implements OnInit {
   public isFiltersShown: boolean = false;
   public isDateSortClick: boolean = false;
   public isViewSortClick: boolean = false;
+  public filterWord: string = '';
 
   public onDateClick(isDate: boolean) {
     this.isDateSortClick = isDate;
@@ -25,6 +26,10 @@ export class MainPageComponent implements OnInit {
 
   public onViewsClick(isViews: boolean) {
     this.isViewSortClick = isViews;
+  }
+
+  public onWordFilterChange(word: string) {
+    this.filterWord = word;
   }
 
   constructor(

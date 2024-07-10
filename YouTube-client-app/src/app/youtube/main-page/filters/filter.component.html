@@ -9,7 +9,12 @@
       <label class="filters-form__label" for="filter-input"
         >by word or sentance</label
       >
-      <input class="filters-form__input" type="text" id="filter-input" />
+      <input
+        class="filters-form__input"
+        type="text"
+        id="filter-input"
+        (input)="onFilterWordChange($event)"
+      />
     </form>
   </div>
 </div>

@@ -3,11 +3,12 @@
     *ngIf="isFiltersShown"
     (dateSortClick)="onDateClick($event)"
     (viewSortClick)="onViewsClick($event)"
+    (wordFilterChange)="onWordFilterChange($event)"
   ></app-filter>
   <app-cards-list
     *ngIf="isCardsShown"
     [isDateSortClick]="isDateSortClick"
     [isViewSortClick]="isViewSortClick"
-    >></app-cards-list
-  >
+    [filterWord]="filterWord"
+  ></app-cards-list>
 </main>

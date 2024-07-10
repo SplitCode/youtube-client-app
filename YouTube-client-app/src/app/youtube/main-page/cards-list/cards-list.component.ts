@@ -6,6 +6,7 @@ import { SearchStateService } from '../../../core/services/search-state.service'
 import { CardItemModel } from '../../models/card-item.model';
 import { FilterDatePipe } from '../../pipes/filter-date-pipe.pipe';
 import { FilterViewsPipe } from '../../pipes/filter-views-pipe.pipe';
+import { FilterWordPipe } from '../../pipes/filter-word-pipe.pipe';
 import { CardDataService } from '../../services/cardData-service.service';
 import { CardItemComponent } from './card-item/card-item.component';
 
@@ -18,6 +19,7 @@ import { CardItemComponent } from './card-item/card-item.component';
     SearchPipePipe,
     FilterDatePipe,
     FilterViewsPipe,
+    FilterWordPipe
   ],
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.scss',
@@ -27,6 +29,7 @@ export class CardsListComponent implements OnInit {
   searchQuery: string = '';
   @Input() isDateSortClick: boolean = false;
   @Input() isViewSortClick: boolean = false;
+  @Input() filterWord: string = '';
 
   constructor(
     private cardDataService: CardDataService,

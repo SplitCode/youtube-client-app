@@ -11,8 +11,6 @@ export class SearchPipePipe implements PipeTransform {
     if (!searchQuery) {
       return cards;
     }
-    return cards.filter((card: CardItemModel) =>
-      card.snippet.title.toLowerCase().includes(searchQuery.toLowerCase()),
-    );
+    return cards.filter((card: CardItemModel) => card.snippet.title.toLowerCase().includes(searchQuery.toLowerCase()),);
   }
 }
