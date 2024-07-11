@@ -9,4 +9,12 @@
     border: none;
     background-color: var(--input-bg-color);
   }
+
+  &__input:focus {
+    outline-color: var(--accent-color);
+  }
+
+  &__input::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
 }
