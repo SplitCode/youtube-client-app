@@ -29,4 +29,8 @@ export class FilterComponent {
     const filterWord = (event.target as HTMLInputElement).value;
     this.wordFilterChange.emit(filterWord);
   }
+
+  preventSubmit(event: Event) {
+    event.preventDefault();
+  }
 }
