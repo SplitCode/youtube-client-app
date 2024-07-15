@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonComponent } from '../../../../shared/button/button.component';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardShowService } from '../../../../youtube/services/card-show-service.service';
 import { SearchStateService } from '../../../services/search-state.service';
 

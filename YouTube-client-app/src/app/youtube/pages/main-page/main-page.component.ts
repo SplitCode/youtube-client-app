@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
-import { CardShowService } from '../services/card-show-service.service';
-import { FilterShowService } from '../services/filter-show-service.service';
+import { CardShowService } from '../../services/card-show-service.service';
+import { FilterShowService } from '../../services/filter-show-service.service';
 import { CardsListComponent } from './cards-list/cards-list.component';
 import { FilterComponent } from './filters/filter.component';
 

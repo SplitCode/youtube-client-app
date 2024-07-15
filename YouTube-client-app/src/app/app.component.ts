@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from './core/components/header/header.component';
-import { MainPageComponent } from './youtube/main-page/main-page.component';
+import { MainPageComponent } from './youtube/pages/main-page/main-page.component';
 
 @Component({
   selector: 'app-root',
