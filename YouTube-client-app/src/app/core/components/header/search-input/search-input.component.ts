@@ -26,8 +26,4 @@ export class SearchInputComponent {
     this.searchStateService.updateSearchQuery(this.searchQuery);
     this.cardShowService.showCards(this.isSubmitForm);
   }
-
-  isSearchDisabled(): boolean {
-    return this.searchQuery.trim().length === 0;
-  }
 }
