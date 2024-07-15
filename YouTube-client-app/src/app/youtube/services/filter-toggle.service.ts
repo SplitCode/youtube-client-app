@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class FilterShowService {
+export class FilterToggleService {
   private filterShow = new BehaviorSubject<boolean>(false);
   currentFilterShow = this.filterShow.asObservable();
 

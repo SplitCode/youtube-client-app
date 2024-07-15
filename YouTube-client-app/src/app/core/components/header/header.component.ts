@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { FilterShowService } from '../../../youtube/services/filter-show-service.service';
+import { FilterToggleService } from '../../../youtube/services/filter-toggle.service';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingsButtonComponent } from './settings-button/settings-button.component';
@@ -21,9 +21,9 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
 export class HeaderComponent {
   public isFilterShown: boolean = false;
 
-  constructor(private filterShowService: FilterShowService) {}
+  constructor(private filterToggleService: FilterToggleService) {}
 
-  showFilter(): void {
-    this.filterShowService.toggleFilterShow();
+  toggleFilter(): void {
+    this.filterToggleService.toggleFilterShow();
   }
 }

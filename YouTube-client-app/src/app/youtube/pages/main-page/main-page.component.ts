@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 import { CardShowService } from '../../services/card-show-service.service';
-import { FilterShowService } from '../../services/filter-show-service.service';
+import { FilterToggleService } from '../../services/filter-toggle.service';
 import { CardsListComponent } from './cards-list/cards-list.component';
 import { FilterComponent } from './filters/filter.component';
 
@@ -34,7 +34,7 @@ export class MainPageComponent implements OnInit {
 
   constructor(
     private cardShowService: CardShowService,
-    private filterShowService: FilterShowService,
+    private filterToggleService: FilterToggleService,
   ) {}
 
   ngOnInit(): void {
@@ -42,7 +42,7 @@ export class MainPageComponent implements OnInit {
       this.isCardsShown = value;
     });
 
-    this.filterShowService.currentFilterShow.subscribe((isShow: boolean) => {
+    this.filterToggleService.currentFilterShow.subscribe((isShow: boolean) => {
       this.isFiltersShown = isShow;
     });
   }
