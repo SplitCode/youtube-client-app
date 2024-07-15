@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { SearchPipePipe } from '../../../../core/pipes/search-pipe.pipe';
+import { SearchPipePipe } from '../../../../core/pipes/search.pipe';
 import { SearchStateService } from '../../../../core/services/search-state.service';
 import { CardItemModel } from '../../../models/card-item.model';
-import { FilterDatePipe } from '../../../pipes/filter-date-pipe.pipe';
-import { FilterViewsPipe } from '../../../pipes/filter-views-pipe.pipe';
-import { FilterWordPipe } from '../../../pipes/filter-word-pipe.pipe';
-import { CardDataService } from '../../../services/cardData-service.service';
+import { FilterDatePipe } from '../../../pipes/filter-date.pipe';
+import { FilterViewsPipe } from '../../../pipes/filter-views.pipe';
+import { FilterWordPipe } from '../../../pipes/filter-word.pipe';
+import { CardDataService } from '../../../services/card-data.service';
 import { CardItemComponent } from './card-item/card-item.component';
 
 @Component({
@@ -19,7 +19,7 @@ import { CardItemComponent } from './card-item/card-item.component';
     SearchPipePipe,
     FilterDatePipe,
     FilterViewsPipe,
-    FilterWordPipe
+    FilterWordPipe,
   ],
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.scss',
