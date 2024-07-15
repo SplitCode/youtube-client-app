@@ -13,8 +13,6 @@ import { SearchStateService } from '../../../services/search-state.service';
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
-  private isSubmitForm: boolean = false;
-
   searchQuery: string = '';
 
   constructor(
