@@ -13,6 +13,7 @@ import { SearchStateService } from '../../../services/search-state.service';
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
+  private isSubmitForm: boolean = false;
   searchQuery: string = '';
 
   constructor(
@@ -20,10 +21,10 @@ export class SearchInputComponent {
     private cardShowService: CardShowService,
   ) {}
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
+  onSubmit(event: boolean): void {
+    this.isSubmitForm = event as boolean;
     this.searchStateService.updateSearchQuery(this.searchQuery);
-    this.cardShowService.showCards(true);
+    this.cardShowService.showCards(this.isSubmitForm);
   }
 
   isSearchDisabled(): boolean {

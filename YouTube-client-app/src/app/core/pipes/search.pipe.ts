@@ -6,7 +6,7 @@ import { CardItemModel } from '../../youtube/models/card-item.model';
   name: 'searchPipe',
   standalone: true,
 })
-export class SearchPipePipe implements PipeTransform {
+export class SearchPipe implements PipeTransform {
   transform(cards: CardItemModel[], searchQuery: string): CardItemModel[] {
     if (!searchQuery) {
       return cards;

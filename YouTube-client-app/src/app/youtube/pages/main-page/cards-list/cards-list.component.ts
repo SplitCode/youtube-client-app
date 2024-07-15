@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 
-import { SearchPipePipe } from '../../../../core/pipes/search.pipe';
+import { SearchPipe } from '../../../../core/pipes/search.pipe';
 import { SearchStateService } from '../../../../core/services/search-state.service';
 import { CardItemModel } from '../../../models/card-item.model';
 import { FilterDatePipe } from '../../../pipes/filter-date.pipe';
@@ -16,10 +16,10 @@ import { CardItemComponent } from './card-item/card-item.component';
   imports: [
     CommonModule,
     CardItemComponent,
-    SearchPipePipe,
     FilterDatePipe,
     FilterViewsPipe,
     FilterWordPipe,
+    SearchPipe
   ],
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.scss',
