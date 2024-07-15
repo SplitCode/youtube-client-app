@@ -22,7 +22,7 @@ export class SearchInputComponent {
   ) {}
 
   onSubmit(event: boolean): void {
-    this.isSubmitForm = event as boolean;
+    this.isSubmitForm = event;
     this.searchStateService.updateSearchQuery(this.searchQuery);
     this.cardShowService.showCards(this.isSubmitForm);
   }
