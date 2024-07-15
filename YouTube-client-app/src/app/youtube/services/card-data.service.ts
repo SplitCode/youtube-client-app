@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import response from '../mocks/mock-response.json';
+import * as response from '../mocks/mock-response.json';
 import { CardItemModel } from '../models/card-item.model';
 
 @Injectable({
@@ -13,5 +13,9 @@ export class CardDataService {
 
   getCards(): CardItemModel[] {
     return this.cardsList;
+  }
+
+  getCardById(id: string): CardItemModel | undefined {
+    return this.cardsList.find((card) => card.id === id);
   }
 }
