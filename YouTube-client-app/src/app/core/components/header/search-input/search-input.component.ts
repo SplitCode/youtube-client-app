@@ -23,10 +23,6 @@ export class SearchInputComponent {
   onSubmit(event: Event): void {
     event.preventDefault();
     this.searchStateService.updateSearchQuery(this.searchQuery);
-  }
-
-  showCards(event: Event): void {
-    event.preventDefault();
     this.cardShowService.showCards(true);
   }
 
