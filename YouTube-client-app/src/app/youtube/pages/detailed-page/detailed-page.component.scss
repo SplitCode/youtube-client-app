@@ -18,6 +18,8 @@
 .card {
   display: flex;
   box-shadow: var(--detailed-card-shadow);
+  border-radius: 0rem 0.5rem 0.5rem 0.5rem;
+  background-color: var(--bg-color);
 
   &__image-container {
     display: flex;
@@ -26,6 +28,7 @@
   &__image {
     width: 72.9rem;
     height: 46.1rem;
+    border-radius: 0rem 0rem 0rem 0.5rem;
   }
 
   &__content {
