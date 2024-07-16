@@ -4,10 +4,10 @@ import { Component, Input } from '@angular/core';
   selector: 'app-card-stats',
   standalone: true,
   imports: [],
-  templateUrl: './card-statistic.component.html',
-  styleUrl: './card-statistic.component.scss',
+  templateUrl: './card-stats.component.html',
+  styleUrl: './card-stats.component.scss',
 })
-export class CardStatisticComponent {
+export class CardStatsComponent {
   @Input() viewCount!: string;
   @Input() likeCount!: string;
   @Input() dislikeCount!: string;

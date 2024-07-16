@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ButtonComponent } from '../../../../../shared/components/button/button.component';
-import { CardStatisticComponent } from '../../../../components/card-statistic/card-statistic.component';
+import { CardStatsComponent } from '../../../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../../../directives/card-color.directive';
 import { CardItemModel } from '../../../../models/card-item.model';
 
@@ -15,7 +15,7 @@ import { CardItemModel } from '../../../../models/card-item.model';
     ButtonComponent,
     CardColorDirective,
     RouterModule,
-    CardStatisticComponent,
+    CardStatsComponent,
   ],
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',

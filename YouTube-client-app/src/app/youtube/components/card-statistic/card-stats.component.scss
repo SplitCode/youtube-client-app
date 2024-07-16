@@ -1,10 +1,12 @@
-.card-stats {
+:host {
   display: flex;
   align-items: center;
   font-size: 1rem;
   gap: 1.5rem;
   margin-bottom: 2rem;
+}
 
+.card-stats {
   &__viewed,
   &__dislike,
   &__like,
@@ -25,6 +27,7 @@
   &__like::before {
     content: url("/liked.svg");
   }
+
   &__comments::before {
     content: url("/comments.svg");
   }
