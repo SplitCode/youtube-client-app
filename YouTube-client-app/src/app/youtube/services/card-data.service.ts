@@ -15,7 +15,15 @@ export class CardDataService {
     return this.cardsList;
   }
 
-  getCardById(id: string): CardItemModel | undefined {
-    return this.cardsList.find((card) => card.id === id);
+  // getCardById(id: string): CardItemModel | undefined {
+  //   return this.cardsList.find((card) => card.id === id);
+  // }
+
+  getCardById(id: string): CardItemModel {
+    const card = this.cardsList.find((cardItem) => cardItem.id === id);
+    if (!card) {
+      throw new Error(`Card with id ${id} not found`);
+    }
+    return card;
   }
 }

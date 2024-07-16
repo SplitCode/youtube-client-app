@@ -1,3 +1,29 @@
-<article>
-  <div class="wrapper"></div>
-</article>
+<section class="detailed-page">
+  <div class="detailed-page__card">
+    <div class="detailed-page__card-button">
+      <app-button btnAppearance="small" btnBorder="left-border"></app-button>
+    </div>
+    <div class="card">
+      <div class="card__image-container">
+        <img
+          class="card__image"
+          src="{{ cardItem.snippet.thumbnails.medium.url }}"
+          alt="{{ cardItem.snippet.channelTitle }}"
+        />
+      </div>
+      <div class="card__content">
+        <div class="card__title">{{ cardItem.snippet.title }}</div>
+        <div class="card__description">
+          <p>Description:</p>
+          <p>{{ cardItem.snippet.description }}</p>
+        </div>
+        <app-card-stats
+          [viewCount]="cardItem.statistics.viewCount"
+          [likeCount]="cardItem.statistics.likeCount"
+          [dislikeCount]="cardItem.statistics.dislikeCount"
+          [commentCount]="cardItem.statistics.commentCount"
+        ></app-card-stats>
+      </div>
+    </div>
+  </div>
+</section>
