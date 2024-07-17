@@ -8,9 +8,8 @@ describe('Page404Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Page404Component]
-    })
-    .compileComponents();
+      imports: [Page404Component],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(Page404Component);
     component = fixture.componentInstance;

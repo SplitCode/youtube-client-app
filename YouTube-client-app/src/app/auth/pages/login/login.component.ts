@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -15,11 +15,8 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   login: string = '';
   password: string = '';
-
-  constructor(
-    private authService: AuthService,
-    private router: Router,
-  ) {}
+  authService = inject(AuthService);
+  router = inject(Router);
 
   onLogin() {
     this.authService.login(this.login, this.password).subscribe(() => {

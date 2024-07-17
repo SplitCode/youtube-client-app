@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, inject, Input, OnInit
+} from '@angular/core';
 
 import { SearchPipe } from '../../../../core/pipes/search.pipe';
 import { SearchStateService } from '../../../../core/services/search-state.service';
@@ -19,7 +21,7 @@ import { CardItemComponent } from './card-item/card-item.component';
     FilterDatePipe,
     FilterViewsPipe,
     FilterWordPipe,
-    SearchPipe
+    SearchPipe,
   ],
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.scss',
@@ -31,10 +33,8 @@ export class CardsListComponent implements OnInit {
   @Input() isViewSortClick: boolean = false;
   @Input() filterWord: string = '';
 
-  constructor(
-    private cardDataService: CardDataService,
-    private searchStateService: SearchStateService,
-  ) {}
+  private cardDataService = inject(CardDataService);
+  private searchStateService = inject(SearchStateService);
 
   ngOnInit(): void {
     this.cardsList = this.cardDataService.getCards();

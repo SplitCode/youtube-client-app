@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 
 import { CardShowService } from '../../services/card-show.service';
 import { FilterToggleService } from '../../services/filter-toggle.service';
@@ -14,6 +14,9 @@ import { FilterComponent } from './filters/filter.component';
   styleUrl: './main-page.component.scss',
 })
 export class MainPageComponent implements OnInit {
+  private cardShowService = inject(CardShowService);
+  private filterToggleService = inject(FilterToggleService);
+
   public isCardsShown: boolean = false;
   public isFiltersShown: boolean = false;
   public isDateSortClick: boolean = false;
@@ -31,11 +34,6 @@ export class MainPageComponent implements OnInit {
   public onWordFilterChange(word: string) {
     this.filterWord = word;
   }
-
-  constructor(
-    private cardShowService: CardShowService,
-    private filterToggleService: FilterToggleService,
-  ) {}
 
   ngOnInit(): void {
     this.cardShowService.submitForm$.subscribe((value: boolean) => {

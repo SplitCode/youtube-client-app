@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
@@ -16,10 +16,8 @@ export class SearchInputComponent {
   private isSubmitForm: boolean = false;
   searchQuery: string = '';
 
-  constructor(
-    private searchStateService: SearchStateService,
-    private cardShowService: CardShowService,
-  ) {}
+  searchStateService = inject(SearchStateService);
+  cardShowService = inject(CardShowService);
 
   onSubmit(event: boolean): void {
     this.isSubmitForm = event;
