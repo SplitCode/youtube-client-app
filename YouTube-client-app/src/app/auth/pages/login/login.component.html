@@ -1,1 +1,22 @@
-<p>login works!</p>
+<section class="login-page">
+  <div class="login-page__form">
+    <h2 class="login-page__form-title">Login</h2>
+    <form class="form">
+      <div class="form__group">
+        <label for="login">login</label>
+        <!-- <input type="text" id="login" [(ngModel)]="login" name="login" required> -->
+        <input type="text" id="login" name="login" required />
+      </div>
+      <div class="form__group">
+        <label for="password">password</label>
+        <!-- <input type="password" id="password" [(ngModel)]="password" name="password" required> -->
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form__button">
+        <app-button btnAppearance="large" [btnType]="'submit'"
+          >Login</app-button
+        >
+      </div>
+    </form>
+  </div>
+</section>
