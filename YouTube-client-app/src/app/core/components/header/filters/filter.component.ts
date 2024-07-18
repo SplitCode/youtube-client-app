@@ -15,17 +15,12 @@ export class FilterComponent {
   searchService = inject(SearchService);
   @Output() wordFilterChange: EventEmitter<string> = new EventEmitter();
 
-  isDateSort: boolean = false;
-  isViewSort: boolean = false;
-
   onDateClick() {
-    this.isDateSort = !this.isDateSort;
-    this.searchService.updateDateSortClick(this.isDateSort);
+    this.searchService.updateDateSortClick();
   }
 
   onViewsClick() {
-    this.isViewSort = !this.isViewSort;
-    this.searchService.updateViewSortClick(this.isViewSort);
+    this.searchService.updateViewSortClick();
   }
 
   onFilterWordChange(event: Event) {

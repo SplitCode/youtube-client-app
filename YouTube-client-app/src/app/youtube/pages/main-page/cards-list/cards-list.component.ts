@@ -16,20 +16,14 @@ import { CardItemComponent } from './card-item/card-item.component';
   styleUrl: './cards-list.component.scss',
 })
 export class CardsListComponent implements OnInit {
+  private searchService = inject(SearchService);
   cardsList: CardItemModel[] = [];
-  searchQuery: string = '';
 
   @Input() filterWord: string = '';
-
-  private searchService = inject(SearchService);
 
   ngOnInit(): void {
     this.searchService.currentCardList.subscribe((cards) => {
       this.cardsList = cards;
-    });
-
-    this.searchService.currentSearchQuery.subscribe((query: string) => {
-      this.searchQuery = query;
     });
   }
 }

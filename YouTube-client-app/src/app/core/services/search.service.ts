@@ -24,49 +24,55 @@ export class SearchService {
 
   updateSearchQuery(query: string) {
     this.searchQuery.next(query);
-    this.filterCards();
+    this.searchCards();
   }
 
   updateFilterWord(word: string) {
     this.filterWord.next(word);
   }
 
-  updateDateSortClick(isDateSort: boolean) {
-    this.isDateSortClick.next(isDateSort);
-    this.filterCards();
+  updateDateSortClick() {
+    this.isDateSortClick.next(!this.isDateSortClick.getValue());
+    this.sortCardsByDate();
   }
 
-  updateViewSortClick(isViewSort: boolean) {
-    this.isViewSortClick.next(isViewSort);
-    this.filterCards();
+  updateViewSortClick() {
+    this.isViewSortClick.next(!this.isViewSortClick.getValue());
+    this.sortCardsByViews();
   }
 
-  private filterCards() {
+  private searchCards() {
     let cards = [...this.cardDataService.getCards()];
-    const isDateSort = this.isDateSortClick.value;
-    const isViewSort = this.isViewSortClick.value;
     const searchQuery = this.searchQuery.getValue().toLowerCase();
 
     if (searchQuery) {
-      cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery));
+      cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery),);
     }
 
-    if (isDateSort) {
-      cards = cards.sort((a, b) => {
-        const dateA = new Date(a.snippet.publishedAt).getTime();
-        const dateB = new Date(b.snippet.publishedAt).getTime();
-        return isDateSort ? dateA - dateB : dateB - dateA;
-      });
-    }
+    this.cardsList.next(cards);
+  }
 
-    if (isViewSort) {
-      cards = cards.sort((a, b) => {
-        const viewsA = parseInt(a.statistics.viewCount, 10);
-        const viewsB = parseInt(b.statistics.viewCount, 10);
-        return isViewSort ? viewsA - viewsB : viewsB - viewsA;
-      });
-    }
+  private sortCardsByDate() {
+    const cards = this.cardsList.getValue();
+    const isDateSortAscending = this.isDateSortClick.getValue();
 
+    cards.sort((a, b) => {
+      const dateA = new Date(a.snippet.publishedAt).getTime();
+      const dateB = new Date(b.snippet.publishedAt).getTime();
+      return isDateSortAscending ? dateA - dateB : dateB - dateA;
+    });
+    this.cardsList.next(cards);
+  }
+
+  private sortCardsByViews() {
+    let cards = this.cardsList.getValue();
+    const isViewSortAscending = this.isViewSortClick.getValue();
+
+    cards = cards.sort((a, b) => {
+      const viewsA = parseInt(a.statistics.viewCount, 10);
+      const viewsB = parseInt(b.statistics.viewCount, 10);
+      return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
+    });
     this.cardsList.next(cards);
   }
 }
