@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { FilterToggleService } from '../../../youtube/services/filter-toggle.service';
+import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingsButtonComponent } from './settings-button/settings-button.component';
@@ -20,6 +20,7 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     CommonModule,
     SettingsButtonComponent,
     ButtonComponent,
+    FilterComponent,
   ],
 })
 export class HeaderComponent {
@@ -27,10 +28,8 @@ export class HeaderComponent {
   router = inject(Router);
   public isFilterShown: boolean = false;
 
-  constructor(private filterToggleService: FilterToggleService) {}
-
   toggleFilter(): void {
-    this.filterToggleService.toggleFilterShow();
+    this.isFilterShown = !this.isFilterShown;
   }
 
   onLogout() {

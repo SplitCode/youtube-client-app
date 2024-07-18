@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 
+import { FilterComponent } from '../../../core/components/header/filters/filter.component';
 import { CardShowService } from '../../services/card-show.service';
 import { FilterToggleService } from '../../services/filter-toggle.service';
 import { CardsListComponent } from './cards-list/cards-list.component';
-import { FilterComponent } from './filters/filter.component';
 
 @Component({
   selector: 'app-main-page',
