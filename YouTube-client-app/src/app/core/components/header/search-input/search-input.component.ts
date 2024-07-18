@@ -3,7 +3,7 @@ import { FormsModule } from '@angular/forms';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardShowService } from '../../../../youtube/services/card-show.service';
-import { SearchStateService } from '../../../services/search-state.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-search-input',
@@ -16,12 +16,12 @@ export class SearchInputComponent {
   private isSubmitForm: boolean = false;
   searchQuery: string = '';
 
-  searchStateService = inject(SearchStateService);
+  searchService = inject(SearchService);
   cardShowService = inject(CardShowService);
 
   onSubmit(event: boolean): void {
     this.isSubmitForm = event;
-    this.searchStateService.updateSearchQuery(this.searchQuery);
+    this.searchService.updateSearchQuery(this.searchQuery);
     this.cardShowService.showCards(this.isSubmitForm);
   }
 }

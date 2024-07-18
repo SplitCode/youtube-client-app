@@ -1,12 +1,6 @@
 <section class="cards-list">
   <app-card-item
-    *ngFor="
-      let cardItem of cardsList
-        | searchPipe: searchQuery
-        | filterDatePipe: isDateSortClick
-        | filterViewsPipe: isViewSortClick
-        | filterWordPipe: filterWord
-    "
+    *ngFor="let cardItem of cardsList | filterWordPipe: filterWord"
     [cardItem]="cardItem"
   ></app-card-item>
 </section>

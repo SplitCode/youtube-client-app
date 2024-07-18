@@ -1,14 +1,6 @@
 <main class="main-page">
-  <app-filter
-    *ngIf="isFiltersShown"
-    (dateSortClick)="onDateClick($event)"
-    (viewSortClick)="onViewsClick($event)"
-    (wordFilterChange)="onWordFilterChange($event)"
-  ></app-filter>
   <app-cards-list
     *ngIf="isCardsShown"
-    [isDateSortClick]="isDateSortClick"
-    [isViewSortClick]="isViewSortClick"
     [filterWord]="filterWord"
   ></app-cards-list>
 </main>

@@ -1,4 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component, EventEmitter, inject, Output
+} from '@angular/core';
+
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-filter',
@@ -8,21 +12,20 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './filter.component.scss',
 })
 export class FilterComponent {
-  @Output() dateSortClick: EventEmitter<boolean> = new EventEmitter();
-  @Output() viewSortClick: EventEmitter<boolean> = new EventEmitter();
+  searchService = inject(SearchService);
   @Output() wordFilterChange: EventEmitter<string> = new EventEmitter();
 
-  public isDateSortClick: boolean = false;
-  public isViewSortClick: boolean = false;
+  isDateSort: boolean = false;
+  isViewSort: boolean = false;
 
-  onSortByDate() {
-    this.isDateSortClick = !this.isDateSortClick;
-    this.dateSortClick.emit(this.isDateSortClick);
+  onDateClick() {
+    this.isDateSort = !this.isDateSort;
+    this.searchService.updateDateSortClick(this.isDateSort);
   }
 
-  onSortByViews() {
-    this.isViewSortClick = !this.isViewSortClick;
-    this.viewSortClick.emit(this.isViewSortClick);
+  onViewsClick() {
+    this.isViewSort = !this.isViewSort;
+    this.searchService.updateViewSortClick(this.isViewSort);
   }
 
   onFilterWordChange(event: Event) {
