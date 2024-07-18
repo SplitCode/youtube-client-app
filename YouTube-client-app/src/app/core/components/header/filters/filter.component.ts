@@ -38,8 +38,4 @@ export class FilterComponent {
   onViewsClick() {
     this.searchService.updateViewSortClick();
   }
-
-  preventSubmit(event: Event) {
-    event.preventDefault();
-  }
 }

@@ -5,7 +5,7 @@
     <button class="filters-list__item" (click)="onViewsClick()">
       count of views
     </button>
-    <form class="filters-form" (submit)="preventSubmit($event)">
+    <div class="filters-form">
       <label class="filters-form__label" for="filter-input"
         >by word or sentance</label
       >
@@ -15,6 +15,6 @@
         id="filter-input"
         [formControl]="filterControl"
       />
-    </form>
+    </div>
   </div>
 </div>
