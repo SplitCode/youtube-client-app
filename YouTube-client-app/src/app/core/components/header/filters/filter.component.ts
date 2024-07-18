@@ -1,6 +1,4 @@
-import {
-  Component, EventEmitter, inject, Output
-} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 
@@ -15,20 +13,16 @@ import { SearchService } from '../../../services/search.service';
 })
 export class FilterComponent {
   searchService = inject(SearchService);
-  @Output() wordFilterChange: EventEmitter<string> = new EventEmitter();
-
   filterControl = new FormControl('');
 
   constructor() {
-    this.filterControl.valueChanges.pipe(
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe((value: string | null) => {
-      if (value !== null) {
-        this.searchService.updateFilterWord(value);
-        this.wordFilterChange.emit(value);
-      }
-    });
+    this.filterControl.valueChanges
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((value: string | null) => {
+        if (value !== null) {
+          this.searchService.updateFilterWord(value);
+        }
+      });
   }
 
   onDateClick() {

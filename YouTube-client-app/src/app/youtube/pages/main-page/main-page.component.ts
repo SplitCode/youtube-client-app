@@ -24,13 +24,17 @@ export class MainPageComponent implements OnInit, OnDestroy {
   public filterWord: string = '';
 
   ngOnInit(): void {
-    this.cardShowService.submitForm$.pipe(takeUntil(this.destroy$)).subscribe((value: boolean) => {
-      this.isCardsShown = value;
-    });
+    this.cardShowService.submitForm$
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((value: boolean) => {
+        this.isCardsShown = value;
+      });
 
-    this.searchService.currentFilterWord.pipe(takeUntil(this.destroy$)).subscribe((word: string) => {
-      this.filterWord = word;
-    });
+    this.searchService.currentFilterWord
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((word: string) => {
+        this.filterWord = word;
+      });
   }
 
   ngOnDestroy(): void {
