@@ -30,8 +30,8 @@ export class FilterComponent {
 
   onFilterWordChange(event: Event) {
     const filterWord = (event.target as HTMLInputElement).value;
-    this.wordFilterChange.emit(filterWord);
     this.searchService.updateFilterWord(filterWord);
+    this.wordFilterChange.emit(filterWord);
   }
 
   preventSubmit(event: Event) {

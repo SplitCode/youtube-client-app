@@ -9,14 +9,14 @@ import { CardDataService } from '../../youtube/services/card-data.service';
 })
 export class SearchService {
   private searchQuery = new BehaviorSubject<string>('');
+  private filterWord = new BehaviorSubject<string>('');
   private cardsList = new BehaviorSubject<CardItemModel[]>([]);
   private isDateSortClick = new BehaviorSubject<boolean>(false);
   private isViewSortClick = new BehaviorSubject<boolean>(false);
-  private filterWord = new BehaviorSubject<string>('');
 
   currentSearchQuery = this.searchQuery.asObservable();
-  currentCardList = this.cardsList.asObservable();
   currentFilterWord = this.filterWord.asObservable();
+  currentCardList = this.cardsList.asObservable();
 
   constructor(private cardDataService: CardDataService) {
     this.cardsList.next(this.cardDataService.getCards());
@@ -25,6 +25,10 @@ export class SearchService {
   updateSearchQuery(query: string) {
     this.searchQuery.next(query);
     this.filterCards();
+  }
+
+  updateFilterWord(word: string) {
+    this.filterWord.next(word);
   }
 
   updateDateSortClick(isDateSort: boolean) {
@@ -37,24 +41,14 @@ export class SearchService {
     this.filterCards();
   }
 
-  updateFilterWord(word: string) {
-    this.filterWord.next(word);
-    this.filterCards();
-  }
-
   private filterCards() {
     let cards = [...this.cardDataService.getCards()];
     const isDateSort = this.isDateSortClick.value;
     const isViewSort = this.isViewSortClick.value;
     const searchQuery = this.searchQuery.getValue().toLowerCase();
-    const filterWord = this.filterWord.getValue().toLowerCase();
 
     if (searchQuery) {
       cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery));
-    }
-
-    if (filterWord) {
-      cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(filterWord));
     }
 
     if (isDateSort) {
