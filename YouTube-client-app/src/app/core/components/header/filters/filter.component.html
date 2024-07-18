@@ -13,7 +13,7 @@
         class="filters-form__input"
         type="text"
         id="filter-input"
-        (input)="onFilterWordChange($event)"
+        [formControl]="filterControl"
       />
     </form>
   </div>
