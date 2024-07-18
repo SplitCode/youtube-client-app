@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 
 import { FilterComponent } from '../../../core/components/header/filters/filter.component';
+import { SearchService } from '../../../core/services/search.service';
 import { CardShowService } from '../../services/card-show.service';
 import { FilterToggleService } from '../../services/filter-toggle.service';
 import { CardsListComponent } from './cards-list/cards-list.component';
@@ -16,6 +17,7 @@ import { CardsListComponent } from './cards-list/cards-list.component';
 export class MainPageComponent implements OnInit {
   private cardShowService = inject(CardShowService);
   private filterToggleService = inject(FilterToggleService);
+  private searchService = inject(SearchService);
 
   public isCardsShown: boolean = false;
   public isFiltersShown: boolean = false;
@@ -42,6 +44,10 @@ export class MainPageComponent implements OnInit {
 
     this.filterToggleService.currentFilterShow.subscribe((isShow: boolean) => {
       this.isFiltersShown = isShow;
+    });
+
+    this.searchService.currentFilterWord.subscribe((word: string) => {
+      this.filterWord = word;
     });
   }
 }
