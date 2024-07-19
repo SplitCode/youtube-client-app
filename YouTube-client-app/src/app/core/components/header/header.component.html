@@ -4,7 +4,7 @@
       <img class="header__logo" src="logo.svg" alt="youtube logo" />
       <app-search-input></app-search-input>
       <app-settings-button
-        *ngIf="isSettingsVisible"
+        *ngIf="isSettingsVisible$ | async"
         (click)="toggleFilter()"
       ></app-settings-button>
     </div>
@@ -15,7 +15,5 @@
       >
     </div>
   </div>
-  @if (isFilterShown) {
-    <app-filter></app-filter>
-  }
+    <app-filter *ngIf="isFilterShown$  | async"></app-filter>
 </header>
