@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { CoreModule } from './core/core.module';
+import { LoggerService } from './core/services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -10,5 +11,8 @@ import { CoreModule } from './core/core.module';
   imports: [RouterOutlet, CoreModule],
 })
 export class AppComponent {
+  constructor(private logger: LoggerService) {
+    this.logger.logMessage('AppComponent initialized');
+  }
   title = 'YouTube-client-app';
 }
