@@ -3,7 +3,10 @@
     <div class="header__search-content">
       <img class="header__logo" src="logo.svg" alt="youtube logo" />
       <app-search-input></app-search-input>
-      <app-settings-button (click)="toggleFilter()"></app-settings-button>
+      <app-settings-button
+        *ngIf="isSettingsVisible"
+        (click)="toggleFilter()"
+      ></app-settings-button>
     </div>
     <div class="header__login">
       <app-login-info></app-login-info>
