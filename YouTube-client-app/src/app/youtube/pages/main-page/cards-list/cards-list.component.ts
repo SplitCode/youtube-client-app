@@ -26,7 +26,7 @@ export class CardsListComponent implements OnInit, OnDestroy {
   @Input() filterWord: string = '';
 
   ngOnInit(): void {
-    this.searchService.currentCardList.pipe(takeUntil(this.destroy$)).subscribe((cards) => {
+    this.searchService.currentCardList$.pipe(takeUntil(this.destroy$)).subscribe((cards) => {
       this.cardsList = cards;
     });
   }

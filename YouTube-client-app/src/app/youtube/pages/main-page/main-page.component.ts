@@ -30,7 +30,7 @@ export class MainPageComponent implements OnInit, OnDestroy {
         this.isCardsShown = value;
       });
 
-    this.searchService.currentFilterWord
+    this.searchService.currentFilterWord$
       .pipe(takeUntil(this.destroy$))
       .subscribe((word: string) => {
         this.filterWord = word;
