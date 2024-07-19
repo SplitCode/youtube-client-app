@@ -17,18 +17,18 @@
   }
 
   &__viewed::before {
-    content: url("/viewed.svg");
+    content: url("../../../../assets/img/viewed.svg");
   }
 
   &__dislike::before {
-    content: url("/dislike.svg");
+    content: url("../../../../assets/img/dislike.svg");
   }
 
   &__like::before {
-    content: url("/liked.svg");
+    content: url("../../../../assets/img/liked.svg");
   }
 
   &__comments::before {
-    content: url("/comments.svg");
+    content: url("../../../../assets/img/comments.svg");
   }
 }
