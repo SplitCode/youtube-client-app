@@ -14,5 +14,4 @@ export class AppComponent {
   constructor(private logger: LoggerService) {
     this.logger.logMessage('AppComponent initialized');
   }
-  title = 'YouTube-client-app';
 }
