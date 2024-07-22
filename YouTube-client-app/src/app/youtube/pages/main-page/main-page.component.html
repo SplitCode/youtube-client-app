@@ -1,6 +1,6 @@
 <main class="main-page">
   <app-cards-list
-    *ngIf="isCardsShown"
-    [filterWord]="filterWord"
+    *ngIf="isCardsShown$ | async"
+    [filterWord]="(filterWord$ | async) ?? ''"
   ></app-cards-list>
 </main>
