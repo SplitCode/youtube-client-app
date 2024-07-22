@@ -13,15 +13,20 @@ import { SearchService } from '../../../services/search.service';
   styleUrl: './search-input.component.scss',
 })
 export class SearchInputComponent {
-  private isSubmitForm: boolean = false;
+  // private isSubmitForm: boolean = false;
   searchQuery: string = '';
 
   searchService = inject(SearchService);
   cardShowService = inject(CardShowService);
 
-  onSubmit(event: boolean): void {
-    this.isSubmitForm = event;
+  // onSubmit(event: boolean): void {
+  //   this.isSubmitForm = event;
+  //   this.searchService.updateSearchQuery(this.searchQuery);
+  //   this.cardShowService.showCards(this.isSubmitForm);
+  // }
+
+  onSubmit(): void {
     this.searchService.updateSearchQuery(this.searchQuery);
-    this.cardShowService.showCards(this.isSubmitForm);
+    this.cardShowService.showCards(true);
   }
 }
