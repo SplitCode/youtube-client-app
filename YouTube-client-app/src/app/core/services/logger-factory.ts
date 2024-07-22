@@ -1,17 +1,15 @@
 /* eslint-disable no-console */
-import { Injectable, isDevMode } from '@angular/core';
 
 import { LoggerService } from './logger.service';
 
-export const loggerFactory = () => {
-  @Injectable()
+export const loggerFactory = (isDevMode: boolean) => {
   class LoggerServiceImplementation extends LoggerService {
-    private readonly prefix = isDevMode() ? '[DEV]' : '[PROD]';
+    private readonly prefix = isDevMode ? '[DEV]' : '[PROD]';
 
     logMessage(message: string): void {
       console.log(`${this.prefix} ${message}`);
     }
   }
 
-  return LoggerServiceImplementation;
+  return new LoggerServiceImplementation();
 };

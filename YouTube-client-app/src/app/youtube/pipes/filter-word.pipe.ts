@@ -7,7 +7,7 @@ import { CardItemModel } from '../models/card-item.model';
   standalone: true,
 })
 export class FilterWordPipe implements PipeTransform {
-  transform(cards: CardItemModel[], filterWord: string): CardItemModel[] {
+  transform(cards: CardItemModel[], filterWord: string | null): CardItemModel[] {
     if (!filterWord) {
       return cards;
     }

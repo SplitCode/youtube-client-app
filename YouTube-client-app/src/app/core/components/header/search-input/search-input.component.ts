@@ -6,6 +6,8 @@ import {
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardShowService } from '../../../../youtube/services/card-show.service';
+import { DevLoggerService } from '../../../services/dev-logger.service';
+import { LoggerService } from '../../../services/logger.service';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -21,8 +23,12 @@ export class SearchInputComponent implements OnInit {
 
   searchService = inject(SearchService);
   cardShowService = inject(CardShowService);
+  logger = inject(DevLoggerService);
+  loggerserv = inject(LoggerService);
 
   ngOnInit(): void {
+    this.logger.logMessage('hhh');
+    this.loggerserv.logMessage('zzz');
     this.searchSubject.pipe(
       filter((query) => query.length >= 3),
       debounceTime(300),

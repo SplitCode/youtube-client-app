@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, inject, Input, OnInit
+  Component, inject, OnInit
 } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -19,9 +19,11 @@ import { CardItemComponent } from './card-item/card-item.component';
 export class CardsListComponent implements OnInit {
   private searchService = inject(SearchService);
 
+  filterWord$ = this.searchService.currentFilterWord$;
+
   cardsList$!: Observable<CardItemModel[]>;
 
-  @Input() filterWord: string = '';
+  // @Input() filterWord: string = '';
 
   ngOnInit(): void {
     this.cardsList$ = this.searchService.currentCardList$;

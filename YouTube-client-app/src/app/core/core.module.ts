@@ -6,19 +6,23 @@ import {
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { ModuleImportGuard } from './guards/module-import.guard';
-import { DevLoggerService } from './services/dev-logger.service';
 import { LoggerService } from './services/logger.service';
-import { ProdLoggerService } from './services/prod-logger.service';
+import { loggerFactory } from './services/logger-factory';
+// import { DevLoggerService } from './services/dev-logger.service';
+// import { LoggerService } from './services/logger.service';
+// import { loggerFactory } from './services/logger-factory';
+// import { ProdLoggerService } from './services/prod-logger.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule, HeaderComponent, FooterComponent],
   exports: [HeaderComponent, FooterComponent],
   providers: [
-    {
-      provide: LoggerService,
-      useClass: isDevMode() ? DevLoggerService : ProdLoggerService,
-    },
+    // {
+    //   provide: LoggerService,
+    //   useFactory: loggerFactory,
+    //   deps: [isDevMode()]
+    // },
   ],
 })
 export class CoreModule extends ModuleImportGuard {

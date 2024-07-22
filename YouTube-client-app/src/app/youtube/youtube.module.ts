@@ -9,7 +9,7 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
   declarations: [],
   imports: [
     CommonModule,
-    MainPageComponent,
+    // MainPageComponent,
     // DetailedPageComponent,
     YoutubeRoutingModule,
   ],
