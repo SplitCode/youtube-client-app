@@ -1,9 +1,14 @@
 export interface CardItemModel {
   kind: string;
   etag: string;
-  id: string;
+  id: Id;
   snippet: Snippet;
-  statistics: Statistics;
+  // statistics: Statistics;
+}
+
+export interface Id {
+  kind: string;
+  videoId: string;
 }
 
 export interface Snippet {
@@ -13,11 +18,12 @@ export interface Snippet {
   description: string;
   thumbnails: Thumbnails;
   channelTitle: string;
-  tags: string[];
-  categoryId: string;
   liveBroadcastContent: string;
-  localized: Localized;
-  defaultAudioLanguage: string;
+  publishTime: string;
+  // tags: string[];
+  // categoryId: string;
+  // localized: Localized;
+  // defaultAudioLanguage: string;
 }
 
 export interface Statistics {
@@ -32,14 +38,14 @@ export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
   high: Thumbnail;
-  standard: Thumbnail;
-  maxres: Thumbnail;
+  // standard: Thumbnail;
+  // maxres: Thumbnail;
 }
 
-export interface Localized {
-  title: string;
-  description: string;
-}
+// export interface Localized {
+//   title: string;
+//   description: string;
+// }
 
 export interface Thumbnail {
   url: string;

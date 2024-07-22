@@ -14,7 +14,7 @@
       <div class="card__image-container">
         <img
           class="card__image"
-          src="{{ cardItem.snippet.thumbnails.maxres.url }}"
+          src="{{ cardItem.snippet.thumbnails.high.url }}"
           alt="{{ cardItem.snippet.channelTitle }}"
         />
       </div>
@@ -33,14 +33,14 @@
             </p>
           </div>
         </div>
-        <div class="card__stats">
+        <!-- <div class="card__stats">
           <app-card-stats
             [viewCount]="cardItem.statistics.viewCount"
             [likeCount]="cardItem.statistics.likeCount"
             [dislikeCount]="cardItem.statistics.dislikeCount"
             [commentCount]="cardItem.statistics.commentCount"
           ></app-card-stats>
-        </div>
+        </div> -->
 
         <div
           class="card__line"

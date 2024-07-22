@@ -9,17 +9,17 @@ import { CardItemModel } from '../models/card-item.model';
 export class CardDataService {
   private data = response;
 
-  protected cardsList: CardItemModel[] = [...this.data.items];
+  // protected cardsList: CardItemModel[] = [...this.data.items];
 
-  getCards(): CardItemModel[] {
-    return this.cardsList;
-  }
+  // getCards(): CardItemModel[] {
+  //   return this.cardsList;
+  // }
 
-  getCardById(id: string): CardItemModel {
-    const card = this.cardsList.find((cardItem) => cardItem.id === id);
-    if (!card) {
-      throw new Error(`Card with id ${id} not found`);
-    }
-    return card;
-  }
+  // getCardById(id: string): CardItemModel {
+  //   const card = this.cardsList.find((cardItem) => cardItem.id === id);
+  //   if (!card) {
+  //     throw new Error(`Card with id ${id} not found`);
+  //   }
+  //   return card;
+  // }
 }

@@ -32,7 +32,7 @@ export class FilterComponent implements OnInit {
     this.searchService.updateDateSortClick();
   }
 
-  onViewsClick() {
-    this.searchService.updateViewSortClick();
-  }
+  // onViewsClick() {
+  //   this.searchService.updateViewSortClick();
+  // }
 }

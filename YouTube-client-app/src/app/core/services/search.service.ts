@@ -44,10 +44,10 @@ export class SearchService {
     this.sortCardsByDate();
   }
 
-  updateViewSortClick() {
-    this.isViewSortClick$$.next(!this.isViewSortClick$$.getValue());
-    this.sortCardsByViews();
-  }
+  // updateViewSortClick() {
+  //   this.isViewSortClick$$.next(!this.isViewSortClick$$.getValue());
+  //   this.sortCardsByViews();
+  // }
 
   // private searchCards() {
   //   let cards = [...this.cardDataService.getCards()];
@@ -81,15 +81,15 @@ export class SearchService {
     this.cardsList$$.next(cards);
   }
 
-  private sortCardsByViews() {
-    let cards = this.cardsList$$.getValue();
-    const isViewSortAscending = this.isViewSortClick$$.getValue();
+  // private sortCardsByViews() {
+  //   let cards = this.cardsList$$.getValue();
+  //   const isViewSortAscending = this.isViewSortClick$$.getValue();
 
-    cards = cards.sort((a, b) => {
-      const viewsA = parseInt(a.statistics.viewCount, 10);
-      const viewsB = parseInt(b.statistics.viewCount, 10);
-      return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
-    });
-    this.cardsList$$.next(cards);
-  }
+  //   cards = cards.sort((a, b) => {
+  //     const viewsA = parseInt(a.statistics.viewCount, 10);
+  //     const viewsB = parseInt(b.statistics.viewCount, 10);
+  //     return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
+  //   });
+  //   this.cardsList$$.next(cards);
+  // }
 }

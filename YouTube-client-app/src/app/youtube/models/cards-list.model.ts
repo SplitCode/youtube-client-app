@@ -3,6 +3,8 @@ import { CardItemModel } from './card-item.model';
 export interface CardsListResponseModel {
   kind: string;
   etag: string;
+  nextPageToken: string;
+  regionCode: string;
   pageInfo: PageInfo;
   items: CardItemModel[];
 }
