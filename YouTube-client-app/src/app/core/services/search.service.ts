@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -61,8 +61,14 @@ export class SearchService {
   // }
 
   private searchCards(query: string) {
-    const url = `${environment.API_URL}/search?key=${environment.API_KEY}&type=video&part=snippet&maxResults=15&q=${query}`;
-    this.http.get<YouTubeResponse>(url).pipe(
+    const url = `${environment.API_URL}/search`;
+    const params = new HttpParams()
+      .set('key', environment.API_KEY)
+      .set('type', 'video')
+      .set('part', 'snippet')
+      .set('maxResults', '15')
+      .set('q', query);
+    this.http.get<YouTubeResponse>(url, { params }).pipe(
       map((response) => response.items)
     ).subscribe((cards) => {
       this.cardsList$$.next(cards);
