@@ -1,5 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import {
+  debounceTime, distinctUntilChanged, filter, Subject
+} from 'rxjs';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardShowService } from '../../../../youtube/services/card-show.service';
@@ -12,21 +15,25 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
-export class SearchInputComponent {
-  // private isSubmitForm: boolean = false;
+export class SearchInputComponent implements OnInit {
   searchQuery: string = '';
+  searchSubject = new Subject<string>();
 
   searchService = inject(SearchService);
   cardShowService = inject(CardShowService);
 
-  // onSubmit(event: boolean): void {
-  //   this.isSubmitForm = event;
-  //   this.searchService.updateSearchQuery(this.searchQuery);
-  //   this.cardShowService.showCards(this.isSubmitForm);
-  // }
+  ngOnInit(): void {
+    this.searchSubject.pipe(
+      filter((query) => query.length >= 3),
+      debounceTime(300),
+      distinctUntilChanged()
+    ).subscribe((query) => {
+      this.searchService.updateSearchQuery(query);
+      this.cardShowService.showCards(true);
+    });
+  }
 
-  onSubmit(): void {
-    this.searchService.updateSearchQuery(this.searchQuery);
-    this.cardShowService.showCards(true);
+  onSearchChange(query: string): void {
+    this.searchSubject.next(query);
   }
 }
