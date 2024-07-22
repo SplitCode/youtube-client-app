@@ -1,12 +1,9 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  debounceTime, distinctUntilChanged, filter, Subject
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, filter, Subject } from 'rxjs';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardShowService } from '../../../../youtube/services/card-show.service';
-import { DevLoggerService } from '../../../services/dev-logger.service';
 import { LoggerService } from '../../../services/logger.service';
 import { SearchService } from '../../../services/search.service';
 
@@ -23,20 +20,20 @@ export class SearchInputComponent implements OnInit {
 
   searchService = inject(SearchService);
   cardShowService = inject(CardShowService);
-  logger = inject(DevLoggerService);
-  loggerserv = inject(LoggerService);
+  logger = inject(LoggerService);
 
   ngOnInit(): void {
-    this.logger.logMessage('hhh');
-    this.loggerserv.logMessage('zzz');
-    this.searchSubject.pipe(
-      filter((query) => query.length >= 3),
-      debounceTime(300),
-      distinctUntilChanged()
-    ).subscribe((query) => {
-      this.searchService.updateSearchQuery(query);
-      this.cardShowService.showCards(true);
-    });
+    this.logger.logMessage('logger work');
+    this.searchSubject
+      .pipe(
+        filter((query) => query.length >= 3),
+        debounceTime(300),
+        distinctUntilChanged(),
+      )
+      .subscribe((query) => {
+        this.searchService.updateSearchQuery(query);
+        this.cardShowService.showCards(true);
+      });
   }
 
   onSearchChange(query: string): void {

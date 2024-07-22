@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { CoreModule } from './core/core.module';
-import { DevLoggerService } from './core/services/dev-logger.service';
+import { LoggerService } from './core/services/logger.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,7 @@ import { DevLoggerService } from './core/services/dev-logger.service';
   imports: [RouterOutlet, CoreModule],
 })
 export class AppComponent {
-  constructor(private logger: DevLoggerService) {
+  constructor(private logger: LoggerService) {
     this.logger.logMessage('AppComponent initialized');
   }
 }
