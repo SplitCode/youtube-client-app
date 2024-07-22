@@ -21,17 +21,13 @@ export class MainPageComponent implements OnInit {
   private searchService = inject(SearchService);
   private destroyRef = inject(DestroyRef);
 
-  public isCardsShown$: Observable<boolean>;
-  public filterWord$: Observable<string>;
-
-  constructor() {
-    this.isCardsShown$ = this.cardShowService.submitForm$;
-    this.filterWord$ = this.searchService.currentFilterWord$;
-  }
+  public isCardsShown$!: Observable<boolean>;
+  public filterWord$!: Observable<string>;
 
   ngOnInit(): void {
+    this.isCardsShown$ = this.cardShowService.submitForm$;
+    this.filterWord$ = this.searchService.currentFilterWord$;
     this.isCardsShown$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
-
     this.filterWord$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }
