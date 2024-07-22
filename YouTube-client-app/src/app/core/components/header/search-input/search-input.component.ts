@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, filter, Subject } from 'rxjs';
+import {
+  debounceTime, distinctUntilChanged, filter, Subject
+} from 'rxjs';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { CardShowService } from '../../../../youtube/services/card-show.service';
 import { LoggerService } from '../../../services/logger.service';
 import { SearchService } from '../../../services/search.service';
 
@@ -19,7 +20,6 @@ export class SearchInputComponent implements OnInit {
   searchSubject = new Subject<string>();
 
   searchService = inject(SearchService);
-  cardShowService = inject(CardShowService);
   logger = inject(LoggerService);
 
   ngOnInit(): void {
@@ -32,7 +32,6 @@ export class SearchInputComponent implements OnInit {
       )
       .subscribe((query) => {
         this.searchService.updateSearchQuery(query);
-        this.cardShowService.showCards(true);
       });
   }
 
