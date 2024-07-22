@@ -5,11 +5,9 @@ import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { CardItemModel } from '../../youtube/models/card-item.model';
+import { YouTubeResponse } from '../../youtube/models/youtube-response.model';
 import { CardDataService } from '../../youtube/services/card-data.service';
 
-interface YouTubeResponse {
-  items: CardItemModel[];
-}
 @Injectable({
   providedIn: 'root',
 })
