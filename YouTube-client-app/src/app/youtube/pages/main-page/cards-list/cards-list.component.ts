@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import {
-  Component, inject, Input, OnDestroy,
-  OnInit
+  Component, inject, Input, OnInit
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { SearchService } from '../../../../core/services/search.service';
 import { CardItemModel } from '../../../models/card-item.model';
@@ -17,22 +16,14 @@ import { CardItemComponent } from './card-item/card-item.component';
   templateUrl: './cards-list.component.html',
   styleUrl: './cards-list.component.scss',
 })
-export class CardsListComponent implements OnInit, OnDestroy {
+export class CardsListComponent implements OnInit {
   private searchService = inject(SearchService);
-  private destroy$ = new Subject<void>();
 
-  cardsList: CardItemModel[] = [];
+  cardsList$!: Observable<CardItemModel[]>;
 
   @Input() filterWord: string = '';
 
   ngOnInit(): void {
-    this.searchService.currentCardList$.pipe(takeUntil(this.destroy$)).subscribe((cards) => {
-      this.cardsList = cards;
-    });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
+    this.cardsList$ = this.searchService.currentCardList$;
   }
 }
