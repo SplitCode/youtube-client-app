@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import {
   Component, DestroyRef, inject, OnInit
 } from '@angular/core';
-// import { Subject, takeUntil } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Observable } from 'rxjs';
 
@@ -31,12 +30,8 @@ export class MainPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isCardsShown$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    this.isCardsShown$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
 
-    this.filterWord$
-      .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+    this.filterWord$.pipe(takeUntilDestroyed(this.destroyRef)).subscribe();
   }
 }
