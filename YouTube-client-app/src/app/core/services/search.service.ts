@@ -1,9 +1,15 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CardDataService } from '../../youtube/services/card-data.service';
 
+interface YouTubeResponse {
+  items: CardItemModel[];
+}
 @Injectable({
   providedIn: 'root',
 })
@@ -18,13 +24,15 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  constructor(private cardDataService: CardDataService) {
-    this.cardsList$$.next(this.cardDataService.getCards());
-  }
+  // constructor(private cardDataService: CardDataService) {
+  //   this.cardsList$$.next(this.cardDataService.getCards());
+  // }
+
+  constructor(private http: HttpClient) {}
 
   updateSearchQuery(query: string) {
     this.searchQuery$$.next(query);
-    this.searchCards();
+    this.searchCards(query);
   }
 
   updateFilterWord(word: string) {
@@ -41,15 +49,24 @@ export class SearchService {
     this.sortCardsByViews();
   }
 
-  private searchCards() {
-    let cards = [...this.cardDataService.getCards()];
-    const searchQuery = this.searchQuery$$.getValue().toLowerCase();
+  // private searchCards() {
+  //   let cards = [...this.cardDataService.getCards()];
+  //   const searchQuery = this.searchQuery$$.getValue().toLowerCase();
 
-    if (searchQuery) {
-      cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery),);
-    }
+  //   if (searchQuery) {
+  //     cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery),);
+  //   }
 
-    this.cardsList$$.next(cards);
+  //   this.cardsList$$.next(cards);
+  // }
+
+  private searchCards(query: string) {
+    const url = `${environment.API_URL}/search?key=${environment.API_KEY}&type=video&part=snippet&maxResults=15&q=${query}`;
+    this.http.get<YouTubeResponse>(url).pipe(
+      map((response) => response.items)
+    ).subscribe((cards) => {
+      this.cardsList$$.next(cards);
+    });
   }
 
   private sortCardsByDate() {
