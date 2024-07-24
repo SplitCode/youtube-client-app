@@ -2,18 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { CardsListComponent } from './pages/cards-list-page/cards-list.component';
-// import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
-// import { MainPageComponent } from './pages/main-page/main-page.component';
+import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 
 const routes: Routes = [
   {
     path: '',
     component: CardsListComponent,
   },
-  // {
-  //   path: 'details/:id',
-  //   component: DetailedPageComponent,
-  // },
+  {
+    path: 'details/:id',
+    component: DetailedPageComponent,
+  },
 ];
 
 @NgModule({

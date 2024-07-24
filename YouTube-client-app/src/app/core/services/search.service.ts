@@ -1,7 +1,7 @@
 // import { CardDataService } from '../../youtube/services/card-data.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
 import { CardItemModel, Statistics } from '../../youtube/models/card-item.model';
@@ -103,6 +103,28 @@ export class SearchService {
       return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
     });
     this.cardsList$$.next(cards);
+  }
+
+  getCardById(id: string): Observable<CardItemModel> {
+    const url = '/api/videos';
+    const params = new HttpParams()
+      .set('id', id)
+      .set('part', 'snippet,statistics');
+
+    return this.http.get<YouTubeVideoStatisticsResponse>(url, { params }).pipe(
+      map((response) => {
+        const item = response.items[0];
+        return {
+          ...item,
+          statistics: item.statistics || {
+            viewCount: '0',
+            likeCount: '0',
+            favoriteCount: '0',
+            commentCount: '0',
+          } as Statistics
+        } as unknown as CardItemModel;
+      })
+    );
   }
 }
 
