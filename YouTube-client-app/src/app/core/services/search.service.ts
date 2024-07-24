@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
 import { CardItemModel, Statistics } from '../../youtube/models/card-item.model';
 import { YouTubeResponse, YouTubeVideoStatisticsResponse } from '../../youtube/models/youtube-response.model';
 
@@ -44,9 +43,8 @@ export class SearchService {
   }
 
   private searchCards(query: string) {
-    const url = `${environment.API_URL}/search`;
+    const url = '/api/search';
     const params = new HttpParams()
-      .set('key', environment.API_KEY)
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', '15')
@@ -73,9 +71,8 @@ export class SearchService {
   }
 
   private fetchVideoStatistics(videoIds: string) {
-    const url = `${environment.API_URL}/videos`;
+    const url = '/api/videos';
     const params = new HttpParams()
-      .set('key', environment.API_KEY)
       .set('id', videoIds)
       .set('part', 'snippet,statistics');
 
