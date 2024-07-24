@@ -1,9 +1,9 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
+import { StatisticsResponse } from '../models/card-item.model';
 import { CardsListModel } from '../models/cards-list.model';
-import { YouTubeVideoStatisticsResponse } from '../models/youtube-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -30,15 +30,29 @@ export class CardDataService {
       .set('id', videoIds)
       .set('part', 'snippet,statistics');
 
-    return this.http.get<YouTubeVideoStatisticsResponse>(url, { params }).pipe(
+    return this.http.get<StatisticsResponse>(url, { params }).pipe(
       map((response) => response.items)
     );
   }
 
-  getCardById(id: string) {
+  getCardsDataWithStatistics(query: string) {
+    return this.getCardsData(query).pipe(
+      switchMap((items) => {
+        const videoIds = items.map((item) => item.id.videoId).join(',');
+        return this.getStatistics(videoIds).pipe(
+          map((statistics) => items.map((item) => ({
+            ...item,
+            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics
+          })))
+        );
+      })
+    );
+  }
+
+  getCardById(ids: string) {
     const url = '/api/videos';
     const params = new HttpParams()
-      .set('id', id)
+      .set('id', ids)
       .set('part', 'snippet,statistics');
 
     return this.http.get<CardsListModel>(url, { params }).pipe(

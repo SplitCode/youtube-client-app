@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { inject, Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
-import { VideoItemModel } from '../../youtube/models/card-item.model';
+import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CardDataService } from '../../youtube/services/card-data.service';
 
 @Injectable({
@@ -11,7 +10,7 @@ import { CardDataService } from '../../youtube/services/card-data.service';
 export class SearchService {
   private searchQuery$$ = new BehaviorSubject<string>('');
   private filterWord$$ = new BehaviorSubject<string>('');
-  private cardsList$$ = new BehaviorSubject<VideoItemModel[]>([]);
+  private cardsList$$ = new BehaviorSubject<CardItemModel[]>([]);
   private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
   private isViewSortClick$$ = new BehaviorSubject<boolean>(false);
 
@@ -19,7 +18,7 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  constructor(private cardDataService: CardDataService) {}
+  private cardDataService = inject(CardDataService);
 
   updateSearchQuery(query: string) {
     this.searchQuery$$.next(query);
@@ -41,24 +40,9 @@ export class SearchService {
   }
 
   private searchCards(query: string) {
-    this.cardDataService.getCardsData(query).pipe(
-      switchMap((items) => {
-        const videoIds = items.map((item) => item.id.videoId).join(',');
-        return this.cardDataService.getStatistics(videoIds).pipe(
-          map((statistics) => items.map((item) => ({
-            ...item,
-            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics
-          })))
-        );
-      }),
-      tap((cards) => console.log('Cards with Statistics:', cards))
-    ).subscribe((cards) => {
+    this.cardDataService.getCardsDataWithStatistics(query).subscribe((cards) => {
       this.cardsList$$.next(cards);
     });
-  }
-
-  getCardById(id: string): Observable<VideoItemModel> {
-    return this.cardDataService.getCardById(id);
   }
 
   private sortCardsByDate() {

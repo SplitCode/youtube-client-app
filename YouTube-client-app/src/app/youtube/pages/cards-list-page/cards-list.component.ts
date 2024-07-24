@@ -20,7 +20,6 @@ export class CardsListComponent implements OnInit {
   private searchService = inject(SearchService);
 
   filterWord$ = this.searchService.currentFilterWord$;
-
   cardsList$!: Observable<CardItemModel[]>;
 
   ngOnInit(): void {

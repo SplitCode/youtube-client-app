@@ -1,31 +1,3 @@
-export interface VideoItemModel {
-  kind: string;
-  etag: string;
-  id: Id;
-  snippet: {
-    publishedAt: string;
-    channelId: string;
-    title: string;
-    description: string;
-    thumbnails: {
-      default: { url: string, width: number, height: number },
-      medium: { url: string, width: number, height: number },
-      high: { url: string, width: number, height: number },
-      standard?: { url: string, width: number, height: number },
-      maxres?: { url: string, width: number, height: number },
-    },
-    channelTitle: string;
-    liveBroadcastContent: string;
-    publishTime: string;
-  };
-  statistics?: {
-    viewCount: string;
-    likeCount: string;
-    favoriteCount: string;
-    commentCount: string;
-  };
-}
-
 export interface CardItemModel {
   kind: string;
   etag: string;
@@ -59,13 +31,6 @@ export interface Statistics {
   commentCount: string;
 }
 
-// export interface VideoStatistics {
-//   kind: string;
-//   etag: string;
-//   items: VideoItemModel[];
-//   pageInfo: PageInfo;
-// }
-
 export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
@@ -83,4 +48,13 @@ export interface Thumbnail {
   url: string;
   width: number;
   height: number;
+}
+
+export interface StatisticsResponse {
+  items: StatisticsModel[];
+}
+
+export interface StatisticsModel {
+  id: string;
+  statistics: Statistics;
 }
