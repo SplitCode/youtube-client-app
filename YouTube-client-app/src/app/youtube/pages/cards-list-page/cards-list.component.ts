@@ -5,7 +5,7 @@ import {
 import { Observable } from 'rxjs';
 
 import { SearchService } from '../../../core/services/search.service';
-import { VideoItemModel } from '../../models/card-item.model';
+import { CardItemModel } from '../../models/card-item.model';
 import { FilterWordPipe } from '../../pipes/filter-word.pipe';
 import { CardItemComponent } from './card-item/card-item.component';
 
@@ -21,8 +21,7 @@ export class CardsListComponent implements OnInit {
 
   filterWord$ = this.searchService.currentFilterWord$;
 
-  // cardsList$!: Observable<CardItemModel[]>;
-  cardsList$!: Observable<VideoItemModel[]>;
+  cardsList$!: Observable<CardItemModel[]>;
 
   ngOnInit(): void {
     this.cardsList$ = this.searchService.currentCardList$;

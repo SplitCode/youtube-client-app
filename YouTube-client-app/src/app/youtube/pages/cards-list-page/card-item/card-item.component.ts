@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
@@ -20,10 +20,6 @@ import { VideoItemModel } from '../../../models/card-item.model';
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
-export class CardItemComponent implements OnInit {
+export class CardItemComponent {
   @Input() cardItem!: VideoItemModel;
-
-  ngOnInit() {
-    console.log(this.cardItem); // Добавьте этот вывод для проверки данных
-  }
 }

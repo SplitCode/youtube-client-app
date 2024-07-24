@@ -3,12 +3,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { SearchService } from '../../../core/services/search.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../directives/card-color.directive';
-import { VideoItemModel } from '../../models/card-item.model';
-// import { CardDataService } from '../../services/card-data.service';
+import { CardItemModel } from '../../models/card-item.model';
+import { CardDataService } from '../../services/card-data.service';
 
 @Component({
   selector: 'app-detailed-page',
@@ -25,12 +24,11 @@ import { VideoItemModel } from '../../models/card-item.model';
 })
 export class DetailedPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private searchService = inject(SearchService);
-  // cardDataService = inject(CardDataService);
-  cardItem$!: Observable<VideoItemModel>;
+  cardDataService = inject(CardDataService);
+  cardItem$!: Observable<CardItemModel>;
 
   ngOnInit() {
     const cardItemId = this.route.snapshot.params['id'];
-    this.cardItem$ = this.searchService.getCardById(cardItemId);
+    this.cardItem$ = this.cardDataService.getCardById(cardItemId);
   }
 }

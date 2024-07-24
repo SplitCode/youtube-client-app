@@ -1,31 +1,3 @@
-// export interface VideoItemModel {
-//   kind: string;
-//   etag: string;
-//   id: string;
-//   snippet: Snippet;
-//   statistics: Statistics;
-// }
-
-// export interface CardItemModel {
-//   kind: string;
-//   etag: string;
-//   id: Id;
-//   snippet: Snippet;
-//   // statistics?: Statistics;
-// }
-// export interface VideoItemModel {
-//   kind: string;
-//   etag: string;
-//   id: Id;
-//   snippet: Snippet;
-//   statistics?: {
-//     viewCount: string;
-//     likeCount: string;
-//     favoriteCount: string;
-//     commentCount: string;
-//   };
-// }
-
 export interface VideoItemModel {
   kind: string;
   etag: string;
@@ -54,11 +26,17 @@ export interface VideoItemModel {
   };
 }
 
+export interface CardItemModel {
+  kind: string;
+  etag: string;
+  id: Id;
+  snippet: Snippet;
+  statistics?: Statistics;
+}
 export interface Id {
   kind: string;
   videoId: string;
 }
-
 export interface Snippet {
   publishedAt: string;
   channelId: string;
@@ -68,12 +46,11 @@ export interface Snippet {
   channelTitle: string;
   liveBroadcastContent: string;
   publishTime: string;
-  tags: string[];
-  categoryId: string;
-  localized: Localized;
-  defaultAudioLanguage: string;
+  tags?: string[];
+  categoryId?: string;
+  localized?: Localized;
+  defaultAudioLanguage?: string;
 }
-
 export interface Statistics {
   viewCount: string;
   likeCount: string;
@@ -82,13 +59,12 @@ export interface Statistics {
   commentCount: string;
 }
 
-export interface VideoStatistics {
-  kind: string;
-  etag: string;
-  items: VideoItemModel[];
-  pageInfo: PageInfo;
-}
-
+// export interface VideoStatistics {
+//   kind: string;
+//   etag: string;
+//   items: VideoItemModel[];
+//   pageInfo: PageInfo;
+// }
 export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
