@@ -13,8 +13,8 @@ import { CardItemComponent } from './card-item/card-item.component';
   selector: 'app-cards-list',
   standalone: true,
   imports: [CommonModule, CardItemComponent, FilterWordPipe],
-  templateUrl: './cards-list.component.html',
-  styleUrl: './cards-list.component.scss',
+  templateUrl: './cards-list-page.component.html',
+  styleUrl: './cards-list-page.component.scss',
 })
 export class CardsListComponent implements OnInit {
   private searchService = inject(SearchService);
