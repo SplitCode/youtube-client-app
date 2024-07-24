@@ -1,8 +1,4 @@
-import { CardItemModel, Statistics } from './card-item.model';
-
-export interface YouTubeResponse {
-  items: CardItemModel[];
-}
+import { Statistics } from './card-item.model';
 
 export interface YouTubeVideoStatisticsResponse {
   items: VideoStatisticsModel[];

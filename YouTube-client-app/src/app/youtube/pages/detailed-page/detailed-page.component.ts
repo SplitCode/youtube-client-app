@@ -7,7 +7,7 @@ import { SearchService } from '../../../core/services/search.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../directives/card-color.directive';
-import { CardItemModel } from '../../models/card-item.model';
+import { VideoItemModel } from '../../models/card-item.model';
 // import { CardDataService } from '../../services/card-data.service';
 
 @Component({
@@ -27,7 +27,7 @@ export class DetailedPageComponent implements OnInit {
   private route = inject(ActivatedRoute);
   private searchService = inject(SearchService);
   // cardDataService = inject(CardDataService);
-  cardItem$!: Observable<CardItemModel>;
+  cardItem$!: Observable<VideoItemModel>;
 
   ngOnInit() {
     const cardItemId = this.route.snapshot.params['id'];

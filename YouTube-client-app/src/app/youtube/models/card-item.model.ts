@@ -1,9 +1,57 @@
-export interface CardItemModel {
+// export interface VideoItemModel {
+//   kind: string;
+//   etag: string;
+//   id: string;
+//   snippet: Snippet;
+//   statistics: Statistics;
+// }
+
+// export interface CardItemModel {
+//   kind: string;
+//   etag: string;
+//   id: Id;
+//   snippet: Snippet;
+//   // statistics?: Statistics;
+// }
+// export interface VideoItemModel {
+//   kind: string;
+//   etag: string;
+//   id: Id;
+//   snippet: Snippet;
+//   statistics?: {
+//     viewCount: string;
+//     likeCount: string;
+//     favoriteCount: string;
+//     commentCount: string;
+//   };
+// }
+
+export interface VideoItemModel {
   kind: string;
   etag: string;
   id: Id;
-  snippet: Snippet;
-  statistics?: Statistics;
+  snippet: {
+    publishedAt: string;
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: { url: string, width: number, height: number },
+      medium: { url: string, width: number, height: number },
+      high: { url: string, width: number, height: number },
+      standard?: { url: string, width: number, height: number },
+      maxres?: { url: string, width: number, height: number },
+    },
+    channelTitle: string;
+    liveBroadcastContent: string;
+    publishTime: string;
+  };
+  statistics?: {
+    viewCount: string;
+    likeCount: string;
+    favoriteCount: string;
+    commentCount: string;
+  };
 }
 
 export interface Id {
@@ -29,17 +77,24 @@ export interface Snippet {
 export interface Statistics {
   viewCount: string;
   likeCount: string;
-  dislikeCount: string;
+  dislikeCount?: string;
   favoriteCount: string;
   commentCount: string;
+}
+
+export interface VideoStatistics {
+  kind: string;
+  etag: string;
+  items: VideoItemModel[];
+  pageInfo: PageInfo;
 }
 
 export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
   high: Thumbnail;
-  standard: Thumbnail;
-  maxres: Thumbnail;
+  standard?: Thumbnail;
+  maxres?: Thumbnail;
 }
 
 export interface Localized {
@@ -51,4 +106,9 @@ export interface Thumbnail {
   url: string;
   width: number;
   height: number;
+}
+
+export interface PageInfo {
+  totalResults: number;
+  resultsPerPage: number;
 }

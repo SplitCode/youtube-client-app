@@ -1,15 +1,11 @@
-import { CardItemModel } from './card-item.model';
+import { PageInfo, VideoItemModel } from './card-item.model';
 
-export interface CardsListResponseModel {
+export interface CardsListModel {
   kind: string;
   etag: string;
-  nextPageToken: string;
+  nextPageToken?: string;
   regionCode: string;
   pageInfo: PageInfo;
-  items: CardItemModel[];
-}
-
-export interface PageInfo {
-  totalResults: number;
-  resultsPerPage: number;
+  // items: CardItemModel[];
+  items: VideoItemModel[];
 }

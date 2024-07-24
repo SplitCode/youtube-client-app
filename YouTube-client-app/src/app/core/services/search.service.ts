@@ -1,11 +1,9 @@
-// import { CardDataService } from '../../youtube/services/card-data.service';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
-import { CardItemModel, Statistics } from '../../youtube/models/card-item.model';
-import { YouTubeResponse, YouTubeVideoStatisticsResponse } from '../../youtube/models/youtube-response.model';
+import { VideoItemModel } from '../../youtube/models/card-item.model';
+import { CardDataService } from '../../youtube/services/card-data.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +11,7 @@ import { YouTubeResponse, YouTubeVideoStatisticsResponse } from '../../youtube/m
 export class SearchService {
   private searchQuery$$ = new BehaviorSubject<string>('');
   private filterWord$$ = new BehaviorSubject<string>('');
-  private cardsList$$ = new BehaviorSubject<CardItemModel[]>([]);
+  private cardsList$$ = new BehaviorSubject<VideoItemModel[]>([]);
   private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
   private isViewSortClick$$ = new BehaviorSubject<boolean>(false);
 
@@ -21,7 +19,7 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  constructor(private http: HttpClient) {}
+  constructor(private cardDataService: CardDataService) {}
 
   updateSearchQuery(query: string) {
     this.searchQuery$$.next(query);
@@ -43,42 +41,27 @@ export class SearchService {
   }
 
   private searchCards(query: string) {
-    const url = '/api/search';
-    const params = new HttpParams()
-      .set('type', 'video')
-      .set('part', 'snippet')
-      .set('maxResults', '15')
-      .set('q', query);
-    this.http.get<YouTubeResponse>(url, { params }).pipe(
-      map((response) => response.items),
+    this.cardDataService.getCardsData(query).pipe(
+      tap((items) => console.log('Items:', items)),
       switchMap((items) => {
-        const videoIds = items.map((item) => item.id.videoId).join(',');
-        return this.fetchVideoStatistics(videoIds).pipe(
+        const videoIds = items.map((item) => item.id.videoId);
+        console.log('Video IDs:', videoIds);
+        return this.cardDataService.getStatistics(videoIds).pipe(
+          tap((statistics) => console.log(statistics)),
           map((statistics) => items.map((item) => ({
             ...item,
-            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics || {
-              viewCount: '0',
-              likeCount: '0',
-              favoriteCount: '0',
-              commentCount: '0',
-            } as Statistics
+            statistics: statistics.find((stat) => stat.id.videoId === item.id.videoId)?.statistics
           })))
         );
-      })
+      }),
+      tap((cards) => console.log('Cards with Statistics:', cards))
     ).subscribe((cards) => {
       this.cardsList$$.next(cards);
     });
   }
 
-  private fetchVideoStatistics(videoIds: string) {
-    const url = '/api/videos';
-    const params = new HttpParams()
-      .set('id', videoIds)
-      .set('part', 'snippet,statistics');
-
-    return this.http.get<YouTubeVideoStatisticsResponse>(url, { params }).pipe(
-      map((response) => response.items)
-    );
+  getCardById(id: string): Observable<VideoItemModel> {
+    return this.cardDataService.getCardById(id);
   }
 
   private sortCardsByDate() {
@@ -104,41 +87,4 @@ export class SearchService {
     });
     this.cardsList$$.next(cards);
   }
-
-  getCardById(id: string): Observable<CardItemModel> {
-    const url = '/api/videos';
-    const params = new HttpParams()
-      .set('id', id)
-      .set('part', 'snippet,statistics');
-
-    return this.http.get<YouTubeVideoStatisticsResponse>(url, { params }).pipe(
-      map((response) => {
-        const item = response.items[0];
-        return {
-          ...item,
-          statistics: item.statistics || {
-            viewCount: '0',
-            likeCount: '0',
-            favoriteCount: '0',
-            commentCount: '0',
-          } as Statistics
-        } as unknown as CardItemModel;
-      })
-    );
-  }
 }
-
-// constructor(private cardDataService: CardDataService) {
-//   this.cardsList$$.next(this.cardDataService.getCards());
-// }
-
-// private searchCards() {
-//   let cards = [...this.cardDataService.getCards()];
-//   const searchQuery = this.searchQuery$$.getValue().toLowerCase();
-
-//   if (searchQuery) {
-//     cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery),);
-//   }
-
-//   this.cardsList$$.next(cards);
-// }
