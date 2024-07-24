@@ -1,4 +1,4 @@
-import { PageInfo, VideoItemModel } from './card-item.model';
+import { CardItemModel } from './card-item.model';
 
 export interface CardsListModel {
   kind: string;
@@ -6,6 +6,10 @@ export interface CardsListModel {
   nextPageToken?: string;
   regionCode: string;
   pageInfo: PageInfo;
-  // items: CardItemModel[];
-  items: VideoItemModel[];
+  items: CardItemModel[];
+}
+
+export interface PageInfo {
+  totalResults: number;
+  resultsPerPage: number;
 }

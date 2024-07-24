@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../../directives/card-color.directive';
-import { VideoItemModel } from '../../../models/card-item.model';
+import { CardItemModel } from '../../../models/card-item.model';
 
 @Component({
   selector: 'app-card-item',
@@ -21,5 +21,5 @@ import { VideoItemModel } from '../../../models/card-item.model';
   styleUrl: './card-item.component.scss',
 })
 export class CardItemComponent {
-  @Input() cardItem!: VideoItemModel;
+  @Input() cardItem!: CardItemModel;
 }

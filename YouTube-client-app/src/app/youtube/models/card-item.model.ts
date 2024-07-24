@@ -65,6 +65,7 @@ export interface Statistics {
 //   items: VideoItemModel[];
 //   pageInfo: PageInfo;
 // }
+
 export interface Thumbnails {
   default: Thumbnail;
   medium: Thumbnail;
@@ -82,9 +83,4 @@ export interface Thumbnail {
   url: string;
   width: number;
   height: number;
-}
-
-export interface PageInfo {
-  totalResults: number;
-  resultsPerPage: number;
 }
