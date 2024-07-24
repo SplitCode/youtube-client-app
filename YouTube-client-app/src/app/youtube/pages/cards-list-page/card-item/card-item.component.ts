@@ -20,10 +20,10 @@ import { VideoItemModel } from '../../../models/card-item.model';
   templateUrl: './card-item.component.html',
   styleUrl: './card-item.component.scss',
 })
-export class CardItemComponent {
+export class CardItemComponent implements OnInit {
   @Input() cardItem!: VideoItemModel;
 
-  // ngOnInit() {
-  //   console.log(this.cardItem); // Добавьте этот вывод для проверки данных
-  // }
+  ngOnInit() {
+    console.log(this.cardItem); // Добавьте этот вывод для проверки данных
+  }
 }

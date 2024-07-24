@@ -42,15 +42,12 @@ export class SearchService {
 
   private searchCards(query: string) {
     this.cardDataService.getCardsData(query).pipe(
-      tap((items) => console.log('Items:', items)),
       switchMap((items) => {
-        const videoIds = items.map((item) => item.id.videoId);
-        console.log('Video IDs:', videoIds);
+        const videoIds = items.map((item) => item.id.videoId).join(',');
         return this.cardDataService.getStatistics(videoIds).pipe(
-          tap((statistics) => console.log(statistics)),
           map((statistics) => items.map((item) => ({
             ...item,
-            statistics: statistics.find((stat) => stat.id.videoId === item.id.videoId)?.statistics
+            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics
           })))
         );
       }),
