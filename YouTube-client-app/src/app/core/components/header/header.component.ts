@@ -1,5 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
@@ -26,15 +28,21 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
 export class HeaderComponent {
   authService = inject(AuthService);
   headerService = inject(HeaderService);
+  router = inject(Router);
 
   isSettingsVisible$ = this.headerService.isSettingsVisible$$;
   isFilterShown$ = this.headerService.isFilterShown$$;
+  isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
 
   toggleFilter(): void {
     this.headerService.toggleFilter();
   }
 
-  onLogout() {
-    this.authService.logout();
+  toggleLogin(): void {
+    if (this.authService.isAuthenticated) {
+      this.authService.logout();
+    } else {
+      this.router.navigate(['/login']);
+    }
   }
 }

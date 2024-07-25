@@ -10,9 +10,9 @@
     </div>
     <div class="header__login">
       <app-login-info></app-login-info>
-      <app-button btnAppearance="middle" (click)="onLogout()"
-        >Logout</app-button
-      >
+      <app-button btnAppearance="middle" (click)="toggleLogin()">
+        {{ (isAuthenticated$ | async) ? 'Logout' : 'Login' }}
+      </app-button>
     </div>
   </div>
     <app-filter *ngIf="isFilterShown$  | async"></app-filter>
