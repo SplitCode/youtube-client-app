@@ -40,9 +40,15 @@ export class SearchService {
   }
 
   private searchCards(query: string) {
-    this.cardDataService.getCardsDataWithStatistics(query).subscribe((cards) => {
-      this.cardsList$$.next(cards);
-    });
+    if (query.trim() === '') {
+      this.cardsList$$.next([]);
+    } else {
+      this.cardDataService
+        .getCardsDataWithStatistics(query)
+        .subscribe((cards) => {
+          this.cardsList$$.next(cards);
+        });
+    }
   }
 
   private sortCardsByDate() {

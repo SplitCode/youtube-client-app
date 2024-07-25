@@ -26,7 +26,7 @@ export class SearchInputComponent implements OnInit {
     this.logger.logMessage('logger work');
     this.searchSubject
       .pipe(
-        filter((query) => query.length >= 3),
+        filter((query) => query.length >= 3 || query.trim() === ''),
         debounceTime(300),
         distinctUntilChanged(),
       )
