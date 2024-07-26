@@ -8,7 +8,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
   const apiReq = req.clone({
     url: req.url.replace('/api', apiUrl),
-    params: req.params.set('key', accessToken)
+    params: req.params.set('key', accessToken),
   });
   return next(apiReq);
 };
