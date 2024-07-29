@@ -27,9 +27,7 @@ export class LoginComponent {
 
   onLogin() {
     if (this.loginForm.valid) {
-      this.authService.login().subscribe(() => {
-        this.router.navigate(['/main']);
-      });
+      this.authService.login();
     }
   }
 

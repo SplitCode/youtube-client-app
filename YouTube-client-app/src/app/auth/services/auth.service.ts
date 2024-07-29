@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +11,10 @@ export class AuthService {
   private router = inject(Router);
   isAuthenticated$ = this.isAuthenticated$$.asObservable();
 
-  login(): Observable<boolean> {
+  login(): void {
     localStorage.setItem(this.token, 'fake-token');
+    this.router.navigate(['/main']);
     this.isAuthenticated$$.next(true);
-    return of(true);
   }
 
   logout(): void {
