@@ -31,7 +31,7 @@ export class SearchInputComponent implements OnInit {
         distinctUntilChanged(),
       )
       .subscribe((query) => {
-        this.searchService.updateSearchQuery(query);
+        this.searchService.searchCards(query);
       });
   }
 
