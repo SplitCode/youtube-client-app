@@ -2,7 +2,7 @@
   <h2 class="login-page__form-title">Login</h2>
   <form class="form" [formGroup]="loginForm" (ngSubmit)="onLogin()">
     <div class="form__group">
-      <label for="login">login</label>
+      <label for="login" class="required">login</label>
       <input type="text" id="login" formControlName="login" name="login" required />
       <div *ngIf="login?.invalid && (login?.dirty || login?.touched)" class="form__error">
         <div *ngIf="login?.errors?.['required']">Please enter a login email.</div>
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="form__group">
-      <label for="password">password</label>
+      <label for="password" class="required">password</label>
       <input
         type="password"
         id="password"
