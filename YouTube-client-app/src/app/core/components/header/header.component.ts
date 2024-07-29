@@ -26,9 +26,9 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
   ],
 })
 export class HeaderComponent {
-  authService = inject(AuthService);
-  headerService = inject(HeaderService);
-  router = inject(Router);
+  private authService = inject(AuthService);
+  private headerService = inject(HeaderService);
+  private router = inject(Router);
 
   isSettingsVisible$ = this.headerService.isSettingsVisible$$;
   isFilterShown$ = this.headerService.isFilterShown$$;
