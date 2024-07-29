@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   debounceTime, distinctUntilChanged, filter, Subject
 } from 'rxjs';
@@ -21,6 +22,7 @@ export class SearchInputComponent implements OnInit {
 
   searchService = inject(SearchService);
   logger = inject(LoggerService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.logger.logMessage('logger work');
@@ -37,5 +39,6 @@ export class SearchInputComponent implements OnInit {
 
   onSearchChange(query: string): void {
     this.searchSubject.next(query);
+    this.router.navigate(['/main']);
   }
 }
