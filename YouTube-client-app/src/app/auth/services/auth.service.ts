@@ -11,13 +11,10 @@ export class AuthService {
   private router = inject(Router);
   isAuthenticated$ = this.isAuthenticated$$.asObservable();
 
-  login(login: string, password: string): Observable<boolean> {
-    if (login && password) {
-      localStorage.setItem(this.token, 'fake-token');
-      this.isAuthenticated$$.next(true);
-      return of(true);
-    }
-    return of(false);
+  login(): Observable<boolean> {
+    localStorage.setItem(this.token, 'fake-token');
+    this.isAuthenticated$$.next(true);
+    return of(true);
   }
 
   logout(): void {

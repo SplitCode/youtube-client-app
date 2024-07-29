@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
-  AbstractControl,
-  FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, Validators
+  FormControl, FormGroup, ReactiveFormsModule, Validators
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { passwordValidator } from '../../../shared/validators/validators';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -19,7 +19,7 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   loginForm = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), this.passwordValidator]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), passwordValidator]),
   });
 
   authService = inject(AuthService);
@@ -27,26 +27,10 @@ export class LoginComponent {
 
   onLogin() {
     if (this.loginForm.valid) {
-      const { login, password } = this.loginForm.value;
-      this.authService.login(login!, password!).subscribe(() => {
+      this.authService.login().subscribe(() => {
         this.router.navigate(['/main']);
       });
     }
-  }
-
-  passwordValidator(control: AbstractControl): ValidationErrors | null {
-    const { value } = control;
-
-    const hasUpperCase = /[A-Z]/.test(value);
-    const hasLowerCase = /[a-z]/.test(value);
-    const hasNumbers = /[0-9]/.test(value);
-    const hasSpecialChar = /[!@#?$%^&*()_+[\]{};':"\\|,.<>/?]+/.test(value);
-    const isValid = hasUpperCase && hasLowerCase && hasNumbers && hasSpecialChar;
-    return isValid ? null : {
-      passwordValidator: {
-        message: "Your password isn't strong enough. It should include a mixture of both uppercase and lowercase letters, letters and numbers, and at least one special character."
-      }
-    };
   }
 
   get login() {
@@ -57,5 +41,3 @@ export class LoginComponent {
     return this.loginForm.get('password');
   }
 }
-
-// form.reset({ first: 'name', last: 'last name' });

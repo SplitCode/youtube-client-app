@@ -36,18 +36,19 @@
     outline-color: var(--accent-color);
   }
 
+  &__group input.ng-invalid.ng-touched {
+    border: 0.1rem solid var(--error-text-color);
+    border-radius: 0.5rem;
+  }
+
   &__button {
     display: flex;
     justify-content: end;
     margin-top: 2.2rem;
   }
-}
 
-.error {
-  color: var(--error-text-color);
-  margin: 0.5rem;
-}
-
-.ng-invalid:not(form)  {
-  border-left: 5px solid #a94442; /* red */
+  &__error {
+    color: var(--error-text-color);
+    margin: 0.5rem;
+  }
 }
