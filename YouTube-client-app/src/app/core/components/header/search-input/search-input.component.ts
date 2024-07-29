@@ -6,7 +6,6 @@ import {
 } from 'rxjs';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { LoggerService } from '../../../services/logger.service';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -21,11 +20,9 @@ export class SearchInputComponent implements OnInit {
   searchSubject = new Subject<string>();
 
   searchService = inject(SearchService);
-  logger = inject(LoggerService);
-  router = inject(Router);
+  private router = inject(Router);
 
   ngOnInit(): void {
-    this.logger.logMessage('logger work');
     this.searchSubject
       .pipe(
         filter((query) => query.length >= 3 || query.trim() === ''),

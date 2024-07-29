@@ -5,11 +5,12 @@ import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../../../auth/services/auth.service';
+import { LoggerService } from '../../../core/services/logger.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { dateValidator } from '../../../shared/validators/validators';
 
@@ -31,11 +32,12 @@ export class AdminPageComponent {
     img: new FormControl('', [Validators.required]),
     link: new FormControl('', [Validators.required]),
     date: new FormControl('', [Validators.required, dateValidator]),
-    tags: new FormArray([new FormControl('', Validators.required)])
+    tags: new FormArray([new FormControl('', Validators.required)]),
   });
 
   authService = inject(AuthService);
-  router = inject(Router);
+  logger = inject(LoggerService);
+  private router = inject(Router);
 
   get title() {
     return this.adminForm.get('title');
@@ -63,7 +65,7 @@ export class AdminPageComponent {
 
   onSubmit() {
     if (this.adminForm.valid) {
-      console.log('Card created');
+      this.logger.logMessage('Card created');
       this.router.navigate(['/main']);
     }
   }
