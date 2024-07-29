@@ -38,11 +38,11 @@ export class HeaderComponent {
     this.headerService.toggleFilter();
   }
 
-  toggleLogin(): void {
-    if (this.authService.isAuthenticated) {
-      this.authService.logout();
-    } else {
-      this.router.navigate(['/login']);
-    }
+  login(): void {
+    this.router.navigate(['/login']);
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }
