@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth.service';
@@ -23,6 +23,7 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     SettingsButtonComponent,
     ButtonComponent,
     FilterComponent,
+    RouterModule
   ],
 })
 export class HeaderComponent {
@@ -44,5 +45,9 @@ export class HeaderComponent {
 
   logout(): void {
     this.authService.logout();
+  }
+
+  goToAdmin(): void {
+    this.router.navigate(['/admin']);
   }
 }
