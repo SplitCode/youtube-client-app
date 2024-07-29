@@ -7,7 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 })
 export class AuthService {
   private readonly token = 'youtube_auth_token';
-  private isAuthenticated$$ = new BehaviorSubject<boolean>(this.isAuthenticated);
+  private isAuthenticated$$ = new BehaviorSubject<boolean>(!!localStorage.getItem(this.token));
   private router = inject(Router);
   isAuthenticated$ = this.isAuthenticated$$.asObservable();
 
@@ -26,7 +26,7 @@ export class AuthService {
     this.router.navigate(['/login']);
   }
 
-  private get isAuthenticated(): boolean {
+  get isAuthenticated(): boolean {
     return this.isAuthenticated$$.value;
   }
 }
