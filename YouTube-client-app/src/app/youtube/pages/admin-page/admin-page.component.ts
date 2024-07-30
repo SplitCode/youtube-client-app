@@ -84,7 +84,6 @@ export class AdminPageComponent {
 
   resetForm() {
     this.adminForm.reset();
-    // Reset tags to only one empty input
     while (this.tags.length > 1) {
       this.tags.removeAt(1);
     }
