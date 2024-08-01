@@ -9,6 +9,7 @@ import {
 } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideRouter } from '@angular/router';
+import { provideStore } from '@ngrx/store';
 
 import { routes } from './app.routes';
 import { httpInterceptor } from './core/services/http.interceptor';
@@ -25,5 +26,6 @@ export const appConfig: ApplicationConfig = {
       provide: LoggerService,
       useFactory: () => loggerFactory(isDevMode()),
     },
+    provideStore()
   ],
 };
