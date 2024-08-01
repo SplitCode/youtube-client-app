@@ -23,7 +23,6 @@ export class FilterComponent implements OnInit {
         tap((value) => {
           if (value !== null) {
             this.searchService.updateFilterWord(value);
-            this.searchService.searchCards(value)
           }
         }),
       )
