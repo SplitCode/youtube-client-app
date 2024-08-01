@@ -11,6 +11,19 @@ import { CardsListModel } from '../models/cards-list.model';
 export class CardDataService {
   private http = inject(HttpClient);
 
+  private getCardsData(query: string) {
+    const url = '/api/search';
+    const params = new HttpParams()
+      .set('type', 'video')
+      .set('part', 'snippet')
+      .set('maxResults', '20')
+      .set('q', query);
+
+    return this.http
+      .get<CardsListModel>(url, { params })
+      .pipe(map((response: CardsListModel) => response.items));
+  }
+
   getStatistics(videoIds: string) {
     const url = '/api/videos';
     const params = new HttpParams()
@@ -46,18 +59,5 @@ export class CardDataService {
     return this.http
       .get<CardsListModel>(url, { params })
       .pipe(map((response: CardsListModel) => response.items[0]));
-  }
-
-  private getCardsData(query: string) {
-    const url = '/api/search';
-    const params = new HttpParams()
-      .set('type', 'video')
-      .set('part', 'snippet')
-      .set('maxResults', '15')
-      .set('q', query);
-
-    return this.http
-      .get<CardsListModel>(url, { params })
-      .pipe(map((response: CardsListModel) => response.items));
   }
 }

@@ -8,8 +8,15 @@ export interface CardsListModel {
   pageInfo: PageInfo;
   items: CardItemModel[];
 }
-
 export interface PageInfo {
   totalResults: number;
   resultsPerPage: number;
 }
+
+// export interface CardsListResponse {
+//   kind: string;
+//   etag: string;
+//   totalResults: number;
+//   resultsPerPage: number;
+//   items: CardItemModel[];
+// }

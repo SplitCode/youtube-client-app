@@ -3,22 +3,24 @@ import { BehaviorSubject } from 'rxjs';
 
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CardDataService } from '../../youtube/services/card-data.service';
+import { Store } from '@ngrx/store';
+import { CardState } from '../../redux/reducers/reducer';
+import { getCardsSuccess, getCardsFailed, getCards } from '../../redux/actions/card.actions';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
-  private searchQuery$$ = new BehaviorSubject<string>('');
   private filterWord$$ = new BehaviorSubject<string>('');
   private cardsList$$ = new BehaviorSubject<CardItemModel[]>([]);
   private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
   private isViewSortClick$$ = new BehaviorSubject<boolean>(false);
 
-  currentSearchQuery$ = this.searchQuery$$.asObservable();
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
   private cardDataService = inject(CardDataService);
+  private store = inject(Store);
 
   updateFilterWord(word: string) {
     this.filterWord$$.next(word);
@@ -35,14 +37,13 @@ export class SearchService {
   }
 
   searchCards(query: string) {
+    console.log('Search query:', query);
+
     if (query.trim() === '') {
       this.cardsList$$.next([]);
+      this.store.dispatch(getCardsSuccess({ cards: [], nextPageToken: '' }));
     } else {
-      this.cardDataService
-        .getCardsDataWithStatistics(query)
-        .subscribe((cards) => {
-          this.cardsList$$.next(cards);
-        });
+      this.store.dispatch(getCards({ query: query.trim() }));
     }
   }
 
@@ -70,3 +71,32 @@ export class SearchService {
     this.cardsList$$.next(cards);
   }
 }
+
+
+
+    // searchCards(query: string) {
+  //   console.log('Search query:', query);
+
+  //   if (query.trim() === '') {
+  //     this.cardsList$$.next([]);
+  //     this.store.dispatch(getCardsSuccess({
+  //       cards: [],
+  //       nextPageToken: ''
+  //     }))
+  //   } else {
+  //     this.cardDataService
+  //       .getCardsDataWithStatistics(query)
+  //       .subscribe((cards) => {
+  //         console.log('Cards from service:', cards);
+  //         this.cardsList$$.next(cards);
+  //         this.store.dispatch(getCardsSuccess({
+  //           cards,
+  //           nextPageToken: ''
+  //         }));
+  //       },
+  //     (error) => {
+  //       console.error('Error fetching cards', error);
+  //       this.store.dispatch(getCardsFailed({ error }))
+  //     });
+  //   }
+  // }

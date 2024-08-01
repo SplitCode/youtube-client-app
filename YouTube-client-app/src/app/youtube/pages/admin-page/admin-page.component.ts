@@ -8,11 +8,14 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { LoggerService } from '../../../core/services/logger.service';
+import { createCard } from '../../../redux/actions/card.actions';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { dateValidator } from '../../../shared/validators/validators';
+import { CustomCardModel } from '../../models/custom-card-item.model';
 
 @Component({
   selector: 'app-admin-page',
@@ -22,22 +25,27 @@ import { dateValidator } from '../../../shared/validators/validators';
   styleUrl: './admin-page.component.scss',
 })
 export class AdminPageComponent {
-  adminForm = new FormGroup({
-    title: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.maxLength(20),
-    ]),
-    description: new FormControl('', [Validators.maxLength(255)]),
-    img: new FormControl('', [Validators.required]),
-    link: new FormControl('', [Validators.required]),
-    date: new FormControl('', [Validators.required, dateValidator]),
-    tags: new FormArray([new FormControl('', Validators.required)]),
-  });
+  public adminForm: FormGroup;
 
   authService = inject(AuthService);
   logger = inject(LoggerService);
+  store = inject(Store);
   private router = inject(Router);
+
+  constructor() {
+    this.adminForm = new FormGroup({
+      title: new FormControl('', [
+        Validators.required,
+        Validators.minLength(3),
+        Validators.maxLength(20),
+      ]),
+      description: new FormControl('', [Validators.maxLength(255)]),
+      img: new FormControl('', [Validators.required]),
+      link: new FormControl('', [Validators.required]),
+      date: new FormControl('', [Validators.required, dateValidator]),
+      tags: new FormArray([new FormControl('', Validators.required)]),
+    });
+  }
 
   get title() {
     return this.adminForm.get('title');
@@ -63,9 +71,11 @@ export class AdminPageComponent {
     return this.adminForm.get('tags') as FormArray;
   }
 
-  onSubmit() {
+  createCard() {
     if (this.adminForm.valid) {
+      const card: CustomCardModel = this.adminForm.value;
       this.logger.logMessage('Card created');
+      this.store.dispatch(createCard({ card }));
       this.router.navigate(['/main']);
     }
   }

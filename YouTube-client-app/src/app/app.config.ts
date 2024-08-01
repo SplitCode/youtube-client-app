@@ -16,6 +16,9 @@ import { routes } from './app.routes';
 import { httpInterceptor } from './core/services/http.interceptor';
 import { LoggerService } from './core/services/logger.service';
 import { loggerFactory } from './core/services/logger-factory';
+import { cardsReducer } from './redux/reducers/reducer';
+import { CardEffects } from './redux/effects/card.effects';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -27,7 +30,15 @@ export const appConfig: ApplicationConfig = {
       provide: LoggerService,
       useFactory: () => loggerFactory(isDevMode()),
     },
-    provideStore(),
-    provideEffects()
+    provideStore({ cardState: cardsReducer }),
+    provideEffects([CardEffects]),
+    provideStoreDevtools({
+      maxAge: 25,
+      logOnly: !isDevMode(),
+      autoPause: true,
+      trace: true,
+      traceLimit: 75,
+      connectInZone: true
+    })
   ],
 };
