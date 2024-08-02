@@ -3,7 +3,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
 import {
-  createCard, getCards, getCardsFailed, getCardsSuccess
+  createCard, getCards, getCardsFailed, getCardsSuccess,
 } from '../actions/card.actions';
 
 export interface CardState {
@@ -35,19 +35,5 @@ const reducer = createReducer(
 );
 
 export function cardsReducer(state: CardState | undefined, action: Action) {
-  return reducer(state, action)
+  return reducer(state, action);
 }
-
-// export const cardsReducer = createReducer(
-//   initialState,
-//   on(getCardsSuccess, (state, { cards }): CardState => {
-//     console.log('Reducer state:', state, 'New cards:', cards);
-//     return { ...state, cards };
-//   }),
-//   on(getCards, (state): CardState => ({ ...state, error: null })),
-//   on(getCardsSuccess, (state, { cards }): CardState => ({ ...state, cards })),
-//   on(getCardsFailed, (state, { error }): CardState => {
-//     console.error('Reducer error:', error);
-//     return { ...state, error: error.message }
-//   })
-// );

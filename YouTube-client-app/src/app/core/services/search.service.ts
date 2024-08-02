@@ -19,7 +19,7 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  private cardDataService = inject(CardDataService);
+  // private cardDataService = inject(CardDataService);
   private store = inject(Store);
 
   updateFilterWord(word: string) {

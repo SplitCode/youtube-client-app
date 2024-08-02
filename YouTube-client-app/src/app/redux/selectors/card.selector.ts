@@ -1,8 +1,8 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 
+import { CardState } from '../reducers/reducer';
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
-import { CardState } from '../reducers/reducer';
 
 const selectCardState = createFeatureSelector<CardState>('cardState');
 
