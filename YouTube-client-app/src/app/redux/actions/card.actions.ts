@@ -10,20 +10,20 @@ export interface CardsResponse {
 
 export const createCard = createAction(
   '[Admin Page] Create Custom Card',
-  props<{ card: CustomCardModel }>()
+  props<{ card: CustomCardModel }>(),
 );
 
 export const getCards = createAction(
   '[Cards API] Get All Cards',
-  props<{ query: string }>()
+  props<{ query: string }>(),
 );
 
 export const getCardsSuccess = createAction(
   '[Cards API] Get Cards Success',
-  props<CardsResponse>()
+  props<CardsResponse>(),
 );
 
 export const getCardsFailed = createAction(
   '[Cards API] Get Cards Failure',
-  props<{ error: Error }>()
+  props<{ error: Error }>(),
 );
