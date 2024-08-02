@@ -18,6 +18,10 @@ const reducer = createReducer(
     console.error('Reducer error:', error);
     return { ...state, error: error.message };
   }),
+  on(createCard, (state, { card }) => ({
+    ...state,
+    customCards: [...state.customCards, card],
+  })),
 );
 
 export function cardsReducer(state: CardState | undefined, action: Action) {
