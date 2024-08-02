@@ -13,3 +13,8 @@ export const selectCustomCards = createSelector(
   selectCardState,
   (state: CardState) => state.customCards,
 );
+
+export const selectCombinedCards = createSelector(
+  selectCardState,
+  (state: CardState) => [...state.customCards, ...state.cards],
+);

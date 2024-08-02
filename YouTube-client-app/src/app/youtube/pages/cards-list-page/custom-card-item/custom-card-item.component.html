@@ -1,0 +1,16 @@
+<div class="custom-card__image-container">
+  <img class="custom-card__image" src="{{ card.image }}" alt="image" />
+</div>
+
+<div class="custom-card__content">
+  <div class="custom-card__title">{{ card.title }}</div>
+  <div class="custom-card__description">{{ card.description }}</div>
+  <div class="custom-card__video">{{ card.videoLink }}</div>
+  <div class="card__button">
+    <app-button btnAppearance="large">Delete</app-button>
+  </div>
+</div>
+<div
+  class="custom-card__line"
+  [appCardColor]="cardItem.snippet.publishedAt"
+></div>

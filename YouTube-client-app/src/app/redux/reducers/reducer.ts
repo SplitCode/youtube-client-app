@@ -20,7 +20,7 @@ const reducer = createReducer(
   }),
   on(createCard, (state, { card }) => ({
     ...state,
-    customCards: [...state.customCards, card],
+    customCards: [card, ...state.customCards],
   })),
 );
 
