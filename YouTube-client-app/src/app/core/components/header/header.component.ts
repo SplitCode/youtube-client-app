@@ -10,6 +10,7 @@ import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingsButtonComponent } from './settings-button/settings-button.component';
+import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 
 @Component({
   selector: 'app-header',
@@ -21,9 +22,10 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     LoginInfoComponent,
     CommonModule,
     SettingsButtonComponent,
+    FavoriteButtonComponent,
     ButtonComponent,
     FilterComponent,
-    RouterModule
+    RouterModule,
   ],
 })
 export class HeaderComponent {

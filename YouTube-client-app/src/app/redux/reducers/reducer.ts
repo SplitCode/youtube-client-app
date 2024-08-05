@@ -25,10 +25,11 @@ const reducer = createReducer(
   })),
   on(deleteCard, (state, { cardId }) => ({
     ...state,
-    cards: state.cards.filter((card) => card.id !== cardId),
+    // cards: state.cards.filter((card) => card.id !== cardId),
+    cards: state.cards.filter((card) => card === card),
   })),
 );
 
-export function cardReducer(state: CardState | undefined, action: Action) {
+export function cardsReducer(state: CardState | undefined, action: Action) {
   return reducer(state, action);
 }

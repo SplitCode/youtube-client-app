@@ -22,4 +22,8 @@ import { CardItemModel } from '../../../models/card-item.model';
 })
 export class CardItemComponent {
   @Input() cardItem!: CardItemModel;
+
+  toggleFavorite(cardId: string): void {
+    console.log('favorite');
+  }
 }

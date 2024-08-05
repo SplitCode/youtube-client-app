@@ -1,7 +1,4 @@
-import {
-  provideHttpClient,
-  withInterceptors,
-} from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import {
   ApplicationConfig,
   isDevMode,
@@ -38,7 +35,7 @@ export const appConfig: ApplicationConfig = {
       autoPause: true,
       trace: true,
       traceLimit: 75,
-      connectInZone: true
-    })
+      connectInZone: true,
+    }),
   ],
 };

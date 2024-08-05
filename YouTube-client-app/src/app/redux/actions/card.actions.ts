@@ -28,8 +28,8 @@ export const getCardsFailed = createAction(
 
 export const createCard = createAction(
   '[Admin Page] Create Custom Card',
-  // props<{ card: CustomCardModel }>(),
-  props<{ card: Card }>(),
+  props<{ card: CustomCardModel }>(),
+  // props<{ card: Card }>(),
 );
 
 export const deleteCard = createAction(

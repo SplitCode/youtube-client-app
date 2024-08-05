@@ -1,5 +1,5 @@
 <div class="custom-card__image-container">
-  <img class="custom-card__image" src="{{ card.image }}" alt="image" />
+  <img class="custom-card__image" src="{{ card.imgLink }}" alt="image" />
 </div>
 
 <div class="custom-card__content">
@@ -12,4 +12,4 @@
     >
   </div>
 </div>
-<div class="custom-card__line" [appCardColor]="card.snippet.publishedAt"></div>
+<div class="custom-card__line" [appCardColor]="card.date"></div>
