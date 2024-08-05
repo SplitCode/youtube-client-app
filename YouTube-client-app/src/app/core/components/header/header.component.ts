@@ -39,15 +39,7 @@ export class HeaderComponent {
     this.headerService.toggleFilter();
   }
 
-  login(): void {
-    this.router.navigate(['/login']);
-  }
-
   logout(): void {
     this.authService.logout();
-  }
-
-  goToAdmin(): void {
-    this.router.navigate(['/admin']);
   }
 }
