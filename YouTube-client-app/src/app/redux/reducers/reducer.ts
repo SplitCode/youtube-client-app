@@ -2,6 +2,7 @@ import { Action, createReducer, on } from '@ngrx/store';
 import { CardState, initialState } from '../state.model';
 import {
   createCard,
+  deleteCard,
   getCards,
   getCardsFailed,
   getCardsSuccess,
@@ -22,8 +23,12 @@ const reducer = createReducer(
     ...state,
     customCards: [card, ...state.customCards],
   })),
+  on(deleteCard, (state, { cardId }) => ({
+    ...state,
+    cards: state.cards.filter((card) => card.id !== cardId),
+  })),
 );
 
-export function cardsReducer(state: CardState | undefined, action: Action) {
+export function cardReducer(state: CardState | undefined, action: Action) {
   return reducer(state, action);
 }

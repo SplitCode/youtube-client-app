@@ -1,17 +1,15 @@
 import { createAction, props } from '@ngrx/store';
 
 import { CardItemModel } from '../../youtube/models/card-item.model';
-import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
+import {
+  Card,
+  CustomCardModel,
+} from '../../youtube/models/custom-card-item.model';
 
 export interface CardsResponse {
   cards: CardItemModel[];
   nextPageToken: string;
 }
-
-export const createCard = createAction(
-  '[Admin Page] Create Custom Card',
-  props<{ card: CustomCardModel }>(),
-);
 
 export const getCards = createAction(
   '[Cards API] Get All Cards',
@@ -26,4 +24,15 @@ export const getCardsSuccess = createAction(
 export const getCardsFailed = createAction(
   '[Cards API] Get Cards Failure',
   props<{ error: Error }>(),
+);
+
+export const createCard = createAction(
+  '[Admin Page] Create Custom Card',
+  // props<{ card: CustomCardModel }>(),
+  props<{ card: Card }>(),
+);
+
+export const deleteCard = createAction(
+  '[Admin Page] Delete Custom Card',
+  props<{ cardId: string }>(),
 );
