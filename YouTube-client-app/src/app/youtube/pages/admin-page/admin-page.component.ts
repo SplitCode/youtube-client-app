@@ -4,6 +4,7 @@ import {
   FormArray,
   FormControl,
   FormGroup,
+  FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -31,19 +32,23 @@ export class AdminPageComponent {
   logger = inject(LoggerService);
   store = inject(Store);
   private router = inject(Router);
+  private fb = inject(FormBuilder);
 
   constructor() {
-    this.adminForm = new FormGroup({
-      title: new FormControl('', [
-        Validators.required,
-        Validators.minLength(3),
-        Validators.maxLength(20),
-      ]),
-      description: new FormControl('', [Validators.maxLength(255)]),
-      img: new FormControl('', [Validators.required]),
-      link: new FormControl('', [Validators.required]),
-      date: new FormControl('', [Validators.required, dateValidator]),
-      tags: new FormArray([new FormControl('', Validators.required)]),
+    this.adminForm = this.fb.group({
+      title: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.maxLength(20),
+        ],
+      ],
+      description: ['', [Validators.maxLength(255)]],
+      img: ['', [Validators.required]],
+      link: ['', [Validators.required]],
+      date: ['', [Validators.required, dateValidator]],
+      tags: this.fb.array([this.fb.control('', Validators.required)]),
     });
   }
 
