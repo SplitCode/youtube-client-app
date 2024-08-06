@@ -46,5 +46,32 @@
 
   &__button {
     margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
   }
+}
+
+.favorite__button {
+  border: none;
+  background-color: transparent;
+}
+
+.favorite__img {
+  display: block;
+  width: 2.4rem;
+  height: 2.4rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  cursor: pointer;
+}
+
+.favorite {
+  background-image: url("./../../../../../assets/img/favorite.svg");
+}
+
+.unfavorite {
+  background-image: url("./../../../../../assets/img/unfavorite.svg");
 }

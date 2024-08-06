@@ -14,21 +14,20 @@
   ></app-card-stats>
   <div class="card__title">{{ cardItem.snippet.title }}</div>
   <div class="card__button">
-    <div class="card__buttons">
-      <app-button
-        btnAppearance="large"
-        [routerLink]="['/main/details', cardItem.id.videoId]"
-        >more...</app-button
-      >
-      <button
-        class="favorite__button"
-        (click)="toggleFavorite(cardItem.id.videoId)"
-      >
-        <span class="favorite__img"></span>
-      </button>
-    </div>
+    <app-button
+      btnAppearance="large"
+      [routerLink]="['/main/details', cardItem.id.videoId]"
+      >more...</app-button
+    >
+    <button
+      class="favorite__button"
+      (click)="toggleFavorite(cardItem.id.videoId)"
+    >
+      <span
+        [ngClass]="isFavorite ? 'unfavorite' : 'favorite'"
+        class="favorite__img"
+      ></span>
+    </button>
   </div>
 </div>
 <div class="card__line" [appCardColor]="cardItem.snippet.publishedAt"></div>
-
-<!-- [ngClass]="{ favorite: isFavorite, favorite_border: !isFavorite }" -->

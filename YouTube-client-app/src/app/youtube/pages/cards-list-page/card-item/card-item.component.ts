@@ -22,8 +22,10 @@ import { CardItemModel } from '../../../models/card-item.model';
 })
 export class CardItemComponent {
   @Input() cardItem!: CardItemModel;
+  isFavorite: boolean = false;
 
   toggleFavorite(cardId: string): void {
+    this.isFavorite = !this.isFavorite;
     console.log('favorite');
   }
 }
