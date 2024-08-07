@@ -4,6 +4,7 @@ import { CustomCardModel } from '../youtube/models/custom-card-item.model';
 export interface CardState {
   cards: CardItemModel[];
   customCards: CustomCardModel[];
+  favoriteVideoIds: string[];
   error: string | null;
   nextPageToken?: string;
   currentPage: number;
@@ -12,6 +13,7 @@ export interface CardState {
 export const initialState: CardState = {
   cards: [],
   customCards: [],
+  favoriteVideoIds: [],
   error: null,
   nextPageToken: '',
   currentPage: 1,

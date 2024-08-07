@@ -12,6 +12,7 @@ import {
   selectCombinedCards,
   selectCurrentPage,
   selectCustomCards,
+  selectFavoriteVideoIds,
 } from '../../../redux/selectors/card.selector';
 import { Store } from '@ngrx/store';
 import { setCurrentPage } from '../../../redux/actions/card.actions';
@@ -36,19 +37,15 @@ import { CustomCardModel } from '../../models/custom-card-item.model';
 export class CardsListComponent {
   filterWord$ = this.searchService.currentFilterWord$;
   cardsList$: Observable<CardModel[]>;
+  favoriteVideoIds$: Observable<string[]>;
   currentPage$: Observable<number>;
 
   constructor(
     private searchService: SearchService,
     private store: Store,
   ) {
-    // this.cardsList$ = combineLatest([
-    //   this.store.select(selectCards),
-    //   this.store.select(selectCustomCards),
-    // ]).pipe(
-    //   map(([standardCards, customCards]) => [...customCards, ...standardCards]),
-    // );
     this.cardsList$ = this.searchService.currentCardList$;
+    this.favoriteVideoIds$ = this.store.select(selectFavoriteVideoIds);
     this.currentPage$ = this.store.select(selectCurrentPage);
   }
 
@@ -60,3 +57,10 @@ export class CardsListComponent {
     return 'isCustom' in card && card.isCustom;
   }
 }
+
+// this.cardsList$ = combineLatest([
+//   this.store.select(selectCards),
+//   this.store.select(selectCustomCards),
+// ]).pipe(
+//   map(([standardCards, customCards]) => [...customCards, ...standardCards]),
+// );

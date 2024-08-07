@@ -7,6 +7,7 @@ import {
   getCardsFailed,
   getCardsSuccess,
   setCurrentPage,
+  toggleFavorite,
 } from '../actions/card.actions';
 
 const reducer = createReducer(
@@ -35,6 +36,12 @@ const reducer = createReducer(
   on(setCurrentPage, (state, { page }) => ({
     ...state,
     currentPage: page,
+  })),
+  on(toggleFavorite, (state, { videoId }) => ({
+    ...state,
+    favoriteVideoIds: state.favoriteVideoIds.includes(videoId)
+      ? state.favoriteVideoIds.filter((id) => id !== videoId)
+      : [...state.favoriteVideoIds, videoId],
   })),
 );
 

@@ -10,6 +10,9 @@
     <app-card-item
       *ngIf="!isCustomCardModel(cardItem)"
       [cardItem]="cardItem"
+      [isFavorite]="
+        (favoriteVideoIds$ | async)?.includes(cardItem.id.videoId) ?? false
+      "
     ></app-card-item>
     <app-custom-card-item
       *ngIf="isCustomCardModel(cardItem)"
@@ -18,8 +21,8 @@
   </ng-container>
 </ng-container>
 
-<app-pagination
+<!-- <app-pagination
   [currentPage]="(currentPage$ | async) || 1"
   (pageChange)="onPageChange($event)"
 >
-</app-pagination>
+</app-pagination> -->

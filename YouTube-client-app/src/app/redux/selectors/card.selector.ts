@@ -24,7 +24,14 @@ export const selectCurrentPage = createSelector(
   (state: CardState) => state.currentPage,
 );
 
-// export const selectCombinedCards = createSelector(
-//   selectCardState,
-//   (state: CardState): CardModel[] => [...state.customCards, ...state.cards],
-// );
+export const selectFavoriteVideoIds = createSelector(
+  selectCardState,
+  (state: CardState) => state.favoriteVideoIds,
+);
+
+export const selectFavoriteVideos = createSelector(
+  selectCards,
+  selectFavoriteVideoIds,
+  (cards, favoriteVideoIds) =>
+    cards.filter((card) => favoriteVideoIds.includes(card.id.videoId)),
+);

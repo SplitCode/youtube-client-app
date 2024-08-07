@@ -38,3 +38,8 @@ export const setCurrentPage = createAction(
   '[Pagination] Set Current Page',
   props<{ page: number }>(),
 );
+
+export const toggleFavorite = createAction(
+  '[Card] Toggle Favorite',
+  props<{ videoId: string }>(),
+);
