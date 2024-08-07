@@ -35,10 +35,6 @@ const reducer = createReducer(
     ...state,
     customCards: state.customCards.filter((card) => card.id !== cardId),
   })),
-  // on(setCurrentPage, (state, { page }) => ({
-  //   ...state,
-  //   currentPage: page,
-  // })),
   on(toggleFavorite, (state, { videoId }) => ({
     ...state,
     favoriteVideoIds: state.favoriteVideoIds.includes(videoId)

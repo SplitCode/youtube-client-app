@@ -19,8 +19,4 @@ export const initialState: CardState = {
   currentPage: 1,
 };
 
-// export interface Card {
-//   card: CardItemModel | CustomCardModel;
-// }
-
 export type CardModel = CustomCardModel | CardItemModel;
