@@ -7,9 +7,13 @@ import { CardStatsComponent } from '../../../components/card-statistic/card-stat
 import { CardColorDirective } from '../../../directives/card-color.directive';
 import { CardItemModel } from '../../../models/card-item.model';
 import { Store } from '@ngrx/store';
-import { toggleFavorite } from '../../../../redux/actions/card.actions';
+// import {
+//   addToFavorite,
+//   removeFromFavorite,
+// } from '../../../../redux/actions/card.actions';
 import { selectFavoriteVideoIds } from '../../../../redux/selectors/card.selector';
 import { map, Observable } from 'rxjs';
+import { toggleFavorite } from '../../../../redux/actions/card.actions';
 
 @Component({
   selector: 'app-card-item',
@@ -42,4 +46,27 @@ export class CardItemComponent {
     this.store.dispatch(toggleFavorite({ videoId }));
     console.log('favorite');
   }
+
+  //   toggleFavorite(videoId: string): void {
+  //     if (this.isFavorite) {
+  //       this.store.dispatch(removeFromFavorite({ cardId: videoId }));
+  //       console.log('removed', videoId);
+  //     } else {
+  //       this.store.dispatch(addToFavorite({ cardId: videoId }));
+  //       console.log('Added', videoId);
+  //     }
+  //   }
+  // }
+
+  // toggleFavorite(videoId: string): void {
+  //   this.isFavorite$.subscribe((isFavorite) => {
+  //     if (isFavorite) {
+  //       this.store.dispatch(removeFromFavorite({ cardId: videoId }));
+  //       console.log('card removed', videoId);
+  //     } else {
+  //       this.store.dispatch(addToFavorite({ cardId: videoId }));
+  //       console.log('card added', videoId);
+  //     }
+  //   });
+  // }
 }

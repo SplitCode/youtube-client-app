@@ -43,3 +43,13 @@ export const toggleFavorite = createAction(
   '[Card] Toggle Favorite',
   props<{ videoId: string }>(),
 );
+
+// export const addToFavorite = createAction(
+//   '[Favorite] Add To Favorite',
+//   props<{ cardId: string }>(),
+// );
+
+// export const removeFromFavorite = createAction(
+//   '[Favorite] Remove From Favorite',
+//   props<{ cardId: string }>(),
+// );
