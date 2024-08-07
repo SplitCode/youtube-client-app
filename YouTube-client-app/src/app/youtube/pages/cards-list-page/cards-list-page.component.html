@@ -6,17 +6,19 @@
 </ng-container> -->
 
 <ng-container *ngIf="cardsList$ | async as cardsList">
-  <ng-container *ngFor="let cardItem of cardsList">
+  <ng-container
+    *ngFor="let cardItem of cardsList | filterWordPipe: (filterWord$ | async)"
+  >
     <app-card-item
-      *ngIf="!isCustomCardModel(cardItem)"
+      *ngIf="!isCustom(cardItem)"
       [cardItem]="cardItem"
       [isFavorite]="
         (favoriteVideoIds$ | async)?.includes(cardItem.id.videoId) ?? false
       "
     ></app-card-item>
     <app-custom-card-item
-      *ngIf="isCustomCardModel(cardItem)"
-      [cardItem]="cardItem"
+      *ngIf="isCustom(cardItem)"
+      [customCardItem]="cardItem"
     ></app-custom-card-item>
   </ng-container>
 </ng-container>

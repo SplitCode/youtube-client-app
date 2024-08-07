@@ -21,7 +21,7 @@ import { deleteCard } from '../../../../redux/actions/card.actions';
   styleUrl: './custom-card-item.component.scss',
 })
 export class CustomCardItemComponent {
-  @Input() cardItem!: CustomCardModel;
+  @Input() customCardItem!: CustomCardModel;
 
   private store = inject(Store);
 

@@ -18,7 +18,6 @@ const reducer = createReducer(
   on(
     getCardsSuccess,
     (state, { cards }): CardState => ({
-      // console.log('Reducer state:', state, 'New cards:', cards);
       ...state,
       // cards: [...state.cards, ...cards],
       cards: cards,
@@ -36,26 +35,16 @@ const reducer = createReducer(
     ...state,
     customCards: state.customCards.filter((card) => card.id !== cardId),
   })),
-  on(setCurrentPage, (state, { page }) => ({
-    ...state,
-    currentPage: page,
-  })),
+  // on(setCurrentPage, (state, { page }) => ({
+  //   ...state,
+  //   currentPage: page,
+  // })),
   on(toggleFavorite, (state, { videoId }) => ({
     ...state,
     favoriteVideoIds: state.favoriteVideoIds.includes(videoId)
       ? state.favoriteVideoIds.filter((id) => id !== videoId)
       : [...state.favoriteVideoIds, videoId],
   })),
-  //   on(addToFavorite, (state, { cardId }) => ({
-  //     ...state,
-  //     favoriteVideoIds: state.favoriteVideoIds.includes(cardId)
-  //       ? state.favoriteVideoIds
-  //       : [...state.favoriteVideoIds, cardId],
-  //   })),
-  //   on(removeFromFavorite, (state, { cardId }) => ({
-  //     ...state,
-  //     favoriteVideoIds: state.favoriteVideoIds.filter((id) => id !== cardId),
-  //   })),
 );
 
 export function cardsReducer(state: CardState | undefined, action: Action) {

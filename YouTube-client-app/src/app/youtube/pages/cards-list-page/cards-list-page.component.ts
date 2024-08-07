@@ -53,14 +53,7 @@ export class CardsListComponent {
     this.store.dispatch(setCurrentPage({ page: newPage }));
   }
 
-  isCustomCardModel(card: CardModel): card is CustomCardModel {
-    return 'isCustom' in card && card.isCustom;
+  isCustom(card: CardModel): card is CustomCardModel {
+    return 'isCustom' in card;
   }
 }
-
-// this.cardsList$ = combineLatest([
-//   this.store.select(selectCards),
-//   this.store.select(selectCustomCards),
-// ]).pipe(
-//   map(([standardCards, customCards]) => [...customCards, ...standardCards]),
-// );
