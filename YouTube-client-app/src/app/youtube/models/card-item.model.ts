@@ -60,5 +60,3 @@ export interface StatisticsModel {
   id: string;
   statistics: Statistics;
 }
-
-export type CardModel = CustomCardModel | CardItemModel;

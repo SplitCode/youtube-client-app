@@ -6,6 +6,7 @@ export interface CardState {
   customCards: CustomCardModel[];
   error: string | null;
   nextPageToken?: string;
+  currentPage: number;
 }
 
 export const initialState: CardState = {
@@ -13,4 +14,11 @@ export const initialState: CardState = {
   customCards: [],
   error: null,
   nextPageToken: '',
+  currentPage: 1,
 };
+
+// export interface Card {
+//   card: CardItemModel | CustomCardModel;
+// }
+
+export type CardModel = CustomCardModel | CardItemModel;

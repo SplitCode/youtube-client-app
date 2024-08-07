@@ -1,0 +1,16 @@
+<div class="pagination">
+  <button (click)="prevPage()" [disabled]="currentPage === 1">
+    &laquo; Prev
+  </button>
+
+  <!-- Пример для отображения 5 кнопок страниц -->
+  <button
+    *ngFor="let page of [1, 2, 3, 4, 5]"
+    (click)="goToPage(page)"
+    [ngClass]="{ active: page === currentPage }"
+  >
+    {{ page }}
+  </button>
+
+  <button (click)="nextPage()">Next &raquo;</button>
+</div>

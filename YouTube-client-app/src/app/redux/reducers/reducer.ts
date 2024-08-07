@@ -6,15 +6,20 @@ import {
   getCards,
   getCardsFailed,
   getCardsSuccess,
+  setCurrentPage,
 } from '../actions/card.actions';
 
 const reducer = createReducer(
   initialState,
   on(getCards, (state): CardState => ({ ...state, error: null })),
-  on(getCardsSuccess, (state, { cards }): CardState => {
-    console.log('Reducer state:', state, 'New cards:', cards);
-    return { ...state, cards };
-  }),
+  on(
+    getCardsSuccess,
+    (state, { cards }): CardState => ({
+      // console.log('Reducer state:', state, 'New cards:', cards);
+      ...state,
+      cards: [...state.cards, ...cards],
+    }),
+  ),
   on(getCardsFailed, (state, { error }): CardState => {
     console.error('Reducer error:', error);
     return { ...state, error: error.message };
@@ -25,8 +30,11 @@ const reducer = createReducer(
   })),
   on(deleteCard, (state, { cardId }) => ({
     ...state,
-    // cards: state.cards.filter((card) => card.id !== cardId),
-    cards: state.cards.filter((card) => card === card),
+    customCards: state.customCards.filter((card) => card.id !== cardId),
+  })),
+  on(setCurrentPage, (state, { page }) => ({
+    ...state,
+    currentPage: page,
   })),
 );
 

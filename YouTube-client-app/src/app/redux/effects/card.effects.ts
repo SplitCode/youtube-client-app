@@ -29,7 +29,6 @@ export class CardEffects {
             console.log('Cards loaded:', cards);
             return getCardsSuccess({
               cards,
-              nextPageToken: '',
             });
           }),
           catchError((error) => {

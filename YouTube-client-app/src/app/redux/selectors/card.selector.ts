@@ -19,6 +19,11 @@ export const selectCombinedCards = createSelector(
   (state: CardState) => [...state.customCards, ...state.cards],
 );
 
+export const selectCurrentPage = createSelector(
+  selectCardState,
+  (state: CardState) => state.currentPage,
+);
+
 // export const selectCombinedCards = createSelector(
 //   selectCardState,
 //   (state: CardState): CardModel[] => [...state.customCards, ...state.cards],
