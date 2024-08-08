@@ -1,31 +1,19 @@
-import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-pagination',
   standalone: true,
-  imports: [CommonModule],
+  imports: [ButtonComponent],
   templateUrl: './pagination.component.html',
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent {
-  @Input() currentPage: number = 1; // Текущая страница
-  @Output() pageChange = new EventEmitter<number>(); // Событие для смены страницы
-
-  // Метод для переключения на предыдущую страницу
-  prevPage() {
-    if (this.currentPage > 1) {
-      this.pageChange.emit(this.currentPage - 1);
-    }
+  goToNextPage() {
+    console.log('next page');
   }
 
-  // Метод для переключения на следующую страницу
-  nextPage() {
-    this.pageChange.emit(this.currentPage + 1);
-  }
-
-  // Метод для переключения на конкретную страницу
-  goToPage(page: number) {
-    this.pageChange.emit(page);
+  goToPrevPage() {
+    console.log('prev page');
   }
 }
