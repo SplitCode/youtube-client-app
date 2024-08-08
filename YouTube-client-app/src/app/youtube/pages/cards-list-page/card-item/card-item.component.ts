@@ -7,10 +7,6 @@ import { CardStatsComponent } from '../../../components/card-statistic/card-stat
 import { CardColorDirective } from '../../../directives/card-color.directive';
 import { CardItemModel } from '../../../models/card-item.model';
 import { Store } from '@ngrx/store';
-// import {
-//   addToFavorite,
-//   removeFromFavorite,
-// } from '../../../../redux/actions/card.actions';
 import { selectFavoriteVideoIds } from '../../../../redux/selectors/card.selector';
 import { map, Observable } from 'rxjs';
 import { toggleFavorite } from '../../../../redux/actions/card.actions';

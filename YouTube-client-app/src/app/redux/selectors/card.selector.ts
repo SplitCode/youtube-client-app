@@ -19,11 +19,6 @@ export const selectCombinedCards = createSelector(
   (state: CardState) => [...state.customCards, ...state.cards],
 );
 
-export const selectCurrentPage = createSelector(
-  selectCardState,
-  (state: CardState) => state.currentPage,
-);
-
 export const selectFavoriteVideoIds = createSelector(
   selectCardState,
   (state: CardState) => state.favoriteVideoIds,

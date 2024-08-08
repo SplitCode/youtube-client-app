@@ -7,16 +7,8 @@ import { CardItemComponent } from './card-item/card-item.component';
 import { combineLatest, map, Observable } from 'rxjs';
 import { CardItemModel } from '../../models/card-item.model';
 import { CardModel } from '../../../redux/state.model';
-import {
-  selectCards,
-  selectCombinedCards,
-  selectCurrentPage,
-  selectCustomCards,
-  selectFavoriteVideoIds,
-} from '../../../redux/selectors/card.selector';
+import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
 import { Store } from '@ngrx/store';
-import { setCurrentPage } from '../../../redux/actions/card.actions';
-// import { Card } from '../../../redux/state.model';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { CustomCardItemComponent } from './custom-card-item/custom-card-item.component';
 import { CustomCardModel } from '../../models/custom-card-item.model';
@@ -38,7 +30,6 @@ export class CardsListComponent {
   filterWord$ = this.searchService.currentFilterWord$;
   cardsList$: Observable<CardModel[]>;
   favoriteVideoIds$: Observable<string[]>;
-  currentPage$: Observable<number>;
 
   constructor(
     private searchService: SearchService,
@@ -46,11 +37,6 @@ export class CardsListComponent {
   ) {
     this.cardsList$ = this.searchService.currentCardList$;
     this.favoriteVideoIds$ = this.store.select(selectFavoriteVideoIds);
-    this.currentPage$ = this.store.select(selectCurrentPage);
-  }
-
-  onPageChange(newPage: number) {
-    this.store.dispatch(setCurrentPage({ page: newPage }));
   }
 
   isCustom(card: CardModel): card is CustomCardModel {
