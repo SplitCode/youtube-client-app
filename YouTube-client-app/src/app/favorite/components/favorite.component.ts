@@ -2,7 +2,10 @@ import { Component, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { Store } from '@ngrx/store';
-import { selectFavoriteVideos } from '../../redux/selectors/card.selector';
+import {
+  selectFavoriteCards,
+  selectFavoriteVideos,
+} from '../../redux/selectors/card.selector';
 import { CommonModule } from '@angular/common';
 import { CardItemComponent } from '../../youtube/pages/cards-list-page/card-item/card-item.component';
 
@@ -18,6 +21,6 @@ export class FavoriteComponent {
   store = inject(Store);
 
   constructor() {
-    this.favoriteVideos$ = this.store.select(selectFavoriteVideos);
+    this.favoriteVideos$ = this.store.select(selectFavoriteCards);
   }
 }

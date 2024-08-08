@@ -30,3 +30,8 @@ export const selectFavoriteVideos = createSelector(
   (cards, favoriteVideoIds) =>
     cards.filter((card) => favoriteVideoIds.includes(card.id.videoId)),
 );
+
+export const selectFavoriteCards = createSelector(
+  selectCardState,
+  (state: CardState) => state.favoriteCards,
+);

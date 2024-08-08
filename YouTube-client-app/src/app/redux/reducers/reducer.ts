@@ -31,12 +31,25 @@ const reducer = createReducer(
     ...state,
     customCards: state.customCards.filter((card) => card.id !== cardId),
   })),
-  on(toggleFavorite, (state, { videoId }) => ({
-    ...state,
-    favoriteVideoIds: state.favoriteVideoIds.includes(videoId)
+  on(toggleFavorite, (state, { videoId }) => {
+    const isFavorite = state.favoriteVideoIds.includes(videoId);
+    const favoriteVideoIds = isFavorite
       ? state.favoriteVideoIds.filter((id) => id !== videoId)
-      : [...state.favoriteVideoIds, videoId],
-  })),
+      : [...state.favoriteVideoIds, videoId];
+
+    const updatedFavoriteCards = isFavorite
+      ? state.favoriteCards.filter((card) => card.id.videoId !== videoId)
+      : [
+          ...state.favoriteCards,
+          ...state.cards.filter((card) => card.id.videoId === videoId),
+        ];
+
+    return {
+      ...state,
+      favoriteVideoIds,
+      favoriteCards: updatedFavoriteCards,
+    };
+  }),
 );
 
 export function cardsReducer(state: CardState | undefined, action: Action) {
