@@ -27,11 +27,32 @@ const reducer = createReducer(
     ...state,
     customCards: [card, ...state.customCards],
   })),
-  on(deleteCard, (state, { cardId }) => ({
-    ...state,
-    customCards: state.customCards.filter((card) => card.id !== cardId),
-  })),
+  //   on(deleteCard, (state, { cardId }) => ({
+  //     ...state,
+  //     customCards: state.customCards.filter((card) => card.id !== cardId),
+  //   })),
+  //   on(toggleFavorite, (state, { videoId }) => {
+  //     const isFavorite = state.favoriteVideoIds.includes(videoId);
+  //     const favoriteVideoIds = isFavorite
+  //       ? state.favoriteVideoIds.filter((id) => id !== videoId)
+  //       : [...state.favoriteVideoIds, videoId];
+
+  //     const updatedFavoriteCards = isFavorite
+  //       ? state.favoriteCards.filter((card) => card.id.videoId !== videoId)
+  //       : [
+  //           ...state.favoriteCards,
+  //           ...state.cards.filter((card) => card.id.videoId === videoId),
+  //         ];
+
+  //     return {
+  //       ...state,
+  //       favoriteVideoIds,
+  //       favoriteCards: updatedFavoriteCards,
+  //     };
+  //   }),
+  // );
   on(toggleFavorite, (state, { videoId }) => {
+    console.log('toggleFavorite reducer called with videoId:', videoId);
     const isFavorite = state.favoriteVideoIds.includes(videoId);
     const favoriteVideoIds = isFavorite
       ? state.favoriteVideoIds.filter((id) => id !== videoId)
@@ -43,6 +64,9 @@ const reducer = createReducer(
           ...state.favoriteCards,
           ...state.cards.filter((card) => card.id.videoId === videoId),
         ];
+
+    console.log('Updated favoriteVideoIds:', favoriteVideoIds);
+    console.log('Updated favoriteCards:', updatedFavoriteCards);
 
     return {
       ...state,
