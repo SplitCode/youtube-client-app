@@ -1,5 +1,3 @@
-import { CustomCardModel } from './custom-card-item.model';
-
 export interface CardItemModel {
   kind: string;
   etag: string;

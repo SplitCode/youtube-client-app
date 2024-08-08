@@ -46,27 +46,4 @@ export class CardItemComponent {
     this.store.dispatch(toggleFavorite({ videoId }));
     console.log('favorite');
   }
-
-  //   toggleFavorite(videoId: string): void {
-  //     if (this.isFavorite) {
-  //       this.store.dispatch(removeFromFavorite({ cardId: videoId }));
-  //       console.log('removed', videoId);
-  //     } else {
-  //       this.store.dispatch(addToFavorite({ cardId: videoId }));
-  //       console.log('Added', videoId);
-  //     }
-  //   }
-  // }
-
-  // toggleFavorite(videoId: string): void {
-  //   this.isFavorite$.subscribe((isFavorite) => {
-  //     if (isFavorite) {
-  //       this.store.dispatch(removeFromFavorite({ cardId: videoId }));
-  //       console.log('card removed', videoId);
-  //     } else {
-  //       this.store.dispatch(addToFavorite({ cardId: videoId }));
-  //       console.log('card added', videoId);
-  //     }
-  //   });
-  // }
 }

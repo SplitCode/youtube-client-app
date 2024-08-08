@@ -1,14 +1,11 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { CardState, initialState } from '../state.model';
 import {
-  // addToFavorite,
   createCard,
   deleteCard,
   getCards,
   getCardsFailed,
   getCardsSuccess,
-  // removeFromFavorite,
-  setCurrentPage,
   toggleFavorite,
 } from '../actions/card.actions';
 
