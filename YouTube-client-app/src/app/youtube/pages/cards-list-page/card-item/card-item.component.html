@@ -23,10 +23,12 @@
       class="favorite__button"
       (click)="toggleFavorite(cardItem.id.videoId)"
     >
-      <span
-        [ngClass]="isFavorite ? 'unfavorite' : 'favorite'"
-        class="favorite__img"
-      ></span>
+      <ng-container *ngIf="isFavorite$ | async; else unfavorite">
+        <span class="favorite__img unfavorite"></span>
+      </ng-container>
+      <ng-template #unfavorite>
+        <span class="favorite__img favorite"></span>
+      </ng-template>
     </button>
   </div>
 </div>

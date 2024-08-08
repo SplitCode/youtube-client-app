@@ -16,7 +16,6 @@ const reducer = createReducer(
     getCardsSuccess,
     (state, { cards }): CardState => ({
       ...state,
-      // cards: [...state.cards, ...cards],
       cards: cards,
     }),
   ),

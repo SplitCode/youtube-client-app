@@ -18,3 +18,8 @@ export const initialState: CardState = {
 };
 
 export type CardModel = CustomCardModel | CardItemModel;
+
+export interface CardsResponse {
+  cards: CardItemModel[];
+  nextPageToken: string;
+}

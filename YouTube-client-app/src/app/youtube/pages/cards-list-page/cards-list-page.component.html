@@ -1,10 +1,3 @@
-<!-- <ng-container *ngIf="cardsList$ | async as cardsList">
-  <app-card-item
-    *ngFor="let cardItem of cardsList | filterWordPipe: (filterWord$ | async)"
-    [cardItem]="cardItem"
-  ></app-card-item>
-</ng-container> -->
-
 <ng-container *ngIf="cardsList$ | async as cardsList">
   <ng-container
     *ngFor="let cardItem of cardsList | filterWordPipe: (filterWord$ | async)"
@@ -12,9 +5,6 @@
     <app-card-item
       *ngIf="!isCustom(cardItem)"
       [cardItem]="cardItem"
-      [isFavorite]="
-        (favoriteVideoIds$ | async)?.includes(cardItem.id.videoId) ?? false
-      "
     ></app-card-item>
     <app-custom-card-item
       *ngIf="isCustom(cardItem)"

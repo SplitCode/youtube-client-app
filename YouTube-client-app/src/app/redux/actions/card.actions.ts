@@ -3,11 +3,6 @@ import { createAction, props } from '@ngrx/store';
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
 
-export interface CardsResponse {
-  cards: CardItemModel[];
-  nextPageToken: string;
-}
-
 export const getCards = createAction(
   '[Cards API] Get All Cards',
   props<{ query: string }>(),
@@ -15,7 +10,6 @@ export const getCards = createAction(
 
 export const getCardsSuccess = createAction(
   '[Cards API] Get Cards Success',
-  // props<CardsResponse>(),
   props<{ cards: CardItemModel[] }>(),
 );
 

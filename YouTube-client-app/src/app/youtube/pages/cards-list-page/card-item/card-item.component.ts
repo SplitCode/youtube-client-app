@@ -26,8 +26,6 @@ import { toggleFavorite } from '../../../../redux/actions/card.actions';
 })
 export class CardItemComponent {
   @Input() cardItem!: CardItemModel;
-  @Input() isFavorite: boolean = false;
-  // isFavorite: boolean = false;
   isFavorite$: Observable<boolean>;
   store = inject(Store);
 
@@ -38,7 +36,6 @@ export class CardItemComponent {
   }
 
   toggleFavorite(videoId: string): void {
-    // this.isFavorite = !this.isFavorite;
     this.store.dispatch(toggleFavorite({ videoId }));
     console.log('favorite');
   }

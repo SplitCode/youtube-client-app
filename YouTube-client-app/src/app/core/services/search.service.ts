@@ -1,26 +1,16 @@
-import { inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
-import { CardItemModel } from '../../youtube/models/card-item.model';
-import { CardDataService } from '../../youtube/services/card-data.service';
 import { Store } from '@ngrx/store';
-import { CardModel, CardState } from '../../redux/state.model';
-import {
-  getCardsSuccess,
-  getCardsFailed,
-  getCards,
-} from '../../redux/actions/card.actions';
-import {
-  selectCards,
-  selectCombinedCards,
-} from '../../redux/selectors/card.selector';
+import { CardModel } from '../../redux/state.model';
+import { getCardsSuccess, getCards } from '../../redux/actions/card.actions';
+import { selectCombinedCards } from '../../redux/selectors/card.selector';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
   private filterWord$$ = new BehaviorSubject<string>('');
-  // private cardsList$$ = new BehaviorSubject<CardItemModel[]>([]);
   private cardsList$$ = new BehaviorSubject<CardModel[]>([]);
   private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
   private isViewSortClick$$ = new BehaviorSubject<boolean>(false);
