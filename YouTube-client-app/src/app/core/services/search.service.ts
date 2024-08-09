@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
 
 import { Store } from '@ngrx/store';
 import { CardModel } from '../../redux/state.model';
@@ -45,6 +45,13 @@ export class SearchService {
 
   searchCards(query: string) {
     this.currentQuery = query;
+
+    if (query.trim() === '') {
+      this.cardsList$$.next([]);
+      this.store.dispatch(getCardsSuccess({ cards: [] }));
+      return;
+    }
+
     this.cardDataService
       .getCardsDataWithStatistics(query)
       .subscribe((cards) => {
@@ -53,28 +60,38 @@ export class SearchService {
       });
   }
 
-  loadNextPage() {
+  loadNextPage(): Observable<boolean> {
     const nextPageToken = this.cardDataService.getNextPageToken();
     if (nextPageToken) {
-      this.cardDataService
+      return this.cardDataService
         .getCardsData(this.currentQuery, nextPageToken)
-        .subscribe((cards) => {
-          this.cardsList$$.next(cards);
-          this.store.dispatch(getCardsSuccess({ cards }));
-        });
+        .pipe(
+          tap((cards) => {
+            this.cardsList$$.next(cards);
+            this.store.dispatch(getCardsSuccess({ cards }));
+          }),
+          map(() => true),
+          catchError(() => of(false)),
+        );
     }
+    return of(false);
   }
 
-  loadPrevPage() {
+  loadPrevPage(): Observable<boolean> {
     const prevPageToken = this.cardDataService.getPrevPageToken();
     if (prevPageToken) {
-      this.cardDataService
+      return this.cardDataService
         .getCardsData(this.currentQuery, prevPageToken)
-        .subscribe((cards) => {
-          this.cardsList$$.next(cards);
-          this.store.dispatch(getCardsSuccess({ cards }));
-        });
+        .pipe(
+          tap((cards) => {
+            this.cardsList$$.next(cards);
+            this.store.dispatch(getCardsSuccess({ cards }));
+          }),
+          map(() => true),
+          catchError(() => of(false)),
+        );
     }
+    return of(false);
   }
 
   private sortCardsByDate() {

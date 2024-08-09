@@ -12,11 +12,23 @@ import { SearchService } from '../../../core/services/search.service';
 export class PaginationComponent {
   searchService = inject(SearchService);
 
+  currentPage: number = 1;
+
   goToNextPage() {
-    this.searchService.loadNextPage();
+    this.searchService.loadNextPage().subscribe((success) => {
+      if (success) {
+        this.currentPage++;
+      }
+    });
   }
 
   goToPrevPage() {
-    this.searchService.loadPrevPage();
+    if (this.currentPage > 1) {
+      this.searchService.loadPrevPage().subscribe((success) => {
+        if (success) {
+          this.currentPage--;
+        }
+      });
+    }
   }
 }
