@@ -8,7 +8,6 @@ export interface CardState {
   favoriteVideoIds: string[];
   error: string | null;
   nextPageToken?: string;
-  prevPageToken?: string;
 }
 
 export const initialState: CardState = {
@@ -18,7 +17,6 @@ export const initialState: CardState = {
   favoriteVideoIds: [],
   error: null,
   nextPageToken: '',
-  prevPageToken: '',
 };
 
 export type CardModel = CustomCardModel | CardItemModel;

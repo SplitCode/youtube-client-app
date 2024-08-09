@@ -28,13 +28,3 @@ export const selectFavoriteCards = createSelector(
   selectCardState,
   (state: CardState) => state.favoriteCards,
 );
-
-export const selectNextPageToken = createSelector(
-  selectCardState,
-  (state: CardState) => state.nextPageToken,
-);
-
-export const selectPrevPageToken = createSelector(
-  selectCardState,
-  (state: CardState) => state.prevPageToken,
-);

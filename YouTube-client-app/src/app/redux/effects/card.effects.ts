@@ -24,19 +24,18 @@ export class CardEffects {
     return this.actions$.pipe(
       ofType(getCards),
       switchMap((action) =>
-        this.cardDataService
-          // .getCardsDataWithStatistics(action.pageToken || '')
-          .getCardsDataWithStatistics(action.query, action.pageToken || '')
-          .pipe(
-            map((response) =>
-              getCardsSuccess({
-                cards: response.items,
-                nextPageToken: response.nextPageToken,
-                prevPageToken: response.prevPageToken,
-              }),
-            ),
-            catchError((error) => of(getCardsFailed({ error }))),
-          ),
+        this.cardDataService.getCardsDataWithStatistics(action.query).pipe(
+          map((cards) => {
+            console.log('Cards loaded:', cards);
+            return getCardsSuccess({
+              cards,
+            });
+          }),
+          catchError((error) => {
+            console.error('Error loading cards:', error);
+            return of(getCardsFailed({ error }));
+          }),
+        ),
       ),
     );
   });

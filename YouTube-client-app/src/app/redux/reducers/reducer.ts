@@ -14,11 +14,9 @@ const reducer = createReducer(
   on(getCards, (state): CardState => ({ ...state, error: null })),
   on(
     getCardsSuccess,
-    (state, { cards, nextPageToken, prevPageToken }): CardState => ({
+    (state, { cards }): CardState => ({
       ...state,
-      cards,
-      nextPageToken,
-      prevPageToken,
+      cards: cards,
     }),
   ),
   on(getCardsFailed, (state, { error }): CardState => {
