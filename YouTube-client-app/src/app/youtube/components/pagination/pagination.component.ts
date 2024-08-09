@@ -10,10 +10,10 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 })
 export class PaginationComponent {
   goToNextPage() {
-    console.log('next page');
+    console.log("I don't work =(");
   }
 
   goToPrevPage() {
-    console.log('prev page');
+    console.log("And I don't work =(");
   }
 }

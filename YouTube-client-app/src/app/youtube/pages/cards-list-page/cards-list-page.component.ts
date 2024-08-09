@@ -30,6 +30,7 @@ export class CardsListComponent {
   filterWord$ = this.searchService.currentFilterWord$;
   cardsList$: Observable<CardModel[]>;
   favoriteVideoIds$: Observable<string[]>;
+  hasCards$: Observable<boolean>;
 
   constructor(
     private searchService: SearchService,
@@ -37,6 +38,10 @@ export class CardsListComponent {
   ) {
     this.cardsList$ = this.searchService.currentCardList$;
     this.favoriteVideoIds$ = this.store.select(selectFavoriteVideoIds);
+
+    this.hasCards$ = this.cardsList$.pipe(
+      map((cardsList) => cardsList.length > 0),
+    );
   }
 
   isCustom(card: CardModel): card is CustomCardModel {

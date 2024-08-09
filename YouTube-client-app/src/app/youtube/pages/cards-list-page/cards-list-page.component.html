@@ -1,5 +1,8 @@
 <div class="container">
-  <app-pagination></app-pagination>
+  <ng-container *ngIf="hasCards$ | async">
+    <app-pagination></app-pagination>
+  </ng-container>
+
   <div class="content">
     <ng-container *ngIf="cardsList$ | async as cardsList">
       <ng-container
