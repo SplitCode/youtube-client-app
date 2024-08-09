@@ -5,4 +5,8 @@
   margin-bottom: 1rem;
   width: 100%;
   gap: 10vmin;
+
+  &__page {
+    width: max-content;
+  }
 }
