@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CardItemModel, StatisticsResponse } from '../models/card-item.model';
 import { CardsListModel } from '../models/cards-list.model';
@@ -11,18 +11,28 @@ import { Observable } from 'rxjs';
 })
 export class CardDataService {
   private http = inject(HttpClient);
+  private nextPageToken: string | null = null;
+  private prevPageToken: string | null = null;
 
-  private getCardsData(query: string) {
+  getCardsData(query: string, pageToken?: string) {
     const url = '/api/search';
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', '20')
       .set('q', query);
 
-    return this.http
-      .get<CardsListModel>(url, { params })
-      .pipe(map((response: CardsListModel) => response.items));
+    if (pageToken) {
+      params = params.set('pageToken', pageToken);
+    }
+
+    return this.http.get<CardsListModel>(url, { params }).pipe(
+      tap((response: CardsListModel) => {
+        this.nextPageToken = response.nextPageToken || null;
+        this.prevPageToken = response.prevPageToken || null;
+      }),
+      map((response: CardsListModel) => response.items),
+    );
   }
 
   getStatistics(videoIds: string) {
@@ -62,5 +72,13 @@ export class CardDataService {
     return this.http
       .get<CardsListModel>(url, { params })
       .pipe(map((response: CardsListModel) => response.items[0]));
+  }
+
+  getNextPageToken(): string | null {
+    return this.nextPageToken;
+  }
+
+  getPrevPageToken(): string | null {
+    return this.prevPageToken;
   }
 }

@@ -5,11 +5,13 @@ import { Store } from '@ngrx/store';
 import { CardModel } from '../../redux/state.model';
 import { getCardsSuccess, getCards } from '../../redux/actions/card.actions';
 import { selectCombinedCards } from '../../redux/selectors/card.selector';
+import { CardDataService } from '../../youtube/services/card-data.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SearchService {
+  private currentQuery: string = '';
   private filterWord$$ = new BehaviorSubject<string>('');
   private cardsList$$ = new BehaviorSubject<CardModel[]>([]);
   private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
@@ -18,7 +20,10 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  constructor(private store: Store) {
+  constructor(
+    private store: Store,
+    private cardDataService: CardDataService,
+  ) {
     this.store.select(selectCombinedCards).subscribe((cards) => {
       this.cardsList$$.next(cards);
     });
@@ -39,13 +44,36 @@ export class SearchService {
   }
 
   searchCards(query: string) {
-    console.log('Search query:', query);
+    this.currentQuery = query;
+    this.cardDataService
+      .getCardsDataWithStatistics(query)
+      .subscribe((cards) => {
+        this.cardsList$$.next(cards);
+        this.store.dispatch(getCardsSuccess({ cards }));
+      });
+  }
 
-    if (query.trim() === '') {
-      this.cardsList$$.next([]);
-      this.store.dispatch(getCardsSuccess({ cards: [] }));
-    } else {
-      this.store.dispatch(getCards({ query: query.trim() }));
+  loadNextPage() {
+    const nextPageToken = this.cardDataService.getNextPageToken();
+    if (nextPageToken) {
+      this.cardDataService
+        .getCardsData(this.currentQuery, nextPageToken)
+        .subscribe((cards) => {
+          this.cardsList$$.next(cards);
+          this.store.dispatch(getCardsSuccess({ cards }));
+        });
+    }
+  }
+
+  loadPrevPage() {
+    const prevPageToken = this.cardDataService.getPrevPageToken();
+    if (prevPageToken) {
+      this.cardDataService
+        .getCardsData(this.currentQuery, prevPageToken)
+        .subscribe((cards) => {
+          this.cardsList$$.next(cards);
+          this.store.dispatch(getCardsSuccess({ cards }));
+        });
     }
   }
 

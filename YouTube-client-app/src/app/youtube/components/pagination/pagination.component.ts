@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { SearchService } from '../../../core/services/search.service';
 
 @Component({
   selector: 'app-pagination',
@@ -9,11 +10,13 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
   styleUrl: './pagination.component.scss',
 })
 export class PaginationComponent {
+  searchService = inject(SearchService);
+
   goToNextPage() {
-    console.log("I don't work =(");
+    this.searchService.loadNextPage();
   }
 
   goToPrevPage() {
-    console.log("And I don't work =(");
+    this.searchService.loadPrevPage();
   }
 }
