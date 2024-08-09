@@ -2,7 +2,6 @@ import { createAction, props } from '@ngrx/store';
 
 import { CardItemModel } from '../../youtube/models/card-item.model';
 import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
-import { CardModel } from '../state.model';
 
 export const getCards = createAction(
   '[Cards API] Get All Cards',
