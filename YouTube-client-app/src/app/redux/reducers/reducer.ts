@@ -32,7 +32,6 @@ const reducer = createReducer(
     customCards: state.customCards.filter((card) => card.id !== cardId),
   })),
   on(toggleFavorite, (state, { videoId }) => {
-    console.log('toggleFavorite reducer called with videoId:', videoId);
     const isFavorite = state.favoriteVideoIds.includes(videoId);
     const favoriteVideoIds = isFavorite
       ? state.favoriteVideoIds.filter((id) => id !== videoId)
@@ -44,9 +43,6 @@ const reducer = createReducer(
           ...state.favoriteCards,
           ...state.cards.filter((card) => card.id.videoId === videoId),
         ];
-
-    console.log('Updated favoriteVideoIds:', favoriteVideoIds);
-    console.log('Updated favoriteCards:', updatedFavoriteCards);
 
     return {
       ...state,

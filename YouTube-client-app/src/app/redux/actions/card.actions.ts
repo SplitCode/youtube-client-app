@@ -9,18 +9,9 @@ export const getCards = createAction(
   props<{ query: string }>(),
 );
 
-// export const getCardsSuccess = createAction(
-//   '[Cards API] Get Cards Success',
-//   props<{ cards: CardItemModel[] }>(),
-// );
-
 export const getCardsSuccess = createAction(
   '[Cards API] Get Cards Success',
-  props<{
-    cards: CardItemModel[];
-    nextPageToken?: string;
-    prevPageToken?: string;
-  }>(),
+  props<{ cards: CardItemModel[] }>(),
 );
 
 export const getCardsFailed = createAction(
@@ -41,23 +32,4 @@ export const deleteCard = createAction(
 export const toggleFavorite = createAction(
   '[Card] Toggle Favorite',
   props<{ videoId: string }>(),
-);
-
-export const switchPage = createAction(
-  '[Cards API] Switch Page',
-  props<{ pageToken: string }>(),
-);
-
-export const switchPageSuccess = createAction(
-  '[Cards API] Switch Page Success',
-  props<{
-    cards: CardModel[];
-    nextPageToken?: string;
-    prevPageToken?: string;
-  }>(),
-);
-
-export const switchPageFailed = createAction(
-  '[Cards API] Switch Page Failed',
-  props<{ error: any }>(),
 );
