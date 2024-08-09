@@ -80,4 +80,22 @@ export class SearchService {
     });
     this.cardsList$$.next(cards);
   }
+
+  searchNextPage(query: string, nextPageToken: string) {
+    console.log('next query', query);
+    this.store.dispatch(getCards({ query, pageToken: nextPageToken }));
+  }
+
+  searchPrevPage(query: string, prevPageToken: string) {
+    console.log('prev query', query);
+    this.store.dispatch(getCards({ query, pageToken: prevPageToken }));
+  }
+
+  // searchNextPage(nextPageToken: string) {
+  //   this.store.dispatch(getCards({ pageToken: nextPageToken }));
+  // }
+
+  // searchPrevPage(prevPageToken: string) {
+  //   this.store.dispatch(getCards({ pageToken: prevPageToken }));
+  // }
 }

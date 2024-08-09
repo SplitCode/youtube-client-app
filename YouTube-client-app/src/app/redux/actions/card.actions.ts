@@ -5,12 +5,21 @@ import { CustomCardModel } from '../../youtube/models/custom-card-item.model';
 
 export const getCards = createAction(
   '[Cards API] Get All Cards',
-  props<{ query: string }>(),
+  props<{ query: string; pageToken?: string }>(),
 );
+
+// export const getCards = createAction(
+//   '[Cards API] Get All Cards',
+//   props<{ pageToken?: string }>(),
+// );
 
 export const getCardsSuccess = createAction(
   '[Cards API] Get Cards Success',
-  props<{ cards: CardItemModel[] }>(),
+  props<{
+    cards: CardItemModel[];
+    nextPageToken?: string;
+    prevPageToken?: string;
+  }>(),
 );
 
 export const getCardsFailed = createAction(

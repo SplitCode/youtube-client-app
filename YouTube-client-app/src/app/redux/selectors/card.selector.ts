@@ -24,14 +24,17 @@ export const selectFavoriteVideoIds = createSelector(
   (state: CardState) => state.favoriteVideoIds,
 );
 
-export const selectFavoriteVideos = createSelector(
-  selectCards,
-  selectFavoriteVideoIds,
-  (cards, favoriteVideoIds) =>
-    cards.filter((card) => favoriteVideoIds.includes(card.id.videoId)),
-);
-
 export const selectFavoriteCards = createSelector(
   selectCardState,
   (state: CardState) => state.favoriteCards,
+);
+
+export const selectNextPageToken = createSelector(
+  selectCardState,
+  (state: CardState) => state.nextPageToken,
+);
+
+export const selectPrevPageToken = createSelector(
+  selectCardState,
+  (state: CardState) => state.prevPageToken,
 );

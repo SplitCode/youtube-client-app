@@ -12,17 +12,26 @@ import { Observable } from 'rxjs';
 export class CardDataService {
   private http = inject(HttpClient);
 
-  private getCardsData(query: string) {
+  private getCardsData(query: string, pageToken: string = '') {
     const url = '/api/search';
-    const params = new HttpParams()
+    let params = new HttpParams()
       .set('type', 'video')
       .set('part', 'snippet')
       .set('maxResults', '20')
       .set('q', query);
 
-    return this.http
-      .get<CardsListModel>(url, { params })
-      .pipe(map((response: CardsListModel) => response.items));
+    if (pageToken) {
+      params = params.set('pageToken', pageToken);
+    }
+
+    return this.http.get<CardsListModel>(url, { params }).pipe(
+      map((response: CardsListModel) => ({
+        items: response.items,
+        nextPageToken: response.nextPageToken,
+        prevPageToken: response.prevPageToken,
+        pageInfo: response.pageInfo,
+      })),
+    );
   }
 
   getStatistics(videoIds: string) {
@@ -36,18 +45,30 @@ export class CardDataService {
       .pipe(map((response) => response.items));
   }
 
-  getCardsDataWithStatistics(query: string): Observable<CardItemModel[]> {
-    return this.getCardsData(query).pipe(
-      switchMap((items) => {
-        const videoIds = items.map((item) => item.id.videoId).join(',');
+  getCardsDataWithStatistics(
+    query: string,
+    pageToken: string = '',
+  ): Observable<{
+    items: CardItemModel[];
+    nextPageToken?: string;
+    prevPageToken?: string;
+  }> {
+    return this.getCardsData(query, pageToken).pipe(
+      // return this.getCardsData(pageToken).pipe(
+      switchMap((response) => {
+        const videoIds = response.items
+          .map((item) => item.id.videoId)
+          .join(',');
         return this.getStatistics(videoIds).pipe(
-          map((statistics) =>
-            items.map((item) => ({
+          map((statistics) => ({
+            items: response.items.map((item) => ({
               ...item,
               statistics: statistics.find((stat) => stat.id === item.id.videoId)
                 ?.statistics,
             })),
-          ),
+            nextPageToken: response.nextPageToken,
+            prevPageToken: response.prevPageToken,
+          })),
         );
       }),
     );

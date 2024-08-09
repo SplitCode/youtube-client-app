@@ -1,5 +1,9 @@
 <div class="container">
-  <app-pagination></app-pagination>
+  <app-pagination
+    [query]="currentQuery"
+    [nextPageToken]="(nextPageToken$ | async) ?? undefined"
+    [prevPageToken]="(prevPageToken$ | async) ?? undefined"
+  ></app-pagination>
   <div class="content">
     <ng-container *ngIf="cardsList$ | async as cardsList">
       <ng-container
