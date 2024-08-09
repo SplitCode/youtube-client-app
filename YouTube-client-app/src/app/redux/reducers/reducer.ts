@@ -12,13 +12,19 @@ import {
 const reducer = createReducer(
   initialState,
   on(getCards, (state): CardState => ({ ...state, error: null })),
-  on(
-    getCardsSuccess,
-    (state, { cards }): CardState => ({
+  on(getCardsSuccess, (state, { cards }): CardState => {
+    const newVideoEntities = cards.reduce((entities, card) => {
+      return { ...entities, [card.id.videoId]: card };
+    }, {});
+
+    const videoIds = cards.map((card) => card.id.videoId);
+
+    return {
       ...state,
-      cards: cards,
-    }),
-  ),
+      videoEntities: { ...state.videoEntities, ...newVideoEntities },
+      videoIds,
+    };
+  }),
   on(getCardsFailed, (state, { error }): CardState => {
     console.error('Reducer error:', error);
     return { ...state, error: error.message };
@@ -37,17 +43,9 @@ const reducer = createReducer(
       ? state.favoriteVideoIds.filter((id) => id !== videoId)
       : [...state.favoriteVideoIds, videoId];
 
-    const updatedFavoriteCards = isFavorite
-      ? state.favoriteCards.filter((card) => card.id.videoId !== videoId)
-      : [
-          ...state.favoriteCards,
-          ...state.cards.filter((card) => card.id.videoId === videoId),
-        ];
-
     return {
       ...state,
       favoriteVideoIds,
-      favoriteCards: updatedFavoriteCards,
     };
   }),
 );
