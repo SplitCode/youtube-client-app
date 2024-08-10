@@ -5,9 +5,6 @@ import { YoutubeRoutingModule } from './youtube-routing.module';
 
 @NgModule({
   declarations: [],
-  imports: [
-    CommonModule,
-    YoutubeRoutingModule,
-  ],
+  imports: [CommonModule, YoutubeRoutingModule],
 })
 export class YoutubeModule {}

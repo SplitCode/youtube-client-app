@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, Input } from '@angular/core';
+import { Store } from '@ngrx/store';
 
+import { deleteCard } from '../../../../redux/actions/card.actions';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../../directives/card-color.directive';
 import { CustomCardModel } from '../../../models/custom-card-item.model';
-import { Store } from '@ngrx/store';
-import { deleteCard } from '../../../../redux/actions/card.actions';
 
 @Component({
   selector: 'app-custom-card-item',

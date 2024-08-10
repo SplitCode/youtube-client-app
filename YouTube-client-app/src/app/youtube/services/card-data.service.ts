@@ -1,10 +1,10 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
 import { CardItemModel, StatisticsResponse } from '../models/card-item.model';
 import { CardsListModel } from '../models/cards-list.model';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -51,13 +51,11 @@ export class CardDataService {
       switchMap((items) => {
         const videoIds = items.map((item) => item.id.videoId).join(',');
         return this.getStatistics(videoIds).pipe(
-          map((statistics) =>
-            items.map((item) => ({
-              ...item,
-              statistics: statistics.find((stat) => stat.id === item.id.videoId)
-                ?.statistics,
-            })),
-          ),
+          map((statistics) => items.map((item) => ({
+            ...item,
+            statistics: statistics.find((stat) => stat.id === item.id.videoId)
+              ?.statistics,
+          })),),
         );
       }),
     );

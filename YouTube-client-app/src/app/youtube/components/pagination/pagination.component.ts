@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { ButtonComponent } from '../../../shared/components/button/button.component';
+
 import { SearchService } from '../../../core/services/search.service';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({
   selector: 'app-pagination',
@@ -17,7 +18,7 @@ export class PaginationComponent {
   goToNextPage() {
     this.searchService.loadNextPage().subscribe((success) => {
       if (success) {
-        this.currentPage++;
+        this.currentPage += 1;
       }
     });
   }
@@ -26,7 +27,7 @@ export class PaginationComponent {
     if (this.currentPage > 1) {
       this.searchService.loadPrevPage().subscribe((success) => {
         if (success) {
-          this.currentPage--;
+          this.currentPage -= 1;
         }
       });
     }

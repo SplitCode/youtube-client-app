@@ -2,9 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
   FormArray,
+  FormBuilder,
   FormControl,
   FormGroup,
-  FormBuilder,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
@@ -96,8 +96,8 @@ export class AdminPageComponent {
 
   private generateUniqueId(): string {
     return (
-      Math.random().toString(36).substring(2, 15) +
       Math.random().toString(36).substring(2, 15)
+      + Math.random().toString(36).substring(2, 15)
     );
   }
 

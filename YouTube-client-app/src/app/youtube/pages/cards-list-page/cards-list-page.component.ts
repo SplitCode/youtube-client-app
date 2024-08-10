@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { map, Observable } from 'rxjs';
 
 import { SearchService } from '../../../core/services/search.service';
+import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
+import { CardModel } from '../../../redux/state.model';
+import { PaginationComponent } from '../../components/pagination/pagination.component';
+import { CustomCardModel } from '../../models/custom-card-item.model';
 import { FilterWordPipe } from '../../pipes/filter-word.pipe';
 import { CardItemComponent } from './card-item/card-item.component';
-import { combineLatest, map, Observable } from 'rxjs';
-import { CardItemModel } from '../../models/card-item.model';
-import { CardModel } from '../../../redux/state.model';
-import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
-import { Store } from '@ngrx/store';
-import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { CustomCardItemComponent } from './custom-card-item/custom-card-item.component';
-import { CustomCardModel } from '../../models/custom-card-item.model';
 
 @Component({
   selector: 'app-cards-list',

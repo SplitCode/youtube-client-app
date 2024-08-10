@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { CardState, initialState } from '../state.model';
+
 import {
   createCard,
   deleteCard,
@@ -8,14 +8,13 @@ import {
   getCardsSuccess,
   toggleFavorite,
 } from '../actions/card.actions';
+import { CardState, initialState } from '../state.model';
 
 const reducer = createReducer(
   initialState,
   on(getCards, (state): CardState => ({ ...state, error: null })),
   on(getCardsSuccess, (state, { cards }): CardState => {
-    const newVideoEntities = cards.reduce((entities, card) => {
-      return { ...entities, [card.id.videoId]: card };
-    }, {});
+    const newVideoEntities = cards.reduce((entities, card) => ({ ...entities, [card.id.videoId]: card }), {});
 
     const videoIds = cards.map((card) => card.id.videoId);
 
@@ -25,10 +24,7 @@ const reducer = createReducer(
       videoIds,
     };
   }),
-  on(getCardsFailed, (state, { error }): CardState => {
-    console.error('Reducer error:', error);
-    return { ...state, error: error.message };
-  }),
+  on(getCardsFailed, (state, { error }): CardState => ({ ...state, error: error.message })),
   on(createCard, (state, { card }) => ({
     ...state,
     customCards: [card, ...state.customCards],
