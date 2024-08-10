@@ -1,5 +1,3 @@
-import { CustomCardModel } from './custom-card-item.model';
-
 export interface CardItemModel {
   kind: string;
   etag: string;
@@ -60,5 +58,3 @@ export interface StatisticsModel {
   id: string;
   statistics: Statistics;
 }
-
-export type CardModel = CustomCardModel | CardItemModel;

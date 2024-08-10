@@ -9,7 +9,7 @@ import { Store } from '@ngrx/store';
 import { deleteCard } from '../../../../redux/actions/card.actions';
 
 @Component({
-  selector: 'app-card-item',
+  selector: 'app-custom-card-item',
   standalone: true,
   imports: [
     CommonModule,
@@ -20,8 +20,8 @@ import { deleteCard } from '../../../../redux/actions/card.actions';
   templateUrl: './custom-card-item.component.html',
   styleUrl: './custom-card-item.component.scss',
 })
-export class CardItemComponent {
-  @Input() card!: CustomCardModel;
+export class CustomCardItemComponent {
+  @Input() customCardItem!: CustomCardModel;
 
   private store = inject(Store);
 

@@ -4,22 +4,41 @@ import { CardState } from '../state.model';
 
 const selectCardState = createFeatureSelector<CardState>('cardState');
 
-export const selectCards = createSelector(
-  selectCardState,
-  (state: CardState) => state.cards,
-);
-
 export const selectCustomCards = createSelector(
   selectCardState,
   (state: CardState) => state.customCards,
 );
 
-export const selectCombinedCards = createSelector(
+export const selectVideoEntities = createSelector(
   selectCardState,
-  (state: CardState) => [...state.customCards, ...state.cards],
+  (state: CardState) => state.videoEntities,
 );
 
-// export const selectCombinedCards = createSelector(
-//   selectCardState,
-//   (state: CardState): CardModel[] => [...state.customCards, ...state.cards],
-// );
+export const selectVideoIds = createSelector(
+  selectCardState,
+  (state: CardState) => state.videoIds,
+);
+
+export const selectCards = createSelector(
+  selectVideoEntities,
+  selectVideoIds,
+  (videoEntities, videoIds) => videoIds.map((id) => videoEntities[id]),
+);
+
+export const selectCombinedCards = createSelector(
+  selectCustomCards,
+  selectCards,
+  (customCards, cards) => [...customCards, ...cards],
+);
+
+export const selectFavoriteVideoIds = createSelector(
+  selectCardState,
+  (state: CardState) => state.favoriteVideoIds,
+);
+
+export const selectFavoriteCards = createSelector(
+  selectVideoEntities,
+  selectFavoriteVideoIds,
+  (videoEntities, favoriteVideoIds) =>
+    favoriteVideoIds.map((id) => videoEntities[id]),
+);

@@ -78,11 +78,27 @@ export class AdminPageComponent {
 
   createCard() {
     if (this.adminForm.valid) {
-      const card: CustomCardModel = this.adminForm.value;
+      const formValue = this.adminForm.value;
+      const card: CustomCardModel = {
+        id: this.generateUniqueId(),
+        title: formValue.title,
+        description: formValue.description,
+        imgLink: formValue.img,
+        videoLink: formValue.link,
+        date: formValue.date,
+        isCustom: true,
+      };
       this.logger.logMessage('Card created');
       this.store.dispatch(createCard({ card }));
       this.router.navigate(['/main']);
     }
+  }
+
+  private generateUniqueId(): string {
+    return (
+      Math.random().toString(36).substring(2, 15) +
+      Math.random().toString(36).substring(2, 15)
+    );
   }
 
   addTag() {

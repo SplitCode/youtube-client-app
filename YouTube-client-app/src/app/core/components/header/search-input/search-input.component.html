@@ -6,5 +6,7 @@
     [(ngModel)]="searchQuery"
     (ngModelChange)="onSearchChange($event)"
     name="searchQuery"
+    [disabled]="!isAuthenticated"
+    name="searchQuery"
   />
 </form>

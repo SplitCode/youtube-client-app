@@ -1,0 +1,26 @@
+:host {
+  display: grid;
+  column-gap: 2.8rem;
+  row-gap: 2.8rem;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: center;
+  padding: 3rem 15rem;
+}
+
+@media (max-width: 1200px) {
+  :host {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 860px) {
+  :host {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  :host {
+    grid-template-columns: 1fr;
+  }
+}
