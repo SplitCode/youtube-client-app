@@ -1,8 +1,7 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
-  BehaviorSubject,
   debounceTime,
   distinctUntilChanged,
   filter,
@@ -10,9 +9,9 @@ import {
   Subject,
 } from 'rxjs';
 
+import { AuthService } from '../../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
 import { SearchService } from '../../../services/search.service';
-import { AuthService } from '../../../../auth/services/auth.service';
 
 @Component({
   selector: 'app-search-input',

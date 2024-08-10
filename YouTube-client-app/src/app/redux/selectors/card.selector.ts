@@ -39,6 +39,5 @@ export const selectFavoriteVideoIds = createSelector(
 export const selectFavoriteCards = createSelector(
   selectVideoEntities,
   selectFavoriteVideoIds,
-  (videoEntities, favoriteVideoIds) =>
-    favoriteVideoIds.map((id) => videoEntities[id]),
+  (videoEntities, favoriteVideoIds) => favoriteVideoIds.map((id) => videoEntities[id]),
 );

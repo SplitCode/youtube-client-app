@@ -1,23 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
 import {
-  BehaviorSubject,
   map,
   Observable,
-  Subscription,
-  take,
-  tap,
 } from 'rxjs';
 
+import { toggleFavorite } from '../../../redux/actions/card.actions';
+import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../directives/card-color.directive';
 import { CardItemModel } from '../../models/card-item.model';
 import { CardDataService } from '../../services/card-data.service';
-import { Store } from '@ngrx/store';
-import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
-import { toggleFavorite } from '../../../redux/actions/card.actions';
 
 @Component({
   selector: 'app-detailed-page',
@@ -55,7 +51,6 @@ export class DetailedPageComponent implements OnInit {
   }
 
   toggleFavorite(videoId: string): void {
-    console.log('Dispatching toggleFavorite for videoId:', videoId);
     this.store.dispatch(toggleFavorite({ videoId }));
   }
 }

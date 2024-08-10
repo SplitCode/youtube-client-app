@@ -8,14 +8,14 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { provideRouter } from '@angular/router';
 import { provideEffects } from '@ngrx/effects';
 import { provideStore } from '@ngrx/store';
+import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
 import { httpInterceptor } from './core/services/http.interceptor';
 import { LoggerService } from './core/services/logger.service';
 import { loggerFactory } from './core/services/logger-factory';
-import { cardsReducer } from './redux/reducers/reducer';
 import { CardEffects } from './redux/effects/card.effects';
-import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { cardsReducer } from './redux/reducers/reducer';
 
 export const appConfig: ApplicationConfig = {
   providers: [

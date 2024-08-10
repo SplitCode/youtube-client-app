@@ -11,15 +11,21 @@ export class HeaderService {
   public isSettingsVisible$$ = new BehaviorSubject<boolean>(true);
 
   constructor(private router: Router) {
-    this.router.events.pipe(
-      filter((event): event is NavigationEnd => event instanceof NavigationEnd),
-      map((event: NavigationEnd) => !event.urlAfterRedirects.startsWith('/main/details/'))
-    ).subscribe((isVisible) => {
-      this.isSettingsVisible$$.next(isVisible);
-      if (!isVisible) {
-        this.isFilterShown$$.next(false);
-      }
-    });
+    this.router.events
+      .pipe(
+        filter(
+          (event): event is NavigationEnd => event instanceof NavigationEnd,
+        ),
+        map(
+          (event: NavigationEnd) => !event.urlAfterRedirects.startsWith('/main/details/'),
+        ),
+      )
+      .subscribe((isVisible) => {
+        this.isSettingsVisible$$.next(isVisible);
+        if (!isVisible) {
+          this.isFilterShown$$.next(false);
+        }
+      });
   }
 
   toggleFilter(): void {

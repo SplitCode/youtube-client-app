@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, map, Observable, of, tap } from 'rxjs';
-
 import { Store } from '@ngrx/store';
-import { CardModel } from '../../redux/state.model';
-import { getCardsSuccess, getCards } from '../../redux/actions/card.actions';
+import {
+  BehaviorSubject, catchError, map, Observable, of, tap
+} from 'rxjs';
+
+import { getCardsSuccess } from '../../redux/actions/card.actions';
 import { selectCombinedCards } from '../../redux/selectors/card.selector';
+import { CardModel } from '../../redux/state.model';
 import { CardDataService } from '../../youtube/services/card-data.service';
 
 @Injectable({
@@ -64,7 +66,7 @@ export class SearchService {
     const nextPageToken = this.cardDataService.getNextPageToken();
     if (nextPageToken) {
       return this.cardDataService
-        .getCardsData(this.currentQuery, nextPageToken)
+        .getCardsDataWithStatistics(this.currentQuery, nextPageToken)
         .pipe(
           tap((cards) => {
             this.cardsList$$.next(cards);
@@ -81,7 +83,7 @@ export class SearchService {
     const prevPageToken = this.cardDataService.getPrevPageToken();
     if (prevPageToken) {
       return this.cardDataService
-        .getCardsData(this.currentQuery, prevPageToken)
+        .getCardsDataWithStatistics(this.currentQuery, prevPageToken)
         .pipe(
           tap((cards) => {
             this.cardsList$$.next(cards);
@@ -96,7 +98,6 @@ export class SearchService {
 
   private sortCardsByDate() {
     const cards = [...this.cardsList$$.getValue()];
-    console.log('Cards for sort', cards);
     const isDateSortAscending = this.isDateSortClick$$.getValue();
 
     cards.sort((a, b) => {
@@ -108,7 +109,6 @@ export class SearchService {
       ).getTime();
       return isDateSortAscending ? dateA - dateB : dateB - dateA;
     });
-    console.log(cards);
     this.cardsList$$.next(cards);
   }
 
@@ -117,10 +117,8 @@ export class SearchService {
     const isViewSortAscending = this.isViewSortClick$$.getValue();
 
     cards.sort((a, b) => {
-      const viewsA =
-        'statistics' in a ? parseInt(a.statistics?.viewCount || '0', 10) : 0;
-      const viewsB =
-        'statistics' in b ? parseInt(b.statistics?.viewCount || '0', 10) : 0;
+      const viewsA = 'statistics' in a ? parseInt(a.statistics?.viewCount || '0', 10) : 0;
+      const viewsB = 'statistics' in b ? parseInt(b.statistics?.viewCount || '0', 10) : 0;
       return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
     });
     this.cardsList$$.next(cards);
