@@ -66,7 +66,7 @@ export class SearchService {
     const nextPageToken = this.cardDataService.getNextPageToken();
     if (nextPageToken) {
       return this.cardDataService
-        .getCardsData(this.currentQuery, nextPageToken)
+        .getCardsDataWithStatistics(this.currentQuery, nextPageToken)
         .pipe(
           tap((cards) => {
             this.cardsList$$.next(cards);
@@ -83,7 +83,7 @@ export class SearchService {
     const prevPageToken = this.cardDataService.getPrevPageToken();
     if (prevPageToken) {
       return this.cardDataService
-        .getCardsData(this.currentQuery, prevPageToken)
+        .getCardsDataWithStatistics(this.currentQuery, prevPageToken)
         .pipe(
           tap((cards) => {
             this.cardsList$$.next(cards);

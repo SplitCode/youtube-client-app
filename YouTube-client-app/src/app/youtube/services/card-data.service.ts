@@ -46,8 +46,8 @@ export class CardDataService {
       .pipe(map((response) => response.items));
   }
 
-  getCardsDataWithStatistics(query: string): Observable<CardItemModel[]> {
-    return this.getCardsData(query).pipe(
+  getCardsDataWithStatistics(query: string, pageToken?: string): Observable<CardItemModel[]> {
+    return this.getCardsData(query, pageToken).pipe(
       switchMap((items) => {
         const videoIds = items.map((item) => item.id.videoId).join(',');
         return this.getStatistics(videoIds).pipe(
@@ -55,7 +55,7 @@ export class CardDataService {
             ...item,
             statistics: statistics.find((stat) => stat.id === item.id.videoId)
               ?.statistics,
-          })),),
+          }))),
         );
       }),
     );
