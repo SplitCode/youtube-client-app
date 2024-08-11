@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth.service';
@@ -31,7 +31,6 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
 export class HeaderComponent {
   private authService = inject(AuthService);
   private headerService = inject(HeaderService);
-  private router = inject(Router);
 
   isSettingsVisible$ = this.headerService.isSettingsVisible$$;
   isFilterShown$ = this.headerService.isFilterShown$$;
