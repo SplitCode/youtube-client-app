@@ -1,9 +1,15 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map, switchMap, tap } from 'rxjs/operators';
+import {
+  computed, inject, Injectable, Signal, signal
+} from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map, tap } from 'rxjs/operators';
 
-import { CardItemModel, StatisticsResponse } from '../models/card-item.model';
+import {
+  CardItemModel,
+  StatisticsModel,
+  StatisticsResponse,
+} from '../models/card-item.model';
 import { CardsListModel } from '../models/cards-list.model';
 
 @Injectable({
@@ -11,10 +17,11 @@ import { CardsListModel } from '../models/cards-list.model';
 })
 export class CardDataService {
   private http = inject(HttpClient);
-  private nextPageToken: string | null = null;
-  private prevPageToken: string | null = null;
 
-  getCardsData(query: string, pageToken?: string) {
+  private nextPageToken = signal<string | null>(null);
+  private prevPageToken = signal<string | null>(null);
+
+  getCardsData(query: string, pageToken?: string): Signal<CardItemModel[]> {
     const url = '/api/search';
     let params = new HttpParams()
       .set('type', 'video')
@@ -26,39 +33,47 @@ export class CardDataService {
       params = params.set('pageToken', pageToken);
     }
 
-    return this.http.get<CardsListModel>(url, { params }).pipe(
+    const observable = this.http.get<CardsListModel>(url, { params }).pipe(
       tap((response: CardsListModel) => {
-        this.nextPageToken = response.nextPageToken || null;
-        this.prevPageToken = response.prevPageToken || null;
+        this.nextPageToken.set(response.nextPageToken || null);
+        this.prevPageToken.set(response.prevPageToken || null);
       }),
       map((response: CardsListModel) => response.items),
     );
+
+    return toSignal(observable, { initialValue: [] });
   }
 
-  getStatistics(videoIds: string) {
+  getStatistics(videoIds: string): Signal<StatisticsModel[]> {
     const url = '/api/videos';
     const params = new HttpParams()
       .set('id', videoIds)
       .set('part', 'snippet,statistics');
 
-    return this.http
-      .get<StatisticsResponse>(url, { params })
-      .pipe(map((response) => response.items));
+    const observable = this.http.get<StatisticsResponse>(url, { params }).pipe(
+      map((response) => response.items),
+    );
+
+    return toSignal(observable, { initialValue: [] });
   }
 
-  getCardsDataWithStatistics(query: string, pageToken?: string): Observable<CardItemModel[]> {
-    return this.getCardsData(query, pageToken).pipe(
-      switchMap((items) => {
-        const videoIds = items.map((item) => item.id.videoId).join(',');
-        return this.getStatistics(videoIds).pipe(
-          map((statistics) => items.map((item) => ({
-            ...item,
-            statistics: statistics.find((stat) => stat.id === item.id.videoId)
-              ?.statistics,
-          }))),
-        );
-      }),
-    );
+  getCardsDataWithStatistics(query: string, pageToken?: string): Signal<CardItemModel[]> {
+    const itemsSignal = this.getCardsData(query, pageToken);
+
+    const combinedSignal = computed(() => {
+      const items = itemsSignal();
+      if (items.length === 0) return [];
+
+      const videoIds = items.map((item) => item.id.videoId).join(',');
+      const statistics = this.getStatistics(videoIds)();
+
+      return items.map((item) => ({
+        ...item,
+        statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics,
+      }));
+    });
+
+    return combinedSignal;
   }
 
   getCardById(ids: string) {
@@ -73,10 +88,10 @@ export class CardDataService {
   }
 
   getNextPageToken(): string | null {
-    return this.nextPageToken;
+    return this.nextPageToken();
   }
 
   getPrevPageToken(): string | null {
-    return this.prevPageToken;
+    return this.prevPageToken();
   }
 }
