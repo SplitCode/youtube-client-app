@@ -32,7 +32,7 @@ export class SearchInputComponent implements OnInit {
     private router: Router,
     private authService: AuthService,
   ) {
-    this.isAuthenticated$ = this.authService.isAuthenticated$; // Ensure initialization here
+    this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
 
   ngOnInit(): void {
