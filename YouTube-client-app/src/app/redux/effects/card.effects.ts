@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 
@@ -10,14 +9,12 @@ import {
   getCardsFailed,
   getCardsSuccess,
 } from '../actions/card.actions';
-import { CardState } from '../state.model';
 
 @Injectable()
 export class CardEffects {
   constructor(
     private actions$: Actions,
     private cardDataService: CardDataService,
-    private store: Store<CardState>,
   ) {}
 
   loadCards$ = createEffect(() => this.actions$.pipe(
