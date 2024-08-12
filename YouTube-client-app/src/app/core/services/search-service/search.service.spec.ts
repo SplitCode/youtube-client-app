@@ -2,8 +2,6 @@ import { TestBed } from '@angular/core/testing';
 import { Store } from '@ngrx/store';
 import { of } from 'rxjs';
 
-// import { getCardsSuccess } from '../../redux/actions/card.actions';
-// import { CardModel } from '../../redux/state.model';
 import { CardDataService } from '../../../youtube/services/card-data-service/card-data.service';
 import { SearchService } from './search.service';
 
