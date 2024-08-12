@@ -2,7 +2,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
-// import { CardsListModel } from '../models/cards-list.model';
 import { CardDataService } from './card-data.service';
 import { mockCardsDataResponse } from './card-data.service.fixtures';
 

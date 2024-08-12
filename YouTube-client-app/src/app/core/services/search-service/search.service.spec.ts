@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 
 // import { getCardsSuccess } from '../../redux/actions/card.actions';
 // import { CardModel } from '../../redux/state.model';
-import { CardDataService } from '../../../youtube/services/card-data.service';
+import { CardDataService } from '../../../youtube/services/card-data-service/card-data.service';
 import { SearchService } from './search.service';
 
 describe('SearchService', () => {

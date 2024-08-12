@@ -3,8 +3,8 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { CardItemModel, StatisticsResponse } from '../models/card-item.model';
-import { CardsListModel } from '../models/cards-list.model';
+import { CardItemModel, StatisticsResponse } from '../../models/card-item.model';
+import { CardsListModel } from '../../models/cards-list.model';
 
 @Injectable({
   providedIn: 'root',

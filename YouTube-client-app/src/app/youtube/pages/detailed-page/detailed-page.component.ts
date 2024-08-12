@@ -13,7 +13,7 @@ import { ButtonComponent } from '../../../shared/components/button/button.compon
 import { CardStatsComponent } from '../../components/card-statistic/card-stats.component';
 import { CardColorDirective } from '../../directives/card-color.directive';
 import { CardItemModel } from '../../models/card-item.model';
-import { CardDataService } from '../../services/card-data.service';
+import { CardDataService } from '../../services/card-data-service/card-data.service';
 
 @Component({
   selector: 'app-detailed-page',

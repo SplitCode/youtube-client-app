@@ -1,4 +1,4 @@
-import { CardsListModel } from '../models/cards-list.model';
+import { CardsListModel } from '../../models/cards-list.model';
 
 export const mockCardsDataResponse: CardsListModel = {
   kind: 'testKind',
