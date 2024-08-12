@@ -2,7 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs';
 
-import { SearchService } from '../../../services/search.service';
+import { SearchService } from '../../../services/search-service/search.service';
 
 @Component({
   selector: 'app-filter',

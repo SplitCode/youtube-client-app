@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
-import { HeaderService } from '../../services/header.service';
+import { HeaderService } from '../../services/header-service/header.service';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';

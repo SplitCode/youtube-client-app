@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 
-import { SearchService } from '../../../core/services/search.service';
+import { SearchService } from '../../../core/services/search-service/search.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 
 @Component({

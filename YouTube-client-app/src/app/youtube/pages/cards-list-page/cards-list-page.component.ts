@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 
-import { SearchService } from '../../../core/services/search.service';
+import { SearchService } from '../../../core/services/search-service/search.service';
 import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
 import { CardModel } from '../../../redux/state.model';
 import { PaginationComponent } from '../../components/pagination/pagination.component';

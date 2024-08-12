@@ -11,11 +11,11 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 
 import { routes } from './app.routes';
-import { httpInterceptor } from './core/services/http.interceptor';
-import { LoggerService } from './core/services/logger.service';
-import { loggerFactory } from './core/services/logger-factory';
+import { LoggerService } from './core/services/logger-service/logger.service';
+import { loggerFactory } from './core/services/logger-service/logger-factory';
 import { CardEffects } from './redux/effects/card.effects';
 import { cardsReducer } from './redux/reducers/reducer';
+import { httpInterceptor } from './youtube/services/http.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

@@ -11,7 +11,7 @@ import {
 
 import { AuthService } from '../../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { SearchService } from '../../../services/search.service';
+import { SearchService } from '../../../services/search-service/search.service';
 
 @Component({
   selector: 'app-search-input',

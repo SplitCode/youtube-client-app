@@ -4,10 +4,10 @@ import {
   BehaviorSubject, catchError, map, Observable, of, tap
 } from 'rxjs';
 
-import { getCardsSuccess } from '../../redux/actions/card.actions';
-import { selectCombinedCards } from '../../redux/selectors/card.selector';
-import { CardModel } from '../../redux/state.model';
-import { CardDataService } from '../../youtube/services/card-data.service';
+import { getCardsSuccess } from '../../../redux/actions/card.actions';
+import { selectCombinedCards } from '../../../redux/selectors/card.selector';
+import { CardModel } from '../../../redux/state.model';
+import { CardDataService } from '../../../youtube/services/card-data.service';
 
 @Injectable({
   providedIn: 'root',

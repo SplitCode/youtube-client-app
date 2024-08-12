@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { AuthService } from '../../../auth/services/auth.service';
-import { LoggerService } from '../../../core/services/logger.service';
+import { LoggerService } from '../../../core/services/logger-service/logger.service';
 import { createCard } from '../../../redux/actions/card.actions';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { dateValidator } from '../../../shared/validators/validators';

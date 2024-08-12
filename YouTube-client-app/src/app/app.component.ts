@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 import { CoreModule } from './core/core.module';
-import { LoggerService } from './core/services/logger.service';
+import { LoggerService } from './core/services/logger-service/logger.service';
 
 @Component({
   selector: 'app-root',
