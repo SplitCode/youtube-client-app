@@ -18,7 +18,7 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     authServiceMock = {
       isAuthenticated$: of(true),
-      logout: jest.fn()
+      logout: jest.fn(),
     };
 
     headerServiceMock = {
@@ -35,7 +35,7 @@ describe('HeaderComponent', () => {
         provideMockStore({}),
         provideHttpClient(),
         provideHttpClientTesting(),
-      ]
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(HeaderComponent);
@@ -58,7 +58,9 @@ describe('HeaderComponent', () => {
   });
 
   it('should show settings button if isSettingsVisible$ is true', () => {
-    const settingsButton = fixture.nativeElement.querySelector('app-settings-button');
+    const settingsButton = fixture.nativeElement.querySelector(
+      'app-settings-button',
+    );
     expect(settingsButton).toBeTruthy();
   });
 

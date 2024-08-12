@@ -10,9 +10,7 @@ describe('AdminPageComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [AdminPageComponent],
-      providers: [
-        provideMockStore({}),
-      ],
+      providers: [provideMockStore({})],
     }).compileComponents();
 
     fixture = TestBed.createComponent(AdminPageComponent);

@@ -18,24 +18,35 @@ export const mockCardsDataResponse: CardsListModel = {
         channelId: 'channel1',
         description: 'Description of Test Video 1',
         thumbnails: {
-          default: { url: 'http://example.com/default.jpg', width: 120, height: 90 },
-          medium: { url: 'http://example.com/medium.jpg', width: 320, height: 180 },
-          high: { url: 'http://example.com/high.jpg', width: 480, height: 360 }
+          default: {
+            url: 'http://example.com/default.jpg',
+            width: 120,
+            height: 90,
+          },
+          medium: {
+            url: 'http://example.com/medium.jpg',
+            width: 320,
+            height: 180,
+          },
+          high: { url: 'http://example.com/high.jpg', width: 480, height: 360 },
         },
         channelTitle: 'Channel 1',
         liveBroadcastContent: 'none',
         publishTime: '2024-01-01T00:00:00Z',
         tags: ['tag1', 'tag2'],
         categoryId: 'category1',
-        localized: { title: 'Localized Title 1', description: 'Localized Description 1' },
-        defaultAudioLanguage: 'en'
+        localized: {
+          title: 'Localized Title 1',
+          description: 'Localized Description 1',
+        },
+        defaultAudioLanguage: 'en',
       },
       statistics: {
         viewCount: '1000',
         likeCount: '100',
         favoriteCount: '10',
-        commentCount: '20'
-      }
+        commentCount: '20',
+      },
     },
     {
       kind: 'youtube#video',
@@ -47,24 +58,35 @@ export const mockCardsDataResponse: CardsListModel = {
         channelId: 'channel2',
         description: 'Description of Test Video 2',
         thumbnails: {
-          default: { url: 'http://example.com/default.jpg', width: 120, height: 90 },
-          medium: { url: 'http://example.com/medium.jpg', width: 320, height: 180 },
-          high: { url: 'http://example.com/high.jpg', width: 480, height: 360 }
+          default: {
+            url: 'http://example.com/default.jpg',
+            width: 120,
+            height: 90,
+          },
+          medium: {
+            url: 'http://example.com/medium.jpg',
+            width: 320,
+            height: 180,
+          },
+          high: { url: 'http://example.com/high.jpg', width: 480, height: 360 },
         },
         channelTitle: 'Channel 2',
         liveBroadcastContent: 'none',
         publishTime: '2024-01-02T00:00:00Z',
         tags: ['tag3', 'tag4'],
         categoryId: 'category2',
-        localized: { title: 'Localized Title 2', description: 'Localized Description 2' },
-        defaultAudioLanguage: 'en'
+        localized: {
+          title: 'Localized Title 2',
+          description: 'Localized Description 2',
+        },
+        defaultAudioLanguage: 'en',
       },
       statistics: {
         viewCount: '2000',
         likeCount: '200',
         favoriteCount: '20',
-        commentCount: '40'
-      }
-    }
-  ]
+        commentCount: '40',
+      },
+    },
+  ],
 };

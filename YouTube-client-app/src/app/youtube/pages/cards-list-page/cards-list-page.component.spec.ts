@@ -15,7 +15,7 @@ describe('SearchResultsComponent', () => {
       providers: [
         provideMockStore({}),
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
 

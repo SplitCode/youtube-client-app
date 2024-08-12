@@ -15,7 +15,7 @@ describe('FilterComponent', () => {
       providers: [
         provideMockStore({}),
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
 

@@ -11,9 +11,7 @@ describe('SearchItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CardItemComponent, RouterModule.forRoot([])],
-      providers: [
-        provideMockStore({}),
-      ],
+      providers: [provideMockStore({})],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardItemComponent);

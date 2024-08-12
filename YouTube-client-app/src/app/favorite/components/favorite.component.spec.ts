@@ -10,9 +10,7 @@ describe('FavoriteComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [FavoriteComponent],
-      providers: [
-        provideMockStore({}),
-      ],
+      providers: [provideMockStore({})],
     }).compileComponents();
 
     fixture = TestBed.createComponent(FavoriteComponent);

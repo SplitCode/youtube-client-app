@@ -16,7 +16,7 @@ describe('DetailedPageComponent', () => {
       providers: [
         provideMockStore({}),
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
       ],
     }).compileComponents();
 

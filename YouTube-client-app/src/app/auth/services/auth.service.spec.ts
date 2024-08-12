@@ -16,10 +16,7 @@ describe('AuthService', () => {
     };
 
     TestBed.configureTestingModule({
-      providers: [
-        AuthService,
-        { provide: Router, useValue: routerMock },
-      ],
+      providers: [AuthService, { provide: Router, useValue: routerMock }],
     });
     service = TestBed.inject(AuthService);
     routerSpy = jest.spyOn(routerMock, 'navigate');

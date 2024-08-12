@@ -2,10 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Store } from '@ngrx/store';
-import {
-  map,
-  Observable,
-} from 'rxjs';
+import { map, Observable } from 'rxjs';
 
 import { toggleFavorite } from '../../../redux/actions/card.actions';
 import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';

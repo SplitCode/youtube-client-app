@@ -3,7 +3,11 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { CardItemModel, StatisticsModel, StatisticsResponse } from '../../models/card-item.model';
+import {
+  CardItemModel,
+  StatisticsModel,
+  StatisticsResponse,
+} from '../../models/card-item.model';
 import { CardsListModel } from '../../models/cards-list.model';
 
 @Injectable({
@@ -46,7 +50,10 @@ export class CardDataService {
       .pipe(map((response) => response.items));
   }
 
-  getCardsDataWithStatistics(query: string, pageToken?: string): Observable<CardItemModel[]> {
+  getCardsDataWithStatistics(
+    query: string,
+    pageToken?: string,
+  ): Observable<CardItemModel[]> {
     return this.getCardsData(query, pageToken).pipe(
       switchMap((items) => {
         const videoIds = items.map((item) => item.id.videoId).join(',');
@@ -55,7 +62,7 @@ export class CardDataService {
             ...item,
             statistics: statistics.find((stat) => stat.id === item.id.videoId)
               ?.statistics,
-          }))),
+          })),),
         );
       }),
     );

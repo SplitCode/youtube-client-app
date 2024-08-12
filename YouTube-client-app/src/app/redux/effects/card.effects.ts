@@ -22,8 +22,8 @@ export class CardEffects {
     switchMap((action) => this.cardDataService.getCardsDataWithStatistics(action.query).pipe(
       map((cards) => getCardsSuccess({
         cards,
-      })),
+      }),),
       catchError((error) => of(getCardsFailed({ error }))),
     ),),
-  ));
+  ),);
 }

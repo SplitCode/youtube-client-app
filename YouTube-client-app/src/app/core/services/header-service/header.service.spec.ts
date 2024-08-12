@@ -1,6 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import {
-  NavigationEnd, Router, RouterEvent, RouterModule
+  NavigationEnd,
+  Router,
+  RouterEvent,
+  RouterModule,
 } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 
@@ -11,12 +14,12 @@ describe('HeaderService', () => {
   let eventsSubject: BehaviorSubject<RouterEvent>;
 
   beforeEach(() => {
-    eventsSubject = new BehaviorSubject<RouterEvent>(new NavigationEnd(0, '', ''));
+    eventsSubject = new BehaviorSubject<RouterEvent>(
+      new NavigationEnd(0, '', ''),
+    );
 
     TestBed.configureTestingModule({
-      imports: [
-        RouterModule.forRoot([]),
-      ],
+      imports: [RouterModule.forRoot([])],
       providers: [
         HeaderService,
         {
@@ -43,13 +46,17 @@ describe('HeaderService', () => {
   });
 
   it('should set isSettingsVisible$$ to false when navigating to /main/details/', () => {
-    eventsSubject.next(new NavigationEnd(0, '/previous-url', '/main/details/1'));
+    eventsSubject.next(
+      new NavigationEnd(0, '/previous-url', '/main/details/1'),
+    );
     expect(service.isSettingsVisible$$.getValue()).toBe(false);
   });
 
   it('should set isFilterShown$$ to false when navigating to /main/details/', () => {
     service.isFilterShown$$.next(true);
-    eventsSubject.next(new NavigationEnd(0, '/previous-url', '/main/details/1'));
+    eventsSubject.next(
+      new NavigationEnd(0, '/previous-url', '/main/details/1'),
+    );
     expect(service.isFilterShown$$.getValue()).toBe(false);
   });
 

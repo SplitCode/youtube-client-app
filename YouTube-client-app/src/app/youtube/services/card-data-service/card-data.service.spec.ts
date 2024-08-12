@@ -1,5 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
-import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
+import {
+  HttpTestingController,
+  provideHttpClientTesting,
+} from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 
 import { CardDataService } from './card-data.service';
@@ -14,7 +17,7 @@ describe('CardDataService', () => {
       providers: [
         CardDataService,
         provideHttpClient(),
-        provideHttpClientTesting()
+        provideHttpClientTesting(),
       ],
     });
 
@@ -40,7 +43,11 @@ describe('CardDataService', () => {
       expect(items[1].id.videoId).toBe('2');
     });
 
-    const req = httpMock.expectOne((request) => request.url === '/api/search' && request.params.has('q') && request.params.get('q') === query);
+    const req = httpMock.expectOne(
+      (request) => request.url === '/api/search'
+        && request.params.has('q')
+        && request.params.get('q') === query,
+    );
 
     expect(req.request.method).toBe('GET');
     req.flush(mockCardsDataResponse);
