@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "jest",
+    "test": "jest --verbose",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
     "lint": "ng lint",
     "lint:fix": "eslint --fix src/**/*.ts"
   },
@@ -26,10 +28,11 @@
     "@ngrx/entity": "^18.0.2",
     "@ngrx/store": "^18.0.2",
     "@ngrx/store-devtools": "^18.0.2",
+    "jest-preset-angular": "^14.2.2",
     "rxjs": "~7.8.0",
+    "ts-node": "^10.9.2",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3",
-    "jest-preset-angular": "^14.2.2"
+    "zone.js": "~0.14.3"
   },
   "devDependencies": {
     "@angular-builders/jest": "^18.0.0",
