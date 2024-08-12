@@ -18,12 +18,6 @@ describe('SearchService', () => {
       dispatch: jest.fn(),
     };
 
-    // cardDataServiceMock = {
-    //   getCardsDataWithStatistics: jest.fn().mockReturnValue(of([])),
-    //   getNextPageToken: jest.fn(),
-    //   getPrevPageToken: jest.fn(),
-    // };
-
     TestBed.configureTestingModule({
       providers: [
         SearchService,
