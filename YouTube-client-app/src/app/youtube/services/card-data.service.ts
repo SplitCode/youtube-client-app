@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, tap } from 'rxjs/operators';
 
-import { CardItemModel, StatisticsResponse } from '../models/card-item.model';
+import { CardItemModel, StatisticsModel, StatisticsResponse } from '../models/card-item.model';
 import { CardsListModel } from '../models/cards-list.model';
 
 @Injectable({
@@ -14,7 +14,7 @@ export class CardDataService {
   private nextPageToken: string | null = null;
   private prevPageToken: string | null = null;
 
-  getCardsData(query: string, pageToken?: string) {
+  getCardsData(query: string, pageToken?: string): Observable<CardItemModel[]> {
     const url = '/api/search';
     let params = new HttpParams()
       .set('type', 'video')
@@ -35,7 +35,7 @@ export class CardDataService {
     );
   }
 
-  getStatistics(videoIds: string) {
+  getStatistics(videoIds: string): Observable<StatisticsModel[]> {
     const url = '/api/videos';
     const params = new HttpParams()
       .set('id', videoIds)
@@ -61,7 +61,7 @@ export class CardDataService {
     );
   }
 
-  getCardById(ids: string) {
+  getCardById(ids: string): Observable<CardItemModel> {
     const url = '/api/videos';
     const params = new HttpParams()
       .set('id', ids)
