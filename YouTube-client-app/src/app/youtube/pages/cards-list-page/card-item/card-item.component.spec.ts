@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideMockStore } from '@ngrx/store/testing';
 
 import { CardItemComponent } from './card-item.component';
 
@@ -9,6 +10,9 @@ describe('SearchItemComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [CardItemComponent],
+      providers: [
+        provideMockStore({}),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CardItemComponent);
