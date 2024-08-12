@@ -1,8 +1,7 @@
-import { effect, Injectable } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  BehaviorSubject, catchError, Observable, of
+  BehaviorSubject, catchError, map, Observable, of, tap
 } from 'rxjs';
 
 import { getCardsSuccess } from '../../redux/actions/card.actions';
@@ -55,34 +54,27 @@ export class SearchService {
       return;
     }
 
-    const cardsSignal = this.cardDataService.getCardsDataWithStatistics(query);
-    const cards$ = toObservable(cardsSignal);
-
-    cards$.subscribe((cards) => {
-      this.cardsList$$.next(cards);
-      this.store.dispatch(getCardsSuccess({ cards }));
-    });
+    this.cardDataService
+      .getCardsDataWithStatistics(query)
+      .subscribe((cards) => {
+        this.cardsList$$.next(cards);
+        this.store.dispatch(getCardsSuccess({ cards }));
+      });
   }
 
   loadNextPage(): Observable<boolean> {
     const nextPageToken = this.cardDataService.getNextPageToken();
     if (nextPageToken) {
-      const cardsSignal = this.cardDataService.getCardsDataWithStatistics(this.currentQuery, nextPageToken);
-
-      return new Observable<boolean>((subscriber) => {
-        effect(() => {
-          const cards = cardsSignal();
-          if (cards.length > 0) {
+      return this.cardDataService
+        .getCardsDataWithStatistics(this.currentQuery, nextPageToken)
+        .pipe(
+          tap((cards) => {
             this.cardsList$$.next(cards);
             this.store.dispatch(getCardsSuccess({ cards }));
-            subscriber.next(true);
-          } else {
-            subscriber.next(false);
-          }
-        });
-      }).pipe(
-        catchError(() => of(false)),
-      );
+          }),
+          map(() => true),
+          catchError(() => of(false)),
+        );
     }
     return of(false);
   }
@@ -90,22 +82,16 @@ export class SearchService {
   loadPrevPage(): Observable<boolean> {
     const prevPageToken = this.cardDataService.getPrevPageToken();
     if (prevPageToken) {
-      const cardsSignal = this.cardDataService.getCardsDataWithStatistics(this.currentQuery, prevPageToken);
-
-      return new Observable<boolean>((subscriber) => {
-        effect(() => {
-          const cards = cardsSignal();
-          if (cards.length > 0) {
+      return this.cardDataService
+        .getCardsDataWithStatistics(this.currentQuery, prevPageToken)
+        .pipe(
+          tap((cards) => {
             this.cardsList$$.next(cards);
             this.store.dispatch(getCardsSuccess({ cards }));
-            subscriber.next(true);
-          } else {
-            subscriber.next(false);
-          }
-        });
-      }).pipe(
-        catchError(() => of(false)),
-      );
+          }),
+          map(() => true),
+          catchError(() => of(false)),
+        );
     }
     return of(false);
   }

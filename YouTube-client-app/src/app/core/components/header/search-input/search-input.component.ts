@@ -1,6 +1,4 @@
-import {
-  Component, Injector, OnInit, runInInjectionContext
-} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
@@ -33,7 +31,6 @@ export class SearchInputComponent implements OnInit {
     private searchService: SearchService,
     private router: Router,
     private authService: AuthService,
-    private injector: Injector,
   ) {
     this.isAuthenticated$ = this.authService.isAuthenticated$;
   }
@@ -57,9 +54,7 @@ export class SearchInputComponent implements OnInit {
   }
 
   onSearchChange(query: string): void {
-    runInInjectionContext(this.injector, () => {
-      this.searchService.searchCards(query);
-    });
+    this.searchSubject.next(query);
     this.router.navigate(['/main']);
   }
 
