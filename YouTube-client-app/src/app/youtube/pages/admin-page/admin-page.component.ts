@@ -80,7 +80,7 @@ export class AdminPageComponent {
     if (this.adminForm.valid) {
       const formValue = this.adminForm.value;
       const card: CustomCardModel = {
-        id: this.generateUniqueId(),
+        id: crypto.randomUUID(),
         title: formValue.title,
         description: formValue.description,
         imgLink: formValue.img,
@@ -92,13 +92,6 @@ export class AdminPageComponent {
       this.store.dispatch(createCard({ card }));
       this.router.navigate(['/main']);
     }
-  }
-
-  private generateUniqueId(): string {
-    return (
-      Math.random().toString(36).substring(2, 15)
-      + Math.random().toString(36).substring(2, 15)
-    );
   }
 
   addTag() {
