@@ -1,7 +1,9 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import {
+  combineLatest,
   debounceTime,
   distinctUntilChanged,
   filter,
@@ -16,7 +18,7 @@ import { SearchService } from '../../../services/search.service';
 @Component({
   selector: 'app-search-input',
   standalone: true,
-  imports: [ButtonComponent, FormsModule],
+  imports: [ButtonComponent, FormsModule, CommonModule],
   templateUrl: './search-input.component.html',
   styleUrl: './search-input.component.scss',
 })
@@ -36,29 +38,22 @@ export class SearchInputComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAuthenticated$.subscribe((authStatus) => {
-      this.isAuthenticated = authStatus;
-    });
-
-    this.searchSubject
-      .pipe(
+    combineLatest([
+      this.isAuthenticated$,
+      this.searchSubject.pipe(
         filter((query) => query.length >= 3 || query.trim() === ''),
         debounceTime(300),
         distinctUntilChanged(),
-      )
-      .subscribe((query) => {
-        if (this.isAuthenticated) {
-          this.searchService.searchCards(query);
-        }
-      });
+      ),
+    ]).subscribe(([isAuthenticated, query]) => {
+      if (isAuthenticated) {
+        this.searchService.searchCards(query);
+      }
+    });
   }
 
   onSearchChange(query: string): void {
     this.searchSubject.next(query);
     this.router.navigate(['/main']);
-  }
-
-  get isSearchInputDisabled(): boolean {
-    return !this.isAuthenticated;
   }
 }
