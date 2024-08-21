@@ -32,3 +32,24 @@ export const toggleFavorite = createAction(
   '[Card] Toggle Favorite',
   props<{ videoId: string }>(),
 );
+
+export const updateFilterWord = createAction(
+  '[Search] Update Filter word',
+  props<{ word: string }>()
+);
+
+export const updateDateSortClick = createAction(
+  '[Search] Update Date Sort Click'
+);
+
+export const updateViewSortClick = createAction(
+  '[Search] Update View Sort Click'
+);
+
+export const sortCardsByDate = createAction(
+  '[Cards] Sort By Date'
+);
+
+export const sortCardsByViews = createAction(
+  '[Cards] Sort By Views'
+);

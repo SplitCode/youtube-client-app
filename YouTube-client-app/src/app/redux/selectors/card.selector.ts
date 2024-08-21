@@ -41,3 +41,18 @@ export const selectFavoriteCards = createSelector(
   selectFavoriteVideoIds,
   (videoEntities, favoriteVideoIds) => favoriteVideoIds.map((id) => videoEntities[id]),
 );
+
+export const selectFilterWord = createSelector(
+  selectCardState,
+  (state: CardState) => state.filterWord
+);
+
+export const selectIsDateSortAscending = createSelector(
+  selectCardState,
+  (state: CardState) => state.isDateSortAscending
+);
+
+export const selectIsViewSortAscending = createSelector(
+  selectCardState,
+  (state: CardState) => state.isViewSortAscending
+);

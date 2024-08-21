@@ -6,7 +6,12 @@ import {
   getCards,
   getCardsFailed,
   getCardsSuccess,
+  sortCardsByDate,
+  sortCardsByViews,
   toggleFavorite,
+  updateDateSortClick,
+  updateFilterWord,
+  updateViewSortClick,
 } from '../actions/card.actions';
 import { CardState, initialState } from '../state.model';
 
@@ -42,6 +47,42 @@ const reducer = createReducer(
     return {
       ...state,
       favoriteVideoIds,
+    };
+  }),
+  on(updateFilterWord, (state, { word }) => ({
+    ...state,
+    filterWord: word,
+  })),
+  on(updateDateSortClick, (state) => ({
+    ...state,
+    isDateSortAscending: !state.isDateSortAscending,
+  })),
+  on(updateViewSortClick, (state) => ({
+    ...state,
+    isViewSortAscending: !state.isViewSortAscending,
+  })),
+  on(sortCardsByDate, (state) => {
+    const cards = [...state.videoIds.map((id) => state.videoEntities[id])];
+    cards.sort((a, b) => {
+      const dateA = new Date(a.snippet.publishedAt).getTime();
+      const dateB = new Date(b.snippet.publishedAt).getTime();
+      return state.isDateSortAscending ? dateA - dateB : dateB - dateA;
+    });
+    return {
+      ...state,
+      videoIds: cards.map((card) => card.id.videoId),
+    };
+  }),
+  on(sortCardsByViews, (state) => {
+    const cards = [...state.videoIds.map((id) => state.videoEntities[id])];
+    cards.sort((a, b) => {
+      const viewsA = 'statistics' in a ? parseInt(a.statistics?.viewCount || '0', 10) : 0;
+      const viewsB = 'statistics' in b ? parseInt(b.statistics?.viewCount || '0', 10) : 0;
+      return state.isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
+    });
+    return {
+      ...state,
+      videoIds: cards.map((card) => card.id.videoId),
     };
   }),
 );

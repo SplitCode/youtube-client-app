@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import {
-  BehaviorSubject, catchError, map, Observable, of, tap
+  catchError, map, Observable, of, tap
 } from 'rxjs';
 
-import { getCardsSuccess } from '../../redux/actions/card.actions';
-import { selectCombinedCards } from '../../redux/selectors/card.selector';
-import { CardModel } from '../../redux/state.model';
+import {
+  getCardsSuccess, sortCardsByDate, sortCardsByViews, updateDateSortClick, updateFilterWord, updateViewSortClick
+} from '../../redux/actions/card.actions';
 import { CardDataService } from '../../youtube/services/card-data.service';
 
 @Injectable({
@@ -14,34 +14,23 @@ import { CardDataService } from '../../youtube/services/card-data.service';
 })
 export class SearchService {
   private currentQuery: string = '';
-  private filterWord$$ = new BehaviorSubject<string>('');
-  private cardsList$$ = new BehaviorSubject<CardModel[]>([]);
-  private isDateSortClick$$ = new BehaviorSubject<boolean>(false);
-  private isViewSortClick$$ = new BehaviorSubject<boolean>(false);
-
-  currentFilterWord$ = this.filterWord$$.asObservable();
-  currentCardList$ = this.cardsList$$.asObservable();
 
   constructor(
     private store: Store,
     private cardDataService: CardDataService,
-  ) {
-    this.store.select(selectCombinedCards).subscribe((cards) => {
-      this.cardsList$$.next(cards);
-    });
-  }
+  ) {}
 
   updateFilterWord(word: string) {
-    this.filterWord$$.next(word);
+    this.store.dispatch(updateFilterWord({ word }));
   }
 
   updateDateSortClick() {
-    this.isDateSortClick$$.next(!this.isDateSortClick$$.getValue());
+    this.store.dispatch(updateDateSortClick());
     this.sortCardsByDate();
   }
 
   updateViewSortClick() {
-    this.isViewSortClick$$.next(!this.isViewSortClick$$.getValue());
+    this.store.dispatch(updateViewSortClick());
     this.sortCardsByViews();
   }
 
@@ -49,7 +38,6 @@ export class SearchService {
     this.currentQuery = query;
 
     if (query.trim() === '') {
-      this.cardsList$$.next([]);
       this.store.dispatch(getCardsSuccess({ cards: [] }));
       return;
     }
@@ -57,7 +45,6 @@ export class SearchService {
     this.cardDataService
       .getCardsDataWithStatistics(query)
       .subscribe((cards) => {
-        this.cardsList$$.next(cards);
         this.store.dispatch(getCardsSuccess({ cards }));
       });
   }
@@ -69,7 +56,6 @@ export class SearchService {
         .getCardsDataWithStatistics(this.currentQuery, nextPageToken)
         .pipe(
           tap((cards) => {
-            this.cardsList$$.next(cards);
             this.store.dispatch(getCardsSuccess({ cards }));
           }),
           map(() => true),
@@ -86,7 +72,6 @@ export class SearchService {
         .getCardsDataWithStatistics(this.currentQuery, prevPageToken)
         .pipe(
           tap((cards) => {
-            this.cardsList$$.next(cards);
             this.store.dispatch(getCardsSuccess({ cards }));
           }),
           map(() => true),
@@ -97,30 +82,10 @@ export class SearchService {
   }
 
   private sortCardsByDate() {
-    const cards = [...this.cardsList$$.getValue()];
-    const isDateSortAscending = this.isDateSortClick$$.getValue();
-
-    cards.sort((a, b) => {
-      const dateA = new Date(
-        'snippet' in a ? a.snippet.publishedAt : a.date,
-      ).getTime();
-      const dateB = new Date(
-        'snippet' in b ? b.snippet.publishedAt : b.date,
-      ).getTime();
-      return isDateSortAscending ? dateA - dateB : dateB - dateA;
-    });
-    this.cardsList$$.next(cards);
+    this.store.dispatch(sortCardsByDate());
   }
 
   private sortCardsByViews() {
-    const cards = [...this.cardsList$$.getValue()];
-    const isViewSortAscending = this.isViewSortClick$$.getValue();
-
-    cards.sort((a, b) => {
-      const viewsA = 'statistics' in a ? parseInt(a.statistics?.viewCount || '0', 10) : 0;
-      const viewsB = 'statistics' in b ? parseInt(b.statistics?.viewCount || '0', 10) : 0;
-      return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
-    });
-    this.cardsList$$.next(cards);
+    this.store.dispatch(sortCardsByViews());
   }
 }

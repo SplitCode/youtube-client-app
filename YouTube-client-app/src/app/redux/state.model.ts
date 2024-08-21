@@ -7,6 +7,9 @@ export interface CardState {
   videoIds: string[];
   favoriteVideoIds: string[];
   error: string | null;
+  filterWord: string;
+  isDateSortAscending: boolean;
+  isViewSortAscending: boolean;
 }
 
 export const initialState: CardState = {
@@ -15,6 +18,9 @@ export const initialState: CardState = {
   videoIds: [],
   favoriteVideoIds: [],
   error: null,
+  filterWord: '',
+  isDateSortAscending: true,
+  isViewSortAscending: true,
 };
 
 export type CardModel = CustomCardModel | CardItemModel;

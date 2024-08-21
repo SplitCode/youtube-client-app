@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
 import { SearchService } from '../../../core/services/search.service';
-import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
+import { selectCombinedCards, selectFavoriteVideoIds, selectFilterWord } from '../../../redux/selectors/card.selector';
 import { CardModel } from '../../../redux/state.model';
 import { PaginationComponent } from '../../components/pagination/pagination.component';
 import { CustomCardModel } from '../../models/custom-card-item.model';
@@ -26,7 +26,7 @@ import { CustomCardItemComponent } from './custom-card-item/custom-card-item.com
   styleUrl: './cards-list-page.component.scss',
 })
 export class CardsListComponent {
-  filterWord$ = this.searchService.currentFilterWord$;
+  filterWord$: Observable<string>;
   cardsList$: Observable<CardModel[]>;
   favoriteVideoIds$: Observable<string[]>;
 
@@ -34,7 +34,8 @@ export class CardsListComponent {
     private searchService: SearchService,
     private store: Store,
   ) {
-    this.cardsList$ = this.searchService.currentCardList$;
+    this.filterWord$ = this.store.select(selectFilterWord);
+    this.cardsList$ = this.store.select(selectCombinedCards);
     this.favoriteVideoIds$ = this.store.select(selectFavoriteVideoIds);
   }
 
