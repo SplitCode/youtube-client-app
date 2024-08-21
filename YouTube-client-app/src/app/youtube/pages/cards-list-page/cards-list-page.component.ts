@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 
 import { SearchService } from '../../../core/services/search.service';
 import { selectFavoriteVideoIds } from '../../../redux/selectors/card.selector';
@@ -29,7 +29,6 @@ export class CardsListComponent {
   filterWord$ = this.searchService.currentFilterWord$;
   cardsList$: Observable<CardModel[]>;
   favoriteVideoIds$: Observable<string[]>;
-  hasCards$: Observable<boolean>;
 
   constructor(
     private searchService: SearchService,
@@ -37,10 +36,6 @@ export class CardsListComponent {
   ) {
     this.cardsList$ = this.searchService.currentCardList$;
     this.favoriteVideoIds$ = this.store.select(selectFavoriteVideoIds);
-
-    this.hasCards$ = this.cardsList$.pipe(
-      map((cardsList) => cardsList.length > 0),
-    );
   }
 
   isCustom(card: CardModel): card is CustomCardModel {

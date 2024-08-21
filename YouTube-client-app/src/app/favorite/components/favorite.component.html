@@ -1,5 +1,4 @@
-<ng-container *ngIf="favoriteVideos$ | async as favoriteVideos">
-  <ng-container *ngFor="let cardItem of favoriteVideos">
-    <app-card-item [cardItem]="cardItem"></app-card-item>
-  </ng-container>
-</ng-container>
+<app-card-item
+  *ngFor="let cardItem of favoriteVideos$ | async"
+  [cardItem]="cardItem"
+></app-card-item>
