@@ -17,4 +17,10 @@
   &__input::-webkit-search-cancel-button {
     cursor: pointer;
   }
+
+  &__input:disabled {
+    background-color: var(--bg-color);
+    cursor: default;
+    border: 0.1rem solid var(--light-text-color);
+  }
 }

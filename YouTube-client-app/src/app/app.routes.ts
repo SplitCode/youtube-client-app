@@ -21,12 +21,21 @@ export const routes: Routes = [
   },
   {
     path: 'admin',
-    loadComponent: () => import('./youtube/pages/admin-page/admin-page.component').then((m) => m.AdminPageComponent),
+    loadComponent: () => import('./youtube/pages/admin-page/admin-page.component').then(
+      (m) => m.AdminPageComponent,
+    ),
+    canActivate: [authGuard],
+  },
+  {
+    path: 'favorite',
+    loadChildren: () => import('./favorite/favorite.routes').then((m) => m.routes),
     canActivate: [authGuard],
   },
   {
     path: '**',
-    loadComponent: () => import('./core/pages/page404/page404.component').then((m) => m.Page404Component)
+    loadComponent: () => import('./core/pages/page404/page404.component').then(
+      (m) => m.Page404Component,
+    ),
   },
 ];
 

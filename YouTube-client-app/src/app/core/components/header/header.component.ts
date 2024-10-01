@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { Observable } from 'rxjs';
 
 import { AuthService } from '../../../auth/services/auth.service';
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { HeaderService } from '../../services/header-service';
+import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
@@ -21,15 +22,15 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     LoginInfoComponent,
     CommonModule,
     SettingsButtonComponent,
+    FavoriteButtonComponent,
     ButtonComponent,
     FilterComponent,
-    RouterModule
+    RouterModule,
   ],
 })
 export class HeaderComponent {
   private authService = inject(AuthService);
   private headerService = inject(HeaderService);
-  private router = inject(Router);
 
   isSettingsVisible$ = this.headerService.isSettingsVisible$$;
   isFilterShown$ = this.headerService.isFilterShown$$;
@@ -39,15 +40,7 @@ export class HeaderComponent {
     this.headerService.toggleFilter();
   }
 
-  login(): void {
-    this.router.navigate(['/login']);
-  }
-
   logout(): void {
     this.authService.logout();
-  }
-
-  goToAdmin(): void {
-    this.router.navigate(['/admin']);
   }
 }

@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import {
-  FormControl, FormGroup, ReactiveFormsModule, Validators
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -19,7 +22,11 @@ import { AuthService } from '../../services/auth.service';
 export class LoginComponent {
   loginForm = new FormGroup({
     login: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8), passwordValidator]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(8),
+      passwordValidator,
+    ]),
   });
 
   authService = inject(AuthService);

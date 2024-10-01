@@ -19,6 +19,17 @@
       [routerLink]="['/main/details', cardItem.id.videoId]"
       >more...</app-button
     >
+    <button
+      class="favorite__button"
+      (click)="toggleFavorite(cardItem.id.videoId)"
+    >
+      <ng-container *ngIf="isFavorite$ | async; else unfavorite">
+        <span class="favorite__img unfavorite"></span>
+      </ng-container>
+      <ng-template #unfavorite>
+        <span class="favorite__img favorite"></span>
+      </ng-template>
+    </button>
   </div>
 </div>
 <div class="card__line" [appCardColor]="cardItem.snippet.publishedAt"></div>

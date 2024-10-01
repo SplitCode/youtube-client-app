@@ -39,12 +39,21 @@
             [likeCount]="cardItem.statistics?.likeCount"
             [commentCount]="cardItem.statistics?.commentCount"
           ></app-card-stats>
+
+          <button class="favorite__button" (click)="toggleFavoriteStatus()">
+            <ng-container *ngIf="isFavorite$ | async; else unfavorite">
+              <span class="favorite__img unfavorite"></span>
+            </ng-container>
+            <ng-template #unfavorite>
+              <span class="favorite__img favorite"></span>
+            </ng-template>
+          </button>
         </div>
-        <div
-          class="card__line"
-          [appCardColor]="cardItem.snippet.publishedAt"
-        ></div>
       </div>
+      <div
+        class="card__line"
+        [appCardColor]="cardItem.snippet.publishedAt"
+      ></div>
     </div>
   </div>
 </section>

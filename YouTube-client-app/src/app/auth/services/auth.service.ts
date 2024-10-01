@@ -7,7 +7,9 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class AuthService {
   private readonly token = 'youtube_auth_token';
-  private isAuthenticated$$ = new BehaviorSubject<boolean>(!!localStorage.getItem(this.token));
+  private isAuthenticated$$ = new BehaviorSubject<boolean>(
+    !!localStorage.getItem(this.token),
+  );
   private router = inject(Router);
   isAuthenticated$ = this.isAuthenticated$$.asObservable();
 
