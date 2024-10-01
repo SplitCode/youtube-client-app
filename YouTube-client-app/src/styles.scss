@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: Roboto;
+  src: url(assets/fonts/Roboto-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: Roboto;
+  src: url(assets/fonts/Roboto-Bold.ttf);
+  font-weight: 700;
+}
+
+:root {
+  --bg-color: #e5e5e5;
+  --input-bg-color: #efefef;
+  --accent-color: #2f80ed;
+  --hover-color: #5ea2ff;
+  --text-color: #ffffff;
+  --light-text-color: #929292;
+  --dark-text-color: #4f4f4f;
+  --button-shadow: 2px 0px 4px 0px #2f80ed;
+  --card-shadow: 2px 2px 4px 0px #00000040;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 1.2rem;
+}

@@ -1,0 +1,20 @@
+<div class="filters">
+  <p class="filters-title">Sorting by:</p>
+  <div class="filters-list">
+    <button class="filters-list__item" (click)="onSortByDate()">date</button>
+    <button class="filters-list__item" (click)="onSortByViews()">
+      count of views
+    </button>
+    <form class="filters-form" (submit)="preventSubmit($event)">
+      <label class="filters-form__label" for="filter-input"
+        >by word or sentance</label
+      >
+      <input
+        class="filters-form__input"
+        type="text"
+        id="filter-input"
+        (input)="onFilterWordChange($event)"
+      />
+    </form>
+  </div>
+</div>

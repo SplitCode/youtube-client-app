@@ -1,0 +1,46 @@
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.8rem 2rem;
+  gap: 1.1rem;
+  font-size: 1.2rem;
+  background-color: var(--bg-color);
+}
+
+.filters-title {
+  color: var(--light-text-color);
+}
+
+.filters-list {
+  display: flex;
+  gap: 2.1rem;
+
+  &__item {
+    border: none;
+    background-color: transparent;
+    color: var(--accent-color);
+    cursor: pointer;
+  }
+
+  &__item:hover,
+  &__item:active {
+    text-decoration: underline;
+  }
+}
+
+.filters-form {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  color: var(--accent-color);
+
+  &__input {
+    border: none;
+    padding: 0.5rem;
+  }
+
+  &__input:focus {
+    outline-color: var(--accent-color);
+  }
+}

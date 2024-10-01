@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card__image-container">
+    <img
+      class="card__image"
+      src="{{ cardItem.snippet.thumbnails.medium.url }}"
+      alt="{{ cardItem.snippet.channelTitle }}"
+    />
+  </div>
+
+  <div class="card__content">
+    <div class="card-stats">
+      <div class="card-stats__item">
+        <span class="card-stats__viewed">{{
+          cardItem.statistics.viewCount
+        }}</span>
+      </div>
+      <div class="card-stats__item">
+        <span class="card-stats__like">{{
+          cardItem.statistics.likeCount
+        }}</span>
+      </div>
+      <div class="card-stats__item">
+        <span class="card-stats__dislike">{{
+          cardItem.statistics.dislikeCount
+        }}</span>
+      </div>
+      <div class="card-stats__item">
+        <span class="card-stats__comments">{{
+          cardItem.statistics.commentCount
+        }}</span>
+      </div>
+    </div>
+    <div class="card__title">{{ cardItem.snippet.title }}</div>
+    <div class="card__button">
+      <app-button btnAppearance="large">more...</app-button>
+    </div>
+  </div>
+  <div class="card__line" [appCardColor]="cardItem.snippet.publishedAt"></div>
+</div>
