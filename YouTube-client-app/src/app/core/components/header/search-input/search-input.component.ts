@@ -1,11 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   debounceTime, distinctUntilChanged, filter, Subject
 } from 'rxjs';
 
 import { ButtonComponent } from '../../../../shared/components/button/button.component';
-import { LoggerService } from '../../../services/logger.service';
 import { SearchService } from '../../../services/search.service';
 
 @Component({
@@ -20,10 +20,9 @@ export class SearchInputComponent implements OnInit {
   searchSubject = new Subject<string>();
 
   searchService = inject(SearchService);
-  logger = inject(LoggerService);
+  private router = inject(Router);
 
   ngOnInit(): void {
-    this.logger.logMessage('logger work');
     this.searchSubject
       .pipe(
         filter((query) => query.length >= 3 || query.trim() === ''),
@@ -31,11 +30,12 @@ export class SearchInputComponent implements OnInit {
         distinctUntilChanged(),
       )
       .subscribe((query) => {
-        this.searchService.updateSearchQuery(query);
+        this.searchService.searchCards(query);
       });
   }
 
   onSearchChange(query: string): void {
     this.searchSubject.next(query);
+    this.router.navigate(['/main']);
   }
 }

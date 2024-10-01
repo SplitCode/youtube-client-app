@@ -20,6 +20,11 @@ export const routes: Routes = [
     canActivate: [authGuard],
   },
   {
+    path: 'admin',
+    loadComponent: () => import('./youtube/pages/admin-page/admin-page.component').then((m) => m.AdminPageComponent),
+    canActivate: [authGuard],
+  },
+  {
     path: '**',
     loadComponent: () => import('./core/pages/page404/page404.component').then((m) => m.Page404Component)
   },

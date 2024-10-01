@@ -1,0 +1,123 @@
+<div class="admin-page__form">
+  <h2 class="admin-page__form-title">Create new card</h2>
+  <form class="form" [formGroup]="adminForm" (ngSubmit)="onSubmit()">
+    <div class="form__group">
+      <label for="title" class="required">Title</label>
+      <input type="text" id="title" formControlName="title" name="title" />
+      <div
+        *ngIf="title?.invalid && (title?.dirty || title?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="title?.errors?.['required']">Please enter a title.</div>
+        <div *ngIf="title?.errors?.['minlength']">The title is too short.</div>
+        <div *ngIf="title?.errors?.['maxlength']">The title is too long.</div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="description">Description</label>
+      <input
+        type="text"
+        id="description"
+        formControlName="description"
+        name="description"
+      />
+      <div
+        *ngIf="
+          description?.invalid && (description?.dirty || description?.touched)
+        "
+        class="form__error"
+      >
+        <div *ngIf="description?.errors?.['maxlength']">
+          The description is too long.
+        </div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="img" class="required">Img</label>
+      <input type="text" id="img" formControlName="img" name="img" />
+      <div
+        *ngIf="img?.invalid && (img?.dirty || img?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="img?.errors?.['required']">
+          Please enter a link to the image.
+        </div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="link" class="required">Link Video</label>
+      <input type="text" id="link" formControlName="link" name="link" />
+      <div
+        *ngIf="link?.invalid && (link?.dirty || link?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="link?.errors?.['required']">
+          Please enter a link to the video.
+        </div>
+      </div>
+    </div>
+
+    <div class="form__group">
+      <label for="date" class="required">Creation Date</label>
+      <input type="date" id="date" formControlName="date" name="date" />
+      <div
+        *ngIf="date?.invalid && (date?.dirty || date?.touched)"
+        class="form__error"
+      >
+        <div *ngIf="date?.errors?.['required']">
+          Please enter a creation date.
+        </div>
+        <div *ngIf="date?.errors?.['errorDate']">The date is invalid.</div>
+      </div>
+    </div>
+
+    <div formArrayName="tags">
+      <div *ngFor="let tag of tags.controls; let i = index" class="form__group">
+        <label for="tag" class="required">Tag</label>
+        <input type="text" id="tag" [formControlName]="i" />
+        <div
+          *ngIf="tag.invalid && (tag.dirty || tag.touched)"
+          class="form__error"
+        >
+          <div *ngIf="tag.errors?.['required']">Please enter a tag.</div>
+        </div>
+        <div class="form__button">
+          <app-button
+            btnAppearance="middle"
+            (click)="removeTag(i)"
+            *ngIf="tags.length > 1"
+            >Remove</app-button
+          >
+        </div>
+      </div>
+      <div class="form__button">
+        <app-button
+          btnAppearance="middle"
+          (click)="addTag()"
+          *ngIf="tags.length < 5"
+          >Add tag</app-button
+        >
+      </div>
+    </div>
+
+    <div class="form__buttons">
+      <app-button
+        btnAppearance="large"
+        [btnType]="'button'"
+        (click)="resetForm()"
+      >
+        Reset
+      </app-button>
+      <app-button
+        btnAppearance="large"
+        [btnType]="'submit'"
+        [disabled]="adminForm.invalid"
+      >
+        Create card
+      </app-button>
+    </div>
+  </form>
+</div>

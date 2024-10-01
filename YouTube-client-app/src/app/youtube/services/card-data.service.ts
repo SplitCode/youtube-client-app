@@ -11,28 +11,15 @@ import { CardsListModel } from '../models/cards-list.model';
 export class CardDataService {
   private http = inject(HttpClient);
 
-  getCardsData(query: string) {
-    const url = '/api/search';
-    const params = new HttpParams()
-      .set('type', 'video')
-      .set('part', 'snippet')
-      .set('maxResults', '15')
-      .set('q', query);
-
-    return this.http.get<CardsListModel>(url, { params }).pipe(
-      map((response: CardsListModel) => response.items)
-    );
-  }
-
   getStatistics(videoIds: string) {
     const url = '/api/videos';
     const params = new HttpParams()
       .set('id', videoIds)
       .set('part', 'snippet,statistics');
 
-    return this.http.get<StatisticsResponse>(url, { params }).pipe(
-      map((response) => response.items)
-    );
+    return this.http
+      .get<StatisticsResponse>(url, { params })
+      .pipe(map((response) => response.items));
   }
 
   getCardsDataWithStatistics(query: string) {
@@ -42,10 +29,11 @@ export class CardDataService {
         return this.getStatistics(videoIds).pipe(
           map((statistics) => items.map((item) => ({
             ...item,
-            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics
-          })))
+            statistics: statistics.find((stat) => stat.id === item.id.videoId)
+              ?.statistics,
+          })),),
         );
-      })
+      }),
     );
   }
 
@@ -55,8 +43,21 @@ export class CardDataService {
       .set('id', ids)
       .set('part', 'snippet,statistics');
 
-    return this.http.get<CardsListModel>(url, { params }).pipe(
-      map((response: CardsListModel) => response.items[0])
-    );
+    return this.http
+      .get<CardsListModel>(url, { params })
+      .pipe(map((response: CardsListModel) => response.items[0]));
+  }
+
+  private getCardsData(query: string) {
+    const url = '/api/search';
+    const params = new HttpParams()
+      .set('type', 'video')
+      .set('part', 'snippet')
+      .set('maxResults', '15')
+      .set('q', query);
+
+    return this.http
+      .get<CardsListModel>(url, { params })
+      .pipe(map((response: CardsListModel) => response.items));
   }
 }

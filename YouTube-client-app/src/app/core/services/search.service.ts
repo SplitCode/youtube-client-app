@@ -20,11 +20,6 @@ export class SearchService {
 
   private cardDataService = inject(CardDataService);
 
-  updateSearchQuery(query: string) {
-    this.searchQuery$$.next(query);
-    this.searchCards(query);
-  }
-
   updateFilterWord(word: string) {
     this.filterWord$$.next(word);
   }
@@ -39,7 +34,7 @@ export class SearchService {
     this.sortCardsByViews();
   }
 
-  private searchCards(query: string) {
+  searchCards(query: string) {
     if (query.trim() === '') {
       this.cardsList$$.next([]);
     } else {
