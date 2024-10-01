@@ -10,7 +10,7 @@ enum CardColors {
   blue = '#2f80ed',
   green = '#27ae60',
   yellow = '#f2c94c',
-  red = '#eb5757'
+  red = '#eb5757',
 }
 
 @Directive({

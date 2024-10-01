@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ButtonComponent } from '../../../../shared/button/button.component';
-import { CardShowService } from '../../../../youtube/services/card-show-service.service';
-import { SearchStateService } from '../../../services/search-state.service';
+import { ButtonComponent } from '../../../../shared/components/button/button.component';
+import { CardShowService } from '../../../../youtube/services/card-show.service';
+import { SearchService } from '../../../services/search.service';
 
 @Component({
   selector: 'app-search-input',
@@ -14,25 +14,14 @@ import { SearchStateService } from '../../../services/search-state.service';
 })
 export class SearchInputComponent {
   private isSubmitForm: boolean = false;
-
   searchQuery: string = '';
 
-  constructor(
-    private searchStateService: SearchStateService,
-    private cardShowService: CardShowService,
-  ) {}
+  searchService = inject(SearchService);
+  cardShowService = inject(CardShowService);
 
-  onSubmit(event: Event): void {
-    event.preventDefault();
-    this.searchStateService.updateSearchQuery(this.searchQuery);
-  }
-
-  showCards(event: Event): void {
-    event.preventDefault();
-    this.cardShowService.showCards(true);
-  }
-
-  isSearchDisabled(): boolean {
-    return this.searchQuery.trim().length === 0;
+  onSubmit(event: boolean): void {
+    this.isSubmitForm = event;
+    this.searchService.updateSearchQuery(this.searchQuery);
+    this.cardShowService.showCards(this.isSubmitForm);
   }
 }

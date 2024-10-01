@@ -1,0 +1,52 @@
+<section class="detailed-page">
+  <div class="detailed-page__card">
+    <div>
+      <app-button
+        btnAppearance="small"
+        btnBorder="left-border"
+        [routerLink]="['/main']"
+      >
+        <span class="detailed-page__button-img"></span>
+      </app-button>
+    </div>
+
+    <div class="card">
+      <div class="card__image-container">
+        <img
+          class="card__image"
+          src="{{ cardItem.snippet.thumbnails.maxres.url }}"
+          alt="{{ cardItem.snippet.channelTitle }}"
+        />
+      </div>
+      <div class="card__content">
+        <div class="card__text-content">
+          <div>
+            <div class="card__title">{{ cardItem.snippet.title }}</div>
+            <div class="card__date">
+              {{ cardItem.snippet.publishedAt | date: "fullDate" }}
+            </div>
+          </div>
+          <div class="card__description">
+            <p class="card__description-title">Description:</p>
+            <p class="card__description-text">
+              {{ cardItem.snippet.description.slice(0, 500) }}
+            </p>
+          </div>
+        </div>
+        <div class="card__stats">
+          <app-card-stats
+            [viewCount]="cardItem.statistics.viewCount"
+            [likeCount]="cardItem.statistics.likeCount"
+            [dislikeCount]="cardItem.statistics.dislikeCount"
+            [commentCount]="cardItem.statistics.commentCount"
+          ></app-card-stats>
+        </div>
+
+        <div
+          class="card__line"
+          [appCardColor]="cardItem.snippet.publishedAt"
+        ></div>
+      </div>
+    </div>
+  </div>
+</section>

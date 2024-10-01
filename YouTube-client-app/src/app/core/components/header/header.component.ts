@@ -1,7 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
-import { FilterShowService } from '../../../youtube/services/filter-show-service.service';
+import { AuthService } from '../../../auth/services/auth.service';
+import { ButtonComponent } from '../../../shared/components/button/button.component';
+import { HeaderService } from '../../services/header-service';
+import { FilterComponent } from './filters/filter.component';
 import { LoginInfoComponent } from './login-info/login-info.component';
 import { SearchInputComponent } from './search-input/search-input.component';
 import { SettingsButtonComponent } from './settings-button/settings-button.component';
@@ -16,14 +19,22 @@ import { SettingsButtonComponent } from './settings-button/settings-button.compo
     LoginInfoComponent,
     CommonModule,
     SettingsButtonComponent,
+    ButtonComponent,
+    FilterComponent,
   ],
 })
 export class HeaderComponent {
-  public isFilterShown: boolean = false;
+  authService = inject(AuthService);
+  headerService = inject(HeaderService);
 
-  constructor(private filterShowService: FilterShowService) {}
+  isSettingsVisible$ = this.headerService.isSettingsVisible$$;
+  isFilterShown$ = this.headerService.isFilterShown$$;
 
-  showFilter(): void {
-    this.filterShowService.toggleFilterShow();
+  toggleFilter(): void {
+    this.headerService.toggleFilter();
+  }
+
+  onLogout() {
+    this.authService.logout();
   }
 }

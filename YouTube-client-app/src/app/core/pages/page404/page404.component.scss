@@ -1,0 +1,17 @@
+.page-404 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  &__content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    color: var(--light-text-color);
+    font-size: 2.4rem;
+    gap: 2.7rem;
+    max-width: 36rem;
+  }
+}

@@ -1,4 +1,4 @@
-<form class="search-form" (submit)="onSubmit($event); showCards($event)">
+<form class="search-form" (ngSubmit)="onSubmit($event)">
   <input
     type="search"
     class="search-form__input"
@@ -6,11 +6,7 @@
     [(ngModel)]="searchQuery"
     name="searchQuery"
   />
-  <app-button
-    btnAppearance="middle"
-    btnBorder="right-border"
-    btnType="submit"
-    [disabled]="isSearchDisabled()"
+  <app-button btnAppearance="middle" btnBorder="right-border" btnType="submit"
     >search</app-button
   >
 </form>

@@ -1,17 +1,18 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
-import { HeaderComponent } from './core/components/header/header.component';
-import { MainPageComponent } from './youtube/main-page/main-page.component';
+import { CoreModule } from './core/core.module';
+import { LoggerService } from './core/services/logger.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
-  imports: [RouterOutlet, HeaderComponent, MainPageComponent, CommonModule],
+  imports: [RouterOutlet, CoreModule],
 })
 export class AppComponent {
+  constructor(private logger: LoggerService) {
+    this.logger.logMessage('AppComponent initialized');
+  }
   title = 'YouTube-client-app';
 }
