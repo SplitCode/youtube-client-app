@@ -8,8 +8,8 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card-stats.component.scss',
 })
 export class CardStatsComponent {
-  @Input() viewCount!: string;
-  @Input() likeCount!: string;
-  @Input() dislikeCount!: string;
-  @Input() commentCount!: string;
+  @Input() viewCount?: string;
+  @Input() likeCount?: string;
+  @Input() dislikeCount?: string = '0';
+  @Input() commentCount?: string;
 }

@@ -8,16 +8,15 @@
 
 <div class="card__content">
   <app-card-stats
-    [viewCount]="cardItem.statistics.viewCount"
-    [likeCount]="cardItem.statistics.likeCount"
-    [dislikeCount]="cardItem.statistics.dislikeCount"
-    [commentCount]="cardItem.statistics.commentCount"
+    [viewCount]="cardItem.statistics?.viewCount"
+    [likeCount]="cardItem.statistics?.likeCount"
+    [commentCount]="cardItem.statistics?.commentCount"
   ></app-card-stats>
   <div class="card__title">{{ cardItem.snippet.title }}</div>
   <div class="card__button">
     <app-button
       btnAppearance="large"
-      [routerLink]="['/main/details', cardItem.id]"
+      [routerLink]="['/main/details', cardItem.id.videoId]"
       >more...</app-button
     >
   </div>

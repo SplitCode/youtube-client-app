@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 import { CardItemModel } from '../../youtube/models/card-item.model';
@@ -18,13 +18,11 @@ export class SearchService {
   currentFilterWord$ = this.filterWord$$.asObservable();
   currentCardList$ = this.cardsList$$.asObservable();
 
-  constructor(private cardDataService: CardDataService) {
-    this.cardsList$$.next(this.cardDataService.getCards());
-  }
+  private cardDataService = inject(CardDataService);
 
   updateSearchQuery(query: string) {
     this.searchQuery$$.next(query);
-    this.searchCards();
+    this.searchCards(query);
   }
 
   updateFilterWord(word: string) {
@@ -41,15 +39,16 @@ export class SearchService {
     this.sortCardsByViews();
   }
 
-  private searchCards() {
-    let cards = [...this.cardDataService.getCards()];
-    const searchQuery = this.searchQuery$$.getValue().toLowerCase();
-
-    if (searchQuery) {
-      cards = cards.filter((card) => card.snippet.title.toLowerCase().includes(searchQuery),);
+  private searchCards(query: string) {
+    if (query.trim() === '') {
+      this.cardsList$$.next([]);
+    } else {
+      this.cardDataService
+        .getCardsDataWithStatistics(query)
+        .subscribe((cards) => {
+          this.cardsList$$.next(cards);
+        });
     }
-
-    this.cardsList$$.next(cards);
   }
 
   private sortCardsByDate() {
@@ -69,8 +68,8 @@ export class SearchService {
     const isViewSortAscending = this.isViewSortClick$$.getValue();
 
     cards = cards.sort((a, b) => {
-      const viewsA = parseInt(a.statistics.viewCount, 10);
-      const viewsB = parseInt(b.statistics.viewCount, 10);
+      const viewsA = parseInt(a.statistics?.viewCount || '0', 10);
+      const viewsB = parseInt(b.statistics?.viewCount || '0', 10);
       return isViewSortAscending ? viewsA - viewsB : viewsB - viewsA;
     });
     this.cardsList$$.next(cards);

@@ -1,12 +1,10 @@
-<form class="search-form" (ngSubmit)="onSubmit($event)">
+<form class="search-form">
   <input
     type="search"
     class="search-form__input"
     placeholder="What are you want to find out?"
     [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange($event)"
     name="searchQuery"
   />
-  <app-button btnAppearance="middle" btnBorder="right-border" btnType="submit"
-    >search</app-button
-  >
 </form>

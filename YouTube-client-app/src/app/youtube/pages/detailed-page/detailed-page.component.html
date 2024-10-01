@@ -10,11 +10,11 @@
       </app-button>
     </div>
 
-    <div class="card">
+    <div class="card" *ngIf="cardItem$ | async as cardItem">
       <div class="card__image-container">
         <img
           class="card__image"
-          src="{{ cardItem.snippet.thumbnails.maxres.url }}"
+          src="{{ cardItem.snippet.thumbnails.high.url }}"
           alt="{{ cardItem.snippet.channelTitle }}"
         />
       </div>
@@ -29,19 +29,17 @@
           <div class="card__description">
             <p class="card__description-title">Description:</p>
             <p class="card__description-text">
-              {{ cardItem.snippet.description.slice(0, 500) }}
+              {{ cardItem.snippet.description | slice: 0 : 500 }}
             </p>
           </div>
         </div>
         <div class="card__stats">
           <app-card-stats
-            [viewCount]="cardItem.statistics.viewCount"
-            [likeCount]="cardItem.statistics.likeCount"
-            [dislikeCount]="cardItem.statistics.dislikeCount"
-            [commentCount]="cardItem.statistics.commentCount"
+            [viewCount]="cardItem.statistics?.viewCount"
+            [likeCount]="cardItem.statistics?.likeCount"
+            [commentCount]="cardItem.statistics?.commentCount"
           ></app-card-stats>
         </div>
-
         <div
           class="card__line"
           [appCardColor]="cardItem.snippet.publishedAt"

@@ -1,4 +1,4 @@
-.cards-list {
+:host {
   display: grid;
   column-gap: 2.8rem;
   row-gap: 2.8rem;
@@ -8,19 +8,19 @@
 }
 
 @media (max-width: 1200px) {
-  .cards-list {
+  :host {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @media (max-width: 860px) {
-  .cards-list {
+  :host {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 580px) {
-  .cards-list {
+  :host {
     grid-template-columns: 1fr;
   }
 }

@@ -1,25 +1,62 @@
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { map, switchMap } from 'rxjs/operators';
 
-import * as response from '../mocks/mock-response.json';
-import { CardItemModel } from '../models/card-item.model';
+import { StatisticsResponse } from '../models/card-item.model';
+import { CardsListModel } from '../models/cards-list.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CardDataService {
-  private data = response;
+  private http = inject(HttpClient);
 
-  protected cardsList: CardItemModel[] = [...this.data.items];
+  getCardsData(query: string) {
+    const url = '/api/search';
+    const params = new HttpParams()
+      .set('type', 'video')
+      .set('part', 'snippet')
+      .set('maxResults', '15')
+      .set('q', query);
 
-  getCards(): CardItemModel[] {
-    return this.cardsList;
+    return this.http.get<CardsListModel>(url, { params }).pipe(
+      map((response: CardsListModel) => response.items)
+    );
   }
 
-  getCardById(id: string): CardItemModel {
-    const card = this.cardsList.find((cardItem) => cardItem.id === id);
-    if (!card) {
-      throw new Error(`Card with id ${id} not found`);
-    }
-    return card;
+  getStatistics(videoIds: string) {
+    const url = '/api/videos';
+    const params = new HttpParams()
+      .set('id', videoIds)
+      .set('part', 'snippet,statistics');
+
+    return this.http.get<StatisticsResponse>(url, { params }).pipe(
+      map((response) => response.items)
+    );
+  }
+
+  getCardsDataWithStatistics(query: string) {
+    return this.getCardsData(query).pipe(
+      switchMap((items) => {
+        const videoIds = items.map((item) => item.id.videoId).join(',');
+        return this.getStatistics(videoIds).pipe(
+          map((statistics) => items.map((item) => ({
+            ...item,
+            statistics: statistics.find((stat) => stat.id === item.id.videoId)?.statistics
+          })))
+        );
+      })
+    );
+  }
+
+  getCardById(ids: string) {
+    const url = '/api/videos';
+    const params = new HttpParams()
+      .set('id', ids)
+      .set('part', 'snippet,statistics');
+
+    return this.http.get<CardsListModel>(url, { params }).pipe(
+      map((response: CardsListModel) => response.items[0])
+    );
   }
 }

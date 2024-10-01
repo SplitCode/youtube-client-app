@@ -1,6 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import {
+  debounceTime, distinctUntilChanged, filter, tap
+} from 'rxjs';
 
 import { SearchService } from '../../../services/search.service';
 
@@ -11,18 +13,19 @@ import { SearchService } from '../../../services/search.service';
   templateUrl: './filter.component.html',
   styleUrl: './filter.component.scss',
 })
-export class FilterComponent {
+export class FilterComponent implements OnInit {
   searchService = inject(SearchService);
   filterControl = new FormControl('');
 
-  constructor() {
+  ngOnInit() {
     this.filterControl.valueChanges
-      .pipe(debounceTime(300), distinctUntilChanged())
-      .subscribe((value: string | null) => {
-        if (value !== null) {
-          this.searchService.updateFilterWord(value);
-        }
-      });
+      .pipe(
+        debounceTime(300),
+        distinctUntilChanged(),
+        filter(Boolean),
+        tap((value) => this.searchService.updateFilterWord(value)),
+      )
+      .subscribe();
   }
 
   onDateClick() {

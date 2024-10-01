@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
+import { Observable } from 'rxjs';
 
 import { ButtonComponent } from '../../../shared/components/button/button.component';
 import { CardStatsComponent } from '../../components/card-statistic/card-stats.component';
@@ -21,13 +22,13 @@ import { CardDataService } from '../../services/card-data.service';
   templateUrl: './detailed-page.component.html',
   styleUrl: './detailed-page.component.scss',
 })
-export class DetailedPageComponent {
-  route: ActivatedRoute = inject(ActivatedRoute);
+export class DetailedPageComponent implements OnInit {
+  private route = inject(ActivatedRoute);
   cardDataService = inject(CardDataService);
-  cardItem: CardItemModel;
+  cardItem$!: Observable<CardItemModel>;
 
-  constructor() {
+  ngOnInit() {
     const cardItemId = this.route.snapshot.params['id'];
-    this.cardItem = this.cardDataService.getCardById(cardItemId);
+    this.cardItem$ = this.cardDataService.getCardById(cardItemId);
   }
 }
