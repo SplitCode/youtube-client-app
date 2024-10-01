@@ -1,0 +1,58 @@
+.login-page {
+  &__form {
+    max-width: 34.5rem;
+    margin: 4rem auto;
+    padding: 2.8rem 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--form-color);
+  }
+
+  &__form-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin-bottom: 1.1rem;
+  }
+}
+
+.form {
+  &__group {
+    margin-bottom: 0.5rem;
+  }
+
+  &__group label {
+    display: block;
+    margin-bottom: 0.4rem;
+    color: var(--light-text-color);
+  }
+
+  &__group input {
+    width: 100%;
+    padding: 1.3rem 0.9rem;
+    border: none;
+    background-color: var(--dark-input-bg);
+  }
+
+  &__group input:focus {
+    outline-color: var(--accent-color);
+  }
+
+  &__group input.ng-invalid.ng-touched {
+    border: 0.1rem solid var(--error-text-color);
+    border-radius: 0.5rem;
+  }
+
+  &__group label.required::after {
+    content: " *";
+  }
+
+  &__button {
+    display: flex;
+    justify-content: end;
+    margin-top: 2.2rem;
+  }
+
+  &__error {
+    color: var(--error-text-color);
+    margin: 0.5rem;
+  }
+}

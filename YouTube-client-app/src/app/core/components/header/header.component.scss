@@ -1,0 +1,39 @@
+.header {
+  background-color: var(--bg-color);
+
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    gap: 1rem;
+    max-width: 144rem;
+    padding: 1.5rem 15.6rem 1.5rem 2rem;
+  }
+
+  &__search-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-grow: 1;
+  }
+
+  &__logo {
+    height: 5rem;
+    width: 5rem;
+    cursor: pointer;
+  }
+
+  &__login {
+    display: flex;
+    gap: 3rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .header__content {
+    flex-direction: column;
+    padding: 2rem;
+  }
+}

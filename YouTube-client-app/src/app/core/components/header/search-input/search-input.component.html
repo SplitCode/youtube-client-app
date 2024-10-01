@@ -1,0 +1,12 @@
+<form class="search-form">
+  <input
+    type="search"
+    class="search-form__input"
+    placeholder="What are you want to find out?"
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="onSearchChange($event)"
+    name="searchQuery"
+    [disabled]="(isAuthenticated$ | async) === false"
+    name="searchQuery"
+  />
+</form>

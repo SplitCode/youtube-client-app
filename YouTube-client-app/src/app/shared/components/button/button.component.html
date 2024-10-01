@@ -1,0 +1,15 @@
+<button
+  [type]="btnType"
+  class="btn"
+  [ngClass]="{
+    middle: btnAppearance === 'middle',
+    small: btnAppearance === 'small',
+    large: btnAppearance === 'large',
+    right: btnBorder === 'right-border',
+    left: btnBorder === 'left-border',
+    full: btnBorder === 'full-border',
+  }"
+  [disabled]="disabled"
+>
+  <ng-content></ng-content>
+</button>

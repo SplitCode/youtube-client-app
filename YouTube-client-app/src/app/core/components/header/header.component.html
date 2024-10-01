@@ -1,0 +1,40 @@
+<header class="header">
+  <div class="header__content">
+    <div class="header__search-content">
+      <img
+        class="header__logo"
+        src="logo.svg"
+        alt="youtube logo"
+        [routerLink]="['/']"
+      />
+      <app-search-input></app-search-input>
+      <app-settings-button
+        *ngIf="isSettingsVisible$ | async"
+        (click)="toggleFilter()"
+      ></app-settings-button>
+    </div>
+    <div class="header__login">
+      <app-login-info></app-login-info>
+      <app-favorite-button [routerLink]="['/favorite']"></app-favorite-button>
+      <app-button
+        btnAppearance="middle"
+        [routerLink]="['/admin']"
+        *ngIf="isAuthenticated$ | async"
+        >Admin</app-button
+      >
+      <app-button
+        btnAppearance="middle"
+        (click)="logout()"
+        *ngIf="isAuthenticated$ | async; else loginBtn"
+      >
+        Logout
+      </app-button>
+      <ng-template #loginBtn>
+        <app-button btnAppearance="middle" [routerLink]="['/login']">
+          Login
+        </app-button>
+      </ng-template>
+    </div>
+  </div>
+  <app-filter *ngIf="isFilterShown$ | async"></app-filter>
+</header>

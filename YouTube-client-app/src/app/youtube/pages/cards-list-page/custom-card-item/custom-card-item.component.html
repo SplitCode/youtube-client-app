@@ -1,0 +1,19 @@
+<div class="custom-card__image-container">
+  <img
+    class="custom-card__image"
+    src="{{ customCardItem.imgLink }}"
+    alt="image"
+  />
+</div>
+
+<div class="custom-card__content">
+  <div class="custom-card__title">{{ customCardItem.title }}</div>
+  <div class="custom-card__description">{{ customCardItem.description }}</div>
+  <div class="custom-card__video">{{ customCardItem.videoLink }}</div>
+  <div class="custom-card__button">
+    <app-button btnAppearance="large" (click)="deleteCard(customCardItem.id)"
+      >Delete</app-button
+    >
+  </div>
+</div>
+<div class="custom-card__line" [appCardColor]="customCardItem.date"></div>

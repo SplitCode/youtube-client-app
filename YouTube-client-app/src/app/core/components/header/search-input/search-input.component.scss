@@ -1,0 +1,26 @@
+.search-form {
+  display: flex;
+  width: 100%;
+
+  &__input {
+    padding: 0.5rem 1.3rem;
+    width: 39.6rem;
+    height: 2.4rem;
+    border: none;
+    background-color: var(--light-input-bg);
+  }
+
+  &__input:focus {
+    outline-color: var(--accent-color);
+  }
+
+  &__input::-webkit-search-cancel-button {
+    cursor: pointer;
+  }
+
+  &__input:disabled {
+    background-color: var(--bg-color);
+    cursor: default;
+    border: 0.1rem solid var(--light-text-color);
+  }
+}

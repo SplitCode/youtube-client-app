@@ -1,0 +1,22 @@
+<div class="container">
+  <app-pagination *ngIf="(cardsList$ | async)?.length"></app-pagination>
+
+  <div class="content">
+    <ng-container *ngIf="cardsList$ | async as cardsList">
+      <ng-container
+        *ngFor="
+          let cardItem of cardsList | filterWordPipe: (filterWord$ | async)
+        "
+      >
+        <app-card-item
+          *ngIf="!isCustom(cardItem)"ч
+          [cardItem]="cardItem"
+        ></app-card-item>
+        <app-custom-card-item
+          *ngIf="isCustom(cardItem)"
+          [customCardItem]="cardItem"
+        ></app-custom-card-item>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
